@@ -12,6 +12,9 @@ import { FooterComponent } from './component/blocks/footer/footer.component';
 import { CarouselComponent } from './component/blocks/carousel/carousel.component';
 import { HomeComponent } from './component/pages/home/home.component';
 import { ContactComponent } from './component/pages/contact/contact.component';
+import { BodyComponent } from './component/blocks/body/body.component';
+import { LoginComponent } from './component/pages/login/login.component';
+import { RegisterComponent } from './component/pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { ContactComponent } from './component/pages/contact/contact.component';
     FooterComponent,
     CarouselComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    BodyComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
