@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mdb-angular-free';
+
+  constructor(){}
+
+  ngOnInit(): void {
+   
+    
+  }
+
+  
+
 }
