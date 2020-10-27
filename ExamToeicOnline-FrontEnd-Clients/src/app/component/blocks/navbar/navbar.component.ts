@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onRegister(){
-    this.router.navigate(['/singin'])
+    this.router.navigate(['/register'])
   }
 
 }

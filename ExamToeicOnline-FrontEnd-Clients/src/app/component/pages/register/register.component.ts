@@ -15,6 +15,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(){
-    this.router.navigate(['/singin'])
+    this.router.navigate(['/register'])
   }
 }
