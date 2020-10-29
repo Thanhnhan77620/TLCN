@@ -49,13 +49,13 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var account = await _context.Accounts.Where(x => x.Username == request.Username.Trim()).FirstOrDefaultAsync();
             try
             {
-                if (account.isActive)
+                if (account == null)
                 {
-                    if (account == null)
-                    {
-                        return BadRequest("Username" + request.Username + "not exists");
-                    }
-                    else
+                    return BadRequest("Username " + request.Username + " not exists");
+                }
+                else
+                {
+                    if (account.isActive)
                     {
                         if (account.Password == request.Password.Trim())
                         {
@@ -66,12 +66,11 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                             return BadRequest("Password is incorrect!");
                         }
                     }
+                    else
+                    {
+                        return BadRequest("Account is not activated!");
+                    }
                 }
-                else
-                {
-                    return BadRequest("Account is not activated!");
-                }
-                
             }
             catch (Exception)
             {
