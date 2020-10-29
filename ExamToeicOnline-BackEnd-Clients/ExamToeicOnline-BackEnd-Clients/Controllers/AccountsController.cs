@@ -46,20 +46,20 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         [HttpPost("{Login}")]
         public async Task<IActionResult> Login([FromBody] AccountVM request) 
         {
-            var user = await _context.Accounts.Where(x => x.Username == request.Username.Trim()).FirstOrDefaultAsync();
+            var account = await _context.Accounts.Where(x => x.Username == request.Username.Trim()).FirstOrDefaultAsync();
             try
             {
-                if (user.isActive)
+                if (account.isActive)
                 {
-                    if (user == null)
+                    if (account == null)
                     {
-                        return BadRequest("Usernam" + request.Username + "not exists");
+                        return BadRequest("Username" + request.Username + "not exists");
                     }
                     else
                     {
-                        if (user.Password == request.Password.Trim())
+                        if (account.Password == request.Password.Trim())
                         {
-                            return Ok(user);
+                            return Ok(account);
                         }
                         else
                         {
