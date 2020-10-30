@@ -33,9 +33,7 @@ namespace ExamToeicOnline_BackEnd_Clients
             });
             services.AddDbContext<ExamToeicOnlineDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ExamToeicOnlineConnection")));
-
             services.AddControllers();
-
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
