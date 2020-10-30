@@ -1,16 +1,13 @@
-import { User } from 'src/app/model/user.model';
+import { Account } from './../../model/account.model';
+
 import * as AuthActions from './auth.action';
 
 export interface State {
-  user: User;
-  authError: string;
-  loading: boolean;
+  account: Account
 }
 
 const initialState: State = {
-  user: null,
-  authError: null,
-  loading: false,
+ account: null
 };
 
 export function authReducer(
@@ -18,13 +15,20 @@ export function authReducer(
   action: AuthActions.AuthActions
 ){
   switch(action.type){
-    case AuthActions.LOGIN_START:
+    case AuthActions.LOGIN:
+      const account =  new Account(action.payload.username, action.payload.password)
+      return {
+       ...state,
+       account: account,
+      };
+      break;
+    case AuthActions.LOGOUT:
       return {
         ...state,
-        authError: null,
-        loading: true
-      };
-
+        account: null,
+      }
+    default:
+      return state;
     
   }
 

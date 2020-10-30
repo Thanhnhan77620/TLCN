@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
-import { LoginService } from './login.service'
+import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
+import { AuthResponseData, LoginService } from './login.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,24 +10,36 @@ import { LoginService } from './login.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  @Input() model: any = {
+  
+  model: any = {
     username: String,
     password: String
   };
 
   
 
-  constructor(
-    private loginService: LoginService
-  ) {}
+  constructor(private loginService: LoginService,
+              private router: Router) {}
  
   ngOnInit(): void {
   }
 
 
 
-  onSubmit(){
-    console.log(this.model);
+  onSubmit(formSignIn: NgForm){
+    const username = formSignIn.value.username;
+    const password = formSignIn.value.password;
+
+    let authObs: Observable<AuthResponseData>;
+    authObs = this.loginService.login(username, password);
+    authObs.subscribe(
+      resData => {
+        console.log(resData);
+        this.router.navigate(['/register']);
+      }
+    );
+    formSignIn.reset();
   }
+
+
 }

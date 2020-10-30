@@ -6,6 +6,7 @@ using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExamToeicOnline_BackEnd_Clients.Controllers
 {

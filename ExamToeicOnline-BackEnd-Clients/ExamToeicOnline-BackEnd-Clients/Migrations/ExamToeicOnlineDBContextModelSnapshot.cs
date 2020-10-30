@@ -49,7 +49,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 1,
                             Password = "98765432",
-                            UserId = new Guid("155b3c26-e9fd-44c2-bbf1-37a7890f7201"),
+                            UserId = new Guid("124cc2cb-a758-419e-baee-a83767e5b659"),
                             Username = "ngan",
                             isActive = true
                         },
@@ -57,7 +57,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 2,
                             Password = "12345678",
-                            UserId = new Guid("71789d6b-a67c-4c29-9ffa-a4eaa1da63f3"),
+                            UserId = new Guid("25aac6b8-a46f-4802-94ae-3efeb85cfba1"),
                             Username = "nhan",
                             isActive = true
                         });
@@ -85,14 +85,14 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("155b3c26-e9fd-44c2-bbf1-37a7890f7201"),
+                            Id = new Guid("124cc2cb-a758-419e-baee-a83767e5b659"),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
                             Phonenumber = 12345678
                         },
                         new
                         {
-                            Id = new Guid("71789d6b-a67c-4c29-9ffa-a4eaa1da63f3"),
+                            Id = new Guid("25aac6b8-a46f-4802-94ae-3efeb85cfba1"),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432

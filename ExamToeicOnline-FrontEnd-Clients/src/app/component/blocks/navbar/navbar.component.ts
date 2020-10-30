@@ -1,3 +1,4 @@
+import { LoginService } from './../../../auth/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,19 +10,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(  private router: Router,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private loginService:LoginService) { }
 
   ngOnInit(): void {
 
   }
 
-  onLogin(){
-    console.log('Login actived')
-    this.router.navigate(['/login'])
-  }
-
   onRegister(){
     this.router.navigate(['/register'])
+  }
+
+  onLogout(){
+    this.loginService.logout();
   }
 
 }

@@ -12,7 +12,7 @@
                 <!--Card content-->
                 <mdb-card-body class="px-lg-5 pt-0">
                     <!-- Form -->
-                    <form (ngSubmit)="onSubmit()" #formSingIn="ngForm" class="text-center" style="color: #757575;">
+                    <form (ngSubmit)="onSubmit(formSignIn)" #formSignIn="ngForm" class="text-center" style="color: #757575;">
                         <!-- Email -->
                         <div class="md-form">
                             <input  
@@ -48,7 +48,7 @@
                         <!-- Sign in button -->
                         <button mdbBtn color="info" outline="true" rounded="true" block="true"
                             class="my-4 waves-effect z-depth-0" type="submit" mdbWavesEffect 
-                            [disabled] = "!formSingIn.valid">Sign In</button>
+                            [disabled] = "!formSignIn.valid">Sign In</button>
                         <!-- Register -->
                         <p>Not a member?
                             <a routerLink="/register">Register</a>
