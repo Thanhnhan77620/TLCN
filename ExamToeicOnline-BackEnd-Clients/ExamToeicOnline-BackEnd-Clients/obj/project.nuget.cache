@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F2TxCIKOUBaTRdCzx4F5bLUGdkVXDmQy2yrLr0cO+h+gZxnacNtBUqpGeGfLrQDv7+VBaZ1apdvVt9uSaAkOQQ==",
+  "dgSpecHash": "d8NSnnaI+yEV+d/JC1I2hlNfOfEFHOABBThEu9sDGG8kRT9Po8kj+K+cS5tvJe+FKAUD9RkYAjlemjVNdyezTQ==",
   "success": true,
-  "projectFilePath": "D:\\Năm 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+  "projectFilePath": "D:\\Năm 4\\HK I\\TLCN\\Ngan\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.9\\microsoft.aspnetcore.jsonpatch.3.1.9.nupkg.sha512",
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.9\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.9.nupkg.sha512",

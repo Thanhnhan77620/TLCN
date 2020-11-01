@@ -13,9 +13,13 @@ import { CarouselComponent } from './component/blocks/carousel/carousel.componen
 import { HomeComponent } from './component/pages/home/home.component';
 import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
-import { LoginComponent } from './component/pages/login/login.component';
-import { RegisterComponent } from './component/pages/register/register.component';
+
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { Store, StoreModule } from '@ngrx/store';
+
+import * as fromApp from "./store/app.reducer";
 
 @NgModule({
   declarations: [
@@ -37,7 +41,7 @@ import { AppRoutingModule } from './app-routing.module';
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
-    
+    StoreModule.forRoot(fromApp.appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]

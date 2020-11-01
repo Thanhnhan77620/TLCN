@@ -46,22 +46,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Fullname", "Phonenumber" },
-                values: new object[] { new Guid("155b3c26-e9fd-44c2-bbf1-37a7890f7201"), "nhan@gmail.com", "Nguyễn Thanh Nhân", 12345678 });
+                values: new object[] { new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"), "nhan@gmail.com", "Nguyễn Thanh Nhân", 12345678 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Fullname", "Phonenumber" },
-                values: new object[] { new Guid("71789d6b-a67c-4c29-9ffa-a4eaa1da63f3"), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", 98765432 });
+                values: new object[] { new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", 98765432 });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "Password", "UserId", "Username", "isActive" },
-                values: new object[] { 1, "98765432", new Guid("155b3c26-e9fd-44c2-bbf1-37a7890f7201"), "ngan", true });
+                values: new object[] { 1, "98765432", new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"), "ngan", true });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "Password", "UserId", "Username", "isActive" },
-                values: new object[] { 2, "12345678", new Guid("71789d6b-a67c-4c29-9ffa-a4eaa1da63f3"), "nhan", true });
+                values: new object[] { 2, "12345678", new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"), "nhan", true });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

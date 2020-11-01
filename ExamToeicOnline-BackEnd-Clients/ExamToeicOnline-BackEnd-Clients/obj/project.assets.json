@@ -5807,11 +5807,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Năm 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+      "projectUniqueName": "D:\\Năm 4\\HK I\\TLCN\\Ngan\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
       "projectName": "ExamToeicOnline-BackEnd-Clients",
-      "projectPath": "D:\\Năm 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+      "projectPath": "D:\\Năm 4\\HK I\\TLCN\\Ngan\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
       "packagesPath": "C:\\Users\\ThanhNhan\\.nuget\\packages\\",
-      "outputPath": "D:\\Năm 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\obj\\",
+      "outputPath": "D:\\Năm 4\\HK I\\TLCN\\Ngan\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ThanhNhan\\AppData\\Roaming\\NuGet\\NuGet.Config",

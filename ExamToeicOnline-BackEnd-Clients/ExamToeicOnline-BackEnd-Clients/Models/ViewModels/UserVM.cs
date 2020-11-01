@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ExamToeicOnline_BackEnd_Clients.Models.ViewModels
 {
-    public class AccountVM
+    public class UserVM
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Boolean isActive { get; set; }
+        public string Fullname { get; set; }
+        public string Email { get; set; }
+        public int Phonenumber { get; set; }
     }
 }
