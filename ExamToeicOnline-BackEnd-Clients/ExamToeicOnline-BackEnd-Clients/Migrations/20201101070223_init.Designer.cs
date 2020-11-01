@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201029081709_init")]
+    [Migration("20201101070223_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 1,
                             Password = "98765432",
-                            UserId = new Guid("124cc2cb-a758-419e-baee-a83767e5b659"),
+                            UserId = new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"),
                             Username = "ngan",
                             isActive = true
                         },
@@ -59,7 +59,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 2,
                             Password = "12345678",
-                            UserId = new Guid("25aac6b8-a46f-4802-94ae-3efeb85cfba1"),
+                            UserId = new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"),
                             Username = "nhan",
                             isActive = true
                         });
@@ -87,14 +87,14 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("124cc2cb-a758-419e-baee-a83767e5b659"),
+                            Id = new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
                             Phonenumber = 12345678
                         },
                         new
                         {
-                            Id = new Guid("25aac6b8-a46f-4802-94ae-3efeb85cfba1"),
+                            Id = new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432
