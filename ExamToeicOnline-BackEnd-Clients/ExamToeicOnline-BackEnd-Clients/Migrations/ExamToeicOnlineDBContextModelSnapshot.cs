@@ -19,6 +19,21 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuestionId");
+
+                    b.ToTable("Questions");
+                });
+
             modelBuilder.Entity("ExamToeicOnline_FrontEnd_Clients.Models.Account", b =>
                 {
                     b.Property<int>("Id")
@@ -49,7 +64,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 1,
                             Password = "98765432",
-                            UserId = new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"),
+                            UserId = new Guid("95818aad-fd30-4ad4-8b45-e3ab838b4c8d"),
                             Username = "ngan",
                             isActive = true
                         },
@@ -57,7 +72,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         {
                             Id = 2,
                             Password = "12345678",
-                            UserId = new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"),
+                            UserId = new Guid("a8e5334c-3477-4fd8-8659-2cf3cc4839cc"),
                             Username = "nhan",
                             isActive = true
                         });
@@ -85,14 +100,14 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7a69a250-9871-4adc-9cdf-d103ed5580ca"),
+                            Id = new Guid("95818aad-fd30-4ad4-8b45-e3ab838b4c8d"),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
                             Phonenumber = 12345678
                         },
                         new
                         {
-                            Id = new Guid("8cbb18d9-f9db-415b-8ed7-60c804b9f8dd"),
+                            Id = new Guid("a8e5334c-3477-4fd8-8659-2cf3cc4839cc"),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432

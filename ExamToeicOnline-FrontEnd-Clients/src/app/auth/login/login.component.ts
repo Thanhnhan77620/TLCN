@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   
   model: any = {
-    username: String,
-    password: String
+    username: "nhan",
+    password: "12345678"
   };
 
   
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     authObs = this.loginService.login(username, password);
     authObs.subscribe(
       resData => {
+        this.model=resData
         console.log(resData);
         this.router.navigate(['/register']);
       }
