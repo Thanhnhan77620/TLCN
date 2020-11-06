@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "eNVslIbY7K5pIeWgUbt15ygsnTe3lqCk9CTbQd0S80MTnqp3n4UsNMo7ePAVxUfSEdiN+rWcRJKPMXN5Glv1Gw==",
+  "dgSpecHash": "ek+1Y5QeBSTVOqRFZInbvEB9PBBU3HNmukpOeRhiiC3B4e2jkoLI841zLHm/QjraAdLS5mOHaQ5lBnweFd/w/Q==",
   "success": true,
   "projectFilePath": "D:\\Nam 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ThanhNhan\\.nuget\\packages\\bcrypt.net-next\\4.0.0\\bcrypt.net-next.4.0.0.nupkg.sha512",
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\documentformat.openxml\\2.11.3\\documentformat.openxml.2.11.3.nupkg.sha512",
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.9\\microsoft.aspnetcore.jsonpatch.3.1.9.nupkg.sha512",

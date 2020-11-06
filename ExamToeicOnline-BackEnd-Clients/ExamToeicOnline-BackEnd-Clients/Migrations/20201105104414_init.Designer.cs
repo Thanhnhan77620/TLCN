@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201103042453_ini")]
-    partial class ini
+    [Migration("20201105104414_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -55,6 +58,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -65,18 +71,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
+                            CreateAt = new DateTime(2020, 11, 5, 17, 44, 13, 944, DateTimeKind.Local).AddTicks(2364),
                             Password = "98765432",
-                            UserId = new Guid("95818aad-fd30-4ad4-8b45-e3ab838b4c8d"),
+                            UserId = new Guid("252f6177-4bf5-417d-97ea-a432715e6924"),
                             Username = "ngan",
-                            isActive = true
+                            isActive = true,
+                            isAdmin = false
                         },
                         new
                         {
                             Id = 2,
+                            CreateAt = new DateTime(2020, 11, 5, 17, 44, 13, 944, DateTimeKind.Local).AddTicks(2364),
                             Password = "12345678",
-                            UserId = new Guid("a8e5334c-3477-4fd8-8659-2cf3cc4839cc"),
+                            UserId = new Guid("f255c9a7-7185-4a5d-b22d-3c3c9351e399"),
                             Username = "nhan",
-                            isActive = true
+                            isActive = true,
+                            isAdmin = false
                         });
                 });
 
@@ -86,11 +96,17 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fullname")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Phonenumber")
                         .HasColumnType("int");
@@ -102,14 +118,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("95818aad-fd30-4ad4-8b45-e3ab838b4c8d"),
+                            Id = new Guid("252f6177-4bf5-417d-97ea-a432715e6924"),
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
                             Phonenumber = 12345678
                         },
                         new
                         {
-                            Id = new Guid("a8e5334c-3477-4fd8-8659-2cf3cc4839cc"),
+                            Id = new Guid("f255c9a7-7185-4a5d-b22d-3c3c9351e399"),
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432

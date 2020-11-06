@@ -6,12 +6,74 @@
             width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
             tabindex="0"></iframe>
     </div>
-    <mdb-card>
-        <mdb-card-header class="info-color white-text text-center py-4">
-            <h5>
-                <strong>Contact us</strong>
-            </h5>
-        </mdb-card-header>
-        
-    </mdb-card>
-</div>                                                                                                                                                                                                                  
+
+
+    <!-- contact form -->
+    <div class="row py-4">
+
+        <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+            
+                <li><mdb-icon class="light-red-text mx-2" fas icon="map fa-2x"></mdb-icon>
+                    <p>map </p>
+                </li>
+
+                <li><mdb-icon class="light-red-text mx-2" fas icon="envelope fa-2x"></mdb-icon>
+                    <p>contact@mdbootstrap.com</p>
+                </li>
+                <li><mdb-icon class="light-blue-text mx-2" fab icon="facebook-f fa-2x"></mdb-icon>
+                    <p>Facebook</p>
+                </li>
+                <li><mdb-icon class="light-green-text mx-2" fas icon="phone fa-2x"></mdb-icon>
+                    <p>+2345678</p>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <mdb-card>
+
+                <mdb-card-header class="info-color white-text text-center py-4">
+                    <h5>
+                        <strong>Contact us</strong>
+                    </h5>
+                </mdb-card-header>
+
+                <mdb-card-body class="px-lg-5 pt-0">
+
+                    <form class="text-center" style="color: #757575;">
+                        <div class="md-form mt-3">
+                            <input type="text" formControlName="contactFormName" id="materialContactFormName"
+                                class="form-control" mdbInput mdbValidate />
+                            <label for="materialContactFormName">Name</label>
+
+                        </div>
+
+                        <div class="md-form">
+                            <input type="email" formControlName="contactFormEmail" id="materialContactFormEmail"
+                                class="form-control" mdbInput mdbValidate />
+                            <label for="materialContactFormEmail">E-mail</label>
+
+                        </div>
+
+
+
+                        <div class="md-form">
+                            <textarea type="text" formControlName="contactFormMessage" id="materialContactFormMessage"
+                                class="form-control md-textarea" mdbInput mdbValidate></textarea>
+                            <label for="materialContactFormMessage">Message</label>
+
+                        </div>
+
+
+                        <button type="button" mdbBtn color="primary" mdbWavesEffect>Send</button>
+                    </form>
+
+                </mdb-card-body>
+
+            </mdb-card>
+        </div>
+
+
+    </div>
+</div>

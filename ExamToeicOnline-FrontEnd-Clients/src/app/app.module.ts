@@ -5,7 +5,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/blocks/navbar/navbar.component';
 import { FooterComponent } from './component/blocks/footer/footer.component';
@@ -13,13 +12,15 @@ import { CarouselComponent } from './component/blocks/carousel/carousel.componen
 import { HomeComponent } from './component/pages/home/home.component';
 import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
-
-import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './user/profile/profile.component';
+
+import { AppRoutingModule } from './app-routing.module';
 import { Store, StoreModule } from '@ngrx/store';
 
 import * as fromApp from "./store/app.reducer";
+
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import * as fromApp from "./store/app.reducer";
     ContactComponent,
     BodyComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
