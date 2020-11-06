@@ -24,8 +24,8 @@
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mini test</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Skill test</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Writing test</a>
-
-
+ 
+          
         </div>
       </li>
     </ul>
@@ -42,11 +42,11 @@
       <!-- Dropdown -->
       <!-- LoggedIn -->
       <li class="nav-item dropdown" dropdown>
-
+    
 
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>
-          <!-- <span > {{ (isLogin$ | async) ? currentUser.username : 'UserName'}}</span> -->
+          <span > {{ (isLogin$ | async) ? currentUser.username : 'UserName'}}</span>
         </a> 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a routerLink="/auth/login" class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>

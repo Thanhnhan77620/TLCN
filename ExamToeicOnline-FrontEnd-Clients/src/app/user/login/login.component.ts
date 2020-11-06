@@ -13,6 +13,7 @@ import * as UserActions from '../state/user.action';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  
   model: any = {
     username: String,
     password: String
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
  
   ngOnInit(): void {
   }
+
   onSubmit(formSignIn: NgForm){
     const username = formSignIn.value.username;
     const password = formSignIn.value.password;

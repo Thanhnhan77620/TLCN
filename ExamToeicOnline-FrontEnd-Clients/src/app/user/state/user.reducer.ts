@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { Guid } from 'guid-typescript';
 
 import { User } from './../../model/user.model';
 
@@ -14,7 +13,7 @@ export interface State extends AppState.State{
 }
 
 export interface UserState {
-  currentUserId: Guid | null,
+  currentUserId: number | null,
   currentUser: User,
   users: User[],
   error: HttpErrorResponse | null,
@@ -57,7 +56,7 @@ export const userReducer = createReducer<UserState>(
 
     return {
       ...state,
-      currentUserId: action.user.Id,
+      currentUserId: action.user.id,
       currentUser: action.user,
       error: null,
       isLogin:true
