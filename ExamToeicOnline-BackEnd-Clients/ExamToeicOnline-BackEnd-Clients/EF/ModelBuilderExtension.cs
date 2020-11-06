@@ -34,7 +34,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Phonenumber = 98765432,
                    Birthday=new DateTime(1999/29/11)
                }
-           );
+            );
             modelBuilder.Entity<Account>().HasData(
               new Account()
               {

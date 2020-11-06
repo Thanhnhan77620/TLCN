@@ -1,6 +1,12 @@
-import { LoginService } from './../../../auth/login/login.service';
+import { UserService } from './../../../user/user.service';
+import { User } from './../../../model/user.model';
+import { getCurrentUser, State, getIsLogin } from './../../../user/state/user.reducer';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, pipe } from 'rxjs';
+
+import * as UserActions from '../../../user/state/user.action'
 
 @Component({
   selector: 'app-navbar',
@@ -8,21 +14,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+ 
+  isLogin$: Observable<boolean>;
+  currentUser: User;
 
   constructor(  private router: Router,
-                private route: ActivatedRoute,
-                private loginService:LoginService) { }
+                private store: Store<State>,
+                ) { }
+
 
   ngOnInit(): void {
 
-  }
-
-  onRegister(){
-    this.router.navigate(['/register'])
+    this.isLogin$ = this.store.select(getIsLogin);
+    this.store.select(getCurrentUser).subscribe(
+      user =>this.currentUser = user
+    )
   }
 
   onLogout(){
-    this.loginService.logout();
+    this.store.dispatch(UserActions.logout());
+    this.router.navigate(['/home']);
+  }
+
+  onRegister(){
+    this.router.navigate(['/auth/register'])
   }
 
 }

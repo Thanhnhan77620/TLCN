@@ -46,13 +46,13 @@
 
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>
-          Username
-        </a>
+          <!-- <span > {{ (isLogin$ | async) ? currentUser.username : 'UserName'}}</span> -->
+        </a> 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a routerLink="/login" class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
-          <a routerLink="/user/information" class="dropdown-item waves-light" mdbWavesEffect>Profile</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()">Log Out</a>
-        </div>
+          <a routerLink="/auth/login" class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Profile</a>
+          <a  class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()">Log Out</a> 
+        </div>  
       </li>
 
     </ul>
