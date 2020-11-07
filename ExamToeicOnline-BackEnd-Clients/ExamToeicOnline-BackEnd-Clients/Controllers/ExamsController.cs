@@ -12,6 +12,8 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ExamToeicOnline_BackEnd_Clients.Controllers
 {
@@ -29,24 +31,33 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
         }
 
+        //GET: get list exams
+        [HttpGet("{list}")]
+        public async Task<IActionResult> getListExam()
+        {
+            var listExam = await this._context.Questions.ToArrayAsync();
+            if (listExam == null)
+            {
+                return BadRequest("not found");
+            }
+            return Ok(listExam);
+        }
+
+
 
 
         [HttpPost("Import"), DisableRequestSizeLimit]
-
         public async Task<IActionResult> Import([FromForm] ImportExamVM ExamVM)
         {
-            var filePath = "";
-
-            if (ExamVM.ExcelFile != null)
-            {
-                filePath = await this.SaveFile(ExamVM.ExcelFile);
-            }
-            var fileName = "./File/ReadWriteCSVFile.xlsx";
+           
+           var filePath = "./File/demo.xlsx";
 
 
             List<Question> questions = new List<Question>();
+
+
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
             {
                 using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
@@ -55,18 +66,13 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                     {
                         questions.Add(new Question()
                         {
-                            Content = reader.GetValue(1).ToString()
+                            Content = reader.GetValue(4).ToString()
                         });
-
-
                     }
                 }
             }
-
-            _context.Questions.AddRange(questions);
-            await _context.Questions.SingleOrDefaultAsync();
-
-
+            this._context.Questions.AddRange(questions);
+            await this._context.SaveChangesAsync();
             return Ok(filePath);
         }
 
@@ -80,5 +86,15 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return _storageService.GetFileUrl(fileName);
         }
 
+        private IActionResult Index(IFormFile file, [FromServices] IHostingEnvironment hostingEnvironment)
+        {
+            string filePath = $"{hostingEnvironment.WebRootPath}\\File\\{file.FileName}";
+            using (FileStream fileStream = System.IO.File.Create(filePath))
+            {
+                file.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+            return Ok();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Models
 {
     public class Question
     {
-        public int QuestionId { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
     }
 }

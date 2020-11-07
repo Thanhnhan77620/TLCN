@@ -84,10 +84,33 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
            
         }
+        
+        //Delete accounts
+        [HttpPost("{disable}")]
+        public async Task<IActionResult> DisableAccounts([FromForm] AccountVM request)
+        {
+            var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
+            if (account==null)
+            {
+                return BadRequest("Account has username" + request.Username + " not exists!");
+            }
+            else
+            {
+                try
+                {
+                    account.isActive = false;
+                    this._context.Accounts.Update(account);
+                    await this._context.SaveChangesAsync();
+                }
+                catch (Exception err)
+                {
 
-
-
-
+                    return BadRequest("The account has been locked!!!");
+                }
+                
+            }
+            return Ok(account);
+        }
 
     }
 }

@@ -15,8 +15,8 @@ import * as UserActions from '../state/user.action';
 export class LoginComponent implements OnInit {
   
   model: any = {
-    username: String,
-    password: String
+    username: "Nhan",
+    password: "12345678"
   };
 
 
