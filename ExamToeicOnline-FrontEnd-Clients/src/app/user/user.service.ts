@@ -17,9 +17,9 @@ export class UserService {
     
     
     login(username: string, password: string) {  
-       return this.http.post<User>('https://localhost:44300/api/accounts/login', {username: username, password:password});
+       return this.http.post<User>('https://localhost:5001/api/accounts/login', {username: username, password:password});
     } 
-    
+    //5000 ko http, 5001 https
     // public handleError(errorRes: HttpErrorResponse) {
     //     let errorMessage = 'An unknown error occurred!';
     //     if (!errorRes.error || !errorRes.error.error) {
