@@ -17,7 +17,11 @@ export class UserService {
     
     
     login(username: string, password: string) {  
-       return this.http.post<User>('https://localhost:5001/api/accounts/login', {username: username, password:password});
+      var formData = new FormData();
+      formData.append("UserName", username);
+      formData.append("Password", password);
+      console.log(formData);
+       return this.http.post<User>('https://localhost:5001/api/accounts/login', formData);
     } 
     
     public handleError(errorRes: HttpErrorResponse) {
