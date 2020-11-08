@@ -19,12 +19,30 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Questions");
+                });
+
             modelBuilder.Entity("ExamToeicOnline_FrontEnd_Clients.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -38,6 +56,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -48,18 +69,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "98765432",
-                            UserId = new Guid("361ce2b0-18ef-401b-ab02-e60a1f877572"),
+                            CreateAt = new DateTime(2020, 11, 8, 11, 49, 0, 722, DateTimeKind.Local).AddTicks(7546),
+                            Password = "$2a$11$bsg2XS4J1ZvFGhKDAmXY1uSZ4RbY2zWClUJCG0.E/5hYJ6sDF8jly",
+                            UserId = new Guid("548774a1-b42e-4230-809d-981c26fd0a09"),
                             Username = "ngan",
-                            isActive = true
+                            isActive = true,
+                            isAdmin = false
                         },
                         new
                         {
                             Id = 2,
-                            Password = "12345678",
-                            UserId = new Guid("39642015-fc87-492c-aee2-c0f0a7581c6a"),
+                            CreateAt = new DateTime(2020, 11, 8, 11, 49, 0, 722, DateTimeKind.Local).AddTicks(7546),
+                            Password = "$2a$11$xZ6g188nzVmQsoLECJPEZ.a5V9LCAmgM5.4ZmzO5roCeh/4kakeLe",
+                            UserId = new Guid("d8699c0c-0b72-4209-9734-564f69281788"),
                             Username = "nhan",
-                            isActive = true
+                            isActive = true,
+                            isAdmin = false
                         });
                 });
 
@@ -69,11 +94,17 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fullname")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Phonenumber")
                         .HasColumnType("int");
@@ -85,14 +116,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("361ce2b0-18ef-401b-ab02-e60a1f877572"),
+                            Id = new Guid("548774a1-b42e-4230-809d-981c26fd0a09"),
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
                             Phonenumber = 12345678
                         },
                         new
                         {
-                            Id = new Guid("39642015-fc87-492c-aee2-c0f0a7581c6a"),
+                            Id = new Guid("d8699c0c-0b72-4209-9734-564f69281788"),
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432

@@ -24,6 +24,7 @@ export class UserEffects {
             .login(action.username,action.password)
             .pipe(
                 map((user)=>{
+                    console.log(user)
                     return UserActions.loginSuccess({user})
                 }),
                 catchError(error=> {
