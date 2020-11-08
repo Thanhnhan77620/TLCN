@@ -48,7 +48,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(account);
         }
         //Login
-        [HttpPost("{Login}")]
+        [HttpPost("{login}")]
         public async Task<IActionResult> Login([FromForm] AccountVM request) 
         {
             var account = await _context.Accounts.Where(x => x.Username == request.Username.Trim()).FirstOrDefaultAsync();
@@ -86,7 +86,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         }
         
         //Delete accounts
-        [HttpPost("{disable}")]
+        [HttpPut("{disable}")]
         public async Task<IActionResult> DisableAccounts([FromForm] AccountVM request)
         {
             var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
