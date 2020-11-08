@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
 using ExamToeicOnline_FrontEnd_Clients.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BC = BCrypt.Net.BCrypt;
 
 namespace ExamToeicOnline_BackEnd_Clients.Controllers
 {
@@ -16,9 +18,11 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ExamToeicOnlineDBContext _context;
-        public AccountsController(ExamToeicOnlineDBContext examToeicOnlineDBContext)
+        private readonly IStorageService _storageService;
+        public AccountsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService)
         {
             this._context = examToeicOnlineDBContext;
+            this._storageService = storageService;
 
         }
         // GET: api/<UserController>
@@ -45,7 +49,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         }
         //Login
         [HttpPost("{Login}")]
-        public async Task<IActionResult> Login([FromBody] AccountVM request) 
+        public async Task<IActionResult> Login([FromForm] AccountVM request) 
         {
             var account = await _context.Accounts.Where(x => x.Username == request.Username.Trim()).FirstOrDefaultAsync();
             try
@@ -58,7 +62,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 {
                     if (account.isActive)
                     {
-                        if (account.Password == request.Password.Trim())
+                        if (BC.Verify(request.Password,account.Password))
                         {
                             return Ok(account);
                         }
@@ -80,7 +84,33 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
            
         }
+        
+        //Delete accounts
+        [HttpPost("{disable}")]
+        public async Task<IActionResult> DisableAccounts([FromForm] AccountVM request)
+        {
+            var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
+            if (account==null)
+            {
+                return BadRequest("Account has username" + request.Username + " not exists!");
+            }
+            else
+            {
+                try
+                {
+                    account.isActive = false;
+                    this._context.Accounts.Update(account);
+                    await this._context.SaveChangesAsync();
+                }
+                catch (Exception err)
+                {
 
+                    return BadRequest("The account has been locked!!!");
+                }
+                
+            }
+            return Ok(account);
+        }
 
     }
 }

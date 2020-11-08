@@ -1,4 +1,5 @@
-﻿using ExamToeicOnline_FrontEnd_Clients.Models;
+﻿using ExamToeicOnline_BackEnd_Clients.Models;
+using ExamToeicOnline_FrontEnd_Clients.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,6 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Question> Questions { get; set; }
     }
 }

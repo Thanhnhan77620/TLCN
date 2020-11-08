@@ -19,6 +19,7 @@ export class UserService {
     login(username: string, password: string) {  
        return this.http.post<User>('https://localhost:5001/api/accounts/login', {username: username, password:password});
     } 
+<<<<<<< HEAD
     //5000 ko http, 5001 https
     // public handleError(errorRes: HttpErrorResponse) {
     //     let errorMessage = 'An unknown error occurred!';
@@ -38,4 +39,25 @@ export class UserService {
     //     }
     //     return throwError(errorMessage);
     //   }
+=======
+    
+    public handleError(errorRes: HttpErrorResponse) {
+        let errorMessage = 'An unknown error occurred!';
+        if (!errorRes.error || !errorRes.error.error) {
+          return throwError(errorMessage);
+        }
+        switch (errorRes.error.error.message) {
+          case 'EMAIL_EXISTS':
+            errorMessage = 'This email exists already';
+            break;
+          case 'EMAIL_NOT_FOUND':
+            errorMessage = 'This email does not exist.';
+            break;
+          case 'INVALID_PASSWORD':
+            errorMessage = 'This password is not correct.';
+            break;
+        }
+        return throwError(errorMessage);
+      }
+>>>>>>> ad5d484e9dc47993a106965bf21e1e1aa7338079
 }

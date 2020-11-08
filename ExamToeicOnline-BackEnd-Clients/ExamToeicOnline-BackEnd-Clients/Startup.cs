@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ExamToeicOnline_BackEnd_Clients
 {
@@ -34,6 +28,8 @@ namespace ExamToeicOnline_BackEnd_Clients
             services.AddDbContext<ExamToeicOnlineDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ExamToeicOnlineConnection")));
             services.AddControllers();
+            //Declare DI
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
