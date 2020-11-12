@@ -17,10 +17,17 @@ export class UserService {
     
     
     login(username: string, password: string) {  
-      console.log(username, password);
-       return this.http.post<User>('https://localhost:44300/api/accounts/login', {username: username, password:password});
+
+      var formData = new FormData();
+      formData.append("UserName", username);
+      formData.append("Password", password);
+      return this.http.post<User>('https://localhost:5001/api/accounts/login', formData);
     } 
     
+    loggedIn(){
+      let token = localStorage.getItem('token');
+    }
+
     public handleError(errorRes: HttpErrorResponse) {
         let errorMessage = 'An unknown error occurred!';
         if (!errorRes.error || !errorRes.error.error) {

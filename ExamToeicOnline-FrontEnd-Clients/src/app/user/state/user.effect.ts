@@ -1,11 +1,12 @@
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as UserActions from '../state/user.action';
 import { map, catchError, tap, mergeMap, exhaustMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+
 
 
 @Injectable()
@@ -19,12 +20,12 @@ export class UserEffects {
     @Effect()
     userLogin$ = this.action$.pipe(
         ofType(UserActions.login),
-        exhaustMap(action =>
+        mergeMap(action =>
         this.userService
             .login(action.username,action.password)
             .pipe(
                 map((user)=>{
-                    console.log(user)
+                    //console.log(user)
                     return UserActions.loginSuccess({user})
                 }),
                 catchError(error=> {
@@ -33,7 +34,9 @@ export class UserEffects {
                 })
             )
         )
-   ) 
+   )
+
+
 
     @Effect({dispatch:false})
     loginSuccess$ = this.action$.pipe(
@@ -57,5 +60,4 @@ export class UserEffects {
             localStorage.removeItem('token')
         })
     )
-
 }

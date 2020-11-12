@@ -6,5 +6,6 @@ export class User {
         public password: string,
         public userId:string,
         public token?: string,
+        public isAdmin?: boolean
     ){}
 }

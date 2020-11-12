@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from './../../model/user.model';
-import { Action, createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 export const login = createAction(
   '[User] Login',
@@ -32,4 +32,9 @@ export const signupSuccess= createAction(
 
 export const signupFail = createAction(
   '[User] Sigup Fail'
+)
+
+export const getCurrentUser = createAction (
+  '[User] Get Current User',
+  props<{currentUser: User}>()
 )

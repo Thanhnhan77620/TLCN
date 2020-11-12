@@ -1,5 +1,5 @@
 import { map, tap } from 'rxjs/operators';
-import { State, getCurrentUser } from './../state/user.reducer';
+import { State } from './../state/user.reducer';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { NgForm} from '@angular/forms';

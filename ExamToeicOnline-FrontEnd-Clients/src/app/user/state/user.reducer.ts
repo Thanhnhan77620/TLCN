@@ -1,10 +1,11 @@
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import { User } from './../../model/user.model';
 
 import * as AppState from '../../state/app.reducer';
-import * as UserActions from '../state/user.action'
+import * as UserActions from '../state/user.action';
 
 
 
@@ -14,7 +15,7 @@ export interface State extends AppState.State{
 
 export interface UserState {
   currentUserId: number | null,
-  currentUser: User,
+  currentUser:User,
   users: User[],
   error: HttpErrorResponse | null,
   isLogin: boolean,
@@ -45,15 +46,15 @@ export const getUsers = createSelector(
   state => state.users
 )
 
-export const getCurrentUser = createSelector(
+export const  getCurrentUser = createSelector (
   getUserFeatureState,
   state => state.currentUser
 )
 
+
 export const userReducer = createReducer<UserState>(
   initialState,
   on(UserActions.loginSuccess, (state, action): UserState => {
-
     return {
       ...state,
       currentUserId: action.user.id,
@@ -76,6 +77,6 @@ export const userReducer = createReducer<UserState>(
       currentUser: null,
       currentUserId: null
     }
-  })
+  }), 
 )
 
