@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ExamToeicOnline_BackEnd_Clients.Models.ViewModels
 {
-    public class AccountVM
+    public class Tokent
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string message { get; set; }
+        public ClaimsPrincipal tokent { get; set; }
     }
 }

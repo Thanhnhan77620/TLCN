@@ -431,6 +431,7 @@ D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.csproj.CoreCompileInputs.cache
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.MvcApplicationPartsAssemblyInfo.cache
 D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
@@ -441,3 +442,4 @@ D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnli
 D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.csproj.CoreCompileInputs.cache
 D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.MvcApplicationPartsAssemblyInfo.cache
 D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

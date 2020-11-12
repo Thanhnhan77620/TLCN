@@ -20,6 +20,7 @@ import { BodyComponent } from './component/blocks/body/body.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './user/register/register.component';
 import { environment } from 'src/environments/environment';
+import {ProfileComponent} from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { environment } from 'src/environments/environment';
     HomeComponent,
     ContactComponent,
     BodyComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

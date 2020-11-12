@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace ExamToeicOnline_BackEnd_Clients.EF.Configurations
 {
-    public class QuestionConfig: IEntityTypeConfiguration<Question>
+
+    public class ExamConfig : IEntityTypeConfiguration<Exam>
     {
-        public void Configure(EntityTypeBuilder<Question> builder)
+        public void Configure(EntityTypeBuilder<Exam> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
-            builder.HasMany(a => a.Anwsers).WithOne(u => u.Question).HasForeignKey(x => x.QuestionId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(a => a.Parts).WithOne(u => u.Exam).HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formSignIn: NgForm){
+    
     const username = formSignIn.value.username;
     const password = formSignIn.value.password;
 

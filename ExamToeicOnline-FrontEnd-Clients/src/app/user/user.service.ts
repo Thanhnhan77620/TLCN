@@ -15,13 +15,10 @@ export class UserService {
                 private store: Store<State>,
                 private router: Router) {}
     
-    
-    login(username: string, password: string) {  
 
-      var formData = new FormData();
-      formData.append("UserName", username);
-      formData.append("Password", password);
-      return this.http.post<User>('https://localhost:5001/api/accounts/login', formData);
+    login(username: string, password: string) {  
+      return this.http.post<User>('https://localhost:5001/api/accounts/login', {username,password});
+
     } 
     
     loggedIn(){

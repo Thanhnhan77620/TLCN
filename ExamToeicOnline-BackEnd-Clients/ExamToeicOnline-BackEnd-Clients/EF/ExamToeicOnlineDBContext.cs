@@ -31,5 +31,8 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Part> Parts { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Anwser> Anwsers { get; set; }
     }
 }
