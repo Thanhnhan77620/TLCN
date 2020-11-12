@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201107100414_init")]
+    [Migration("20201111023055_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,70 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Anwser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Correct")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Anwsers");
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Part", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Direction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("FilMP3")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Parts");
+                });
 
             modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
                 {
@@ -31,7 +95,15 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("PartId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PartId");
 
                     b.ToTable("Questions");
                 });
@@ -71,9 +143,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 11, 7, 17, 4, 14, 259, DateTimeKind.Local).AddTicks(4484),
-                            Password = "$2a$11$n6tPBEQzCzkcWWxSw2Xdx.JKUI.IHJJ.Wz6PL.RqvCPetcGxh2vLu",
-                            UserId = new Guid("09792120-9430-4871-bcaa-ff54662b05a0"),
+                            CreateAt = new DateTime(2020, 11, 11, 9, 30, 55, 96, DateTimeKind.Local).AddTicks(9854),
+                            Password = "$2a$11$qSbDYNJVa/WLJ59NvUQIrOA7SWNtBA2tNZJPcrKRN1M5yXihXZfFq",
+                            UserId = new Guid("7c16f426-d4c0-44ee-8673-77e50b73971e"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -81,9 +153,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 11, 7, 17, 4, 14, 259, DateTimeKind.Local).AddTicks(4484),
-                            Password = "$2a$11$/zsny9.fT/eG1ONfXFQlaOM5d6keOUv88leD5EwNcB4BRvWYYyq66",
-                            UserId = new Guid("b7d9403b-84ec-4a7a-a463-271dfe9f44da"),
+                            CreateAt = new DateTime(2020, 11, 11, 9, 30, 55, 96, DateTimeKind.Local).AddTicks(9854),
+                            Password = "$2a$11$PkwSXllacHn/PAsobYT7bunpk7sqMrN/aJOvioCtESaiRZIDdOpqu",
+                            UserId = new Guid("fb4d7403-b894-40e9-8d10-4f9e86940bad"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -118,7 +190,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("09792120-9430-4871-bcaa-ff54662b05a0"),
+                            Id = new Guid("7c16f426-d4c0-44ee-8673-77e50b73971e"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -126,12 +198,39 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7d9403b-84ec-4a7a-a463-271dfe9f44da"),
+                            Id = new Guid("fb4d7403-b894-40e9-8d10-4f9e86940bad"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
                             Phonenumber = 98765432
                         });
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Anwser", b =>
+                {
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Question", "Question")
+                        .WithMany("Anwsers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Part", b =>
+                {
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Exam", "Exam")
+                        .WithMany("Parts")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
+                {
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Part", "Part")
+                        .WithMany("Questions")
+                        .HasForeignKey("PartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ExamToeicOnline_FrontEnd_Clients.Models.Account", b =>

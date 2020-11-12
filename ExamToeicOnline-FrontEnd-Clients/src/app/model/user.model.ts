@@ -1,3 +1,5 @@
+import { Guid } from 'guid-typescript';
+
 export class User {
     constructor(
         public id: number,
