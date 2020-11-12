@@ -16,18 +16,10 @@ export class UserService {
                 private router: Router) {}
     
     
-<<<<<<< HEAD
     login(username: string, password: string) { 
       var formData = new FormData();
         formData.append("UserName", username);
         formData.append("Password", password); 
-=======
-    login(username: string, password: string) {  
-      var formData = new FormData();
-      formData.append("UserName", username);
-      formData.append("Password", password);
-      console.log(formData);
->>>>>>> master
        return this.http.post<User>('https://localhost:5001/api/accounts/login', formData);
     } 
     
