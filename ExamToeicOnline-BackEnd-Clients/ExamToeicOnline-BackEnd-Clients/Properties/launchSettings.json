@@ -7,7 +7,7 @@
       "sslPort": 0
     },
     "iisExpress": {
-      "applicationUrl": "http://localhost:63289",
+      "applicationUrl": "http://localhost:63288",
       "sslPort": 44300
     }
   },
@@ -22,7 +22,11 @@
     },
     "ExamToeicOnline_BackEnd_Clients": {
       "commandName": "Project",
+<<<<<<< HEAD
+      "launchUrl": "api/users",
+=======
       "launchUrl": "api/exams/import",
+>>>>>>> ad5d484e9dc47993a106965bf21e1e1aa7338079
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

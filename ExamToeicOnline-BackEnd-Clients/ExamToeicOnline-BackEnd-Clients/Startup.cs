@@ -107,7 +107,7 @@ namespace ExamToeicOnline_BackEnd_Clients
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseHttpsRedirection();
             app.UseCors("AllowAllOrigins");
 
