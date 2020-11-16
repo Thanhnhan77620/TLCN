@@ -5,21 +5,51 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
-import { State } from './state/user.reducer';
-import * as UserActions from './state/user.action';
+import jwt_decode from "jwt-decode";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
     constructor(private http: HttpClient, 
-                private store: Store<State>,
                 private router: Router) {}
     
-
+    user:User;
+    currentUser: any
+    token: string
     login(username: string, password: string) {  
-      return this.http.post<User>('https://localhost:5001/api/accounts/login', {username,password});
-
+      return this.http
+        .get('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
+        // .pipe(
+        //   map(user =>{
+        //     this.user= user,
+        //     console.log(this.user),
+        //     console.log(this.user.value.token)
+        //     return this.user.value.token
+        //   })
+        // );
     } 
+
+    getToken(username: string, password: string){
+      return this.http
+      .get('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
+      .pipe(
+        map(user => {
+          this.currentUser = user
+          // this.user = this.decode_token(this.currentUser.value.token);
+        })
+      )
+      .subscribe();
+    }
+
+
+    decode_token(token: string){
+      let decodedHeader:any = jwt_decode(this.token);
+      if(decodedHeader.exp){
+        console.log(decodedHeader.sub.message)
+      }
+    }
+
+    
     
     loggedIn(){
       let token = localStorage.getItem('token');

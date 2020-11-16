@@ -1,12 +1,9 @@
-import { map, tap } from 'rxjs/operators';
-import { State } from './../state/user.reducer';
+import { map } from 'rxjs/operators';
+import { UserService } from './../user.service';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { NgForm} from '@angular/forms';
-
-
-import * as UserActions from '../state/user.action';
-
+import jwt_decode from "jwt-decode";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,13 +12,15 @@ import * as UserActions from '../state/user.action';
 export class LoginComponent implements OnInit {
   
   model: any = {
-    username: "Nhan",
+    username: "nhan",
     password: "12345678"
   };
-
+  
+  token: string;
+  user: any;
 
   constructor(
-              private store: Store<State>,
+              private userService: UserService
               ) {}
  
   ngOnInit(): void {
@@ -31,9 +30,17 @@ export class LoginComponent implements OnInit {
     
     const username = formSignIn.value.username;
     const password = formSignIn.value.password;
-
-    this.store.dispatch(UserActions.login({username:username, password:password}));
-   
+    
+    this.userService.login(username, password).pipe(
+      map((user) => {
+        this.user = user
+        this.token = this.user.value.token
+        console.log(this.token)
+        var decodedHeader = jwt_decode(this.token);
+        console.log(decodedHeader);
+       
+      })
+    ).subscribe();   
 
     formSignIn.reset();
   }
