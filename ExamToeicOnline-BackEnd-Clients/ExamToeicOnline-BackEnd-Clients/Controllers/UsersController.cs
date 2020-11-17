@@ -43,7 +43,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         }
 
         //  POST: api/register
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Create([FromForm] GuestVM request)
         {
             var user = await _context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync();

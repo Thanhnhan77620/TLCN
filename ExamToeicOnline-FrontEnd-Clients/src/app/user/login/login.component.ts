@@ -31,10 +31,10 @@ export class LoginComponent implements OnInit {
     
     const username = formSignIn.value.username;
     const password = formSignIn.value.password;
-
-    this.store.dispatch(UserActions.login({username:username, password:password}));
+    
+   this.store.dispatch(UserActions.login({username:username, password:password}));
    
-
+   
     formSignIn.reset();
   }
 
