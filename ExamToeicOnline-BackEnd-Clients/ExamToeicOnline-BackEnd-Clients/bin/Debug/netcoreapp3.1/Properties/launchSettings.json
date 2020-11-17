@@ -22,7 +22,15 @@
     },
     "ExamToeicOnline_BackEnd_Clients": {
       "commandName": "Project",
+<<<<<<< HEAD
       "launchUrl": "api/users",
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> Nhan
+      "launchUrl": "api/exams/import",
+>>>>>>> master
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
