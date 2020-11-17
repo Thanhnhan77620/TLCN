@@ -27,12 +27,12 @@ export class NavbarComponent implements OnInit {
   }
 
   loggedIn(){
-    this.userService.loggedIn().subscribe(
-      (loggedIn) => {
-        this.isLogin = loggedIn;
-        console.log(this.isLogin)
-      }
-    );
+    // this.userService.loggedIn().subscribe(
+    //   (loggedIn) => {
+    //     this.isLogin = loggedIn;
+    //     console.log(this.isLogin)
+    //   }
+    // );
   }
 
   onLogout(){

@@ -14,7 +14,7 @@ export interface AuthResponseData {
   username: string
   expiresIn: string;
   message: string;
-  registered?: boolean;
+ 
 }
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -25,15 +25,13 @@ export class UserService {
 
   login(username: string, password: string) {
     return this.http
-      .get('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
+      .get<AuthResponseData>('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
       .pipe(
-        map((response: any) => {
-          const user  = response ;
-          if(user) {
-            let currentUser = this.decocodeToken(user);
-            t
-            
-          }
+        catchError(error => this.handleError),
+        tap(resData => {
+          const user: any = resData;
+          this.handleAuthentication(user.value.token);
+          console.log(user.value.token);
         })
       );
   }
@@ -59,6 +57,19 @@ export class UserService {
 
 
   decocodeToken(token: string) {
-    return JSON.stringify(jwt_decode(token));
+    return jwt_decode(token);
+  }
+
+  private handleAuthentication(token: string) {
+    const account:any = this.decocodeToken(token);
+    const expDate = account.exp;
+    console.log(account.sub[1]);
+    localStorage.setItem('token',token);
+
+    // const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    // const user = new User(email, userId, token, expirationDate);
+    // this.user.next(user);
+    // this.autoLogout(expiresIn * 1000);
+    // localStorage.setItem('userData', JSON.stringify(user));
   }
 }

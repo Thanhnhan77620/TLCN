@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { UserService } from './../user.service';
+import { AuthResponseData, UserService } from './../user.service';
 import { Store } from '@ngrx/store';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm} from '@angular/forms';
 import jwt_decode from "jwt-decode";
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,28 +18,48 @@ export class LoginComponent implements OnInit {
     password: "12345678"
   };
   
-  token: string;
-  user: any;
-  @Output() loggedIn: EventEmitter<boolean>;
+  isLoginMode = true;
+  isLoading = false;
+  error: string = null;
 
   constructor(
-              private userService: UserService
+              private userService: UserService,
+              private router: Router
               ) {}
  
   ngOnInit(): void {
   }
 
-  onSubmit(formSignIn: NgForm){
-    
-    const username = formSignIn.value.username;
-    const password = formSignIn.value.password;
-    this.userService.login(username, password).subscribe(
-     () => console.log('Login Success'),
-     (error) => {
-       console.log(error)
-     }
-    )
-    formSignIn.reset();
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
+
+    let authObs: Observable<AuthResponseData>;
+
+    this.isLoading = true;
+
+    if (this.isLoginMode) {
+      authObs = this.userService.login(email, password);
+    } else {
+      // authObs = this.authService.signup(email, password);
+    }
+
+    authObs.subscribe(
+      resData => {
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      },
+      errorMessage => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+      }
+    );
+
+    form.reset();
   }
 
   
