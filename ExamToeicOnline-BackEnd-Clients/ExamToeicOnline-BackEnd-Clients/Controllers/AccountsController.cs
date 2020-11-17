@@ -62,47 +62,37 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         public async Task<IActionResult> Login(string username, string password) 
         {
             
-            AccountVM accountVM = new AccountVM();
-            accountVM.Username = username;
-            accountVM.Password = password;
+            AccountVM accountLogin = new AccountVM();
+            accountLogin.Username = username;
+            accountLogin.Password = password;
             IActionResult response = Unauthorized();
-            var account = AuthenticateAccount(accountVM);
-
-            accountVM.message = account.message;
-            var tokenStr = GenerateJSONWebToken(accountVM);
-            response = Ok(new { token = tokenStr });
-
+            var account = AuthenticateAccount(accountLogin);
+            if (account.Username!=null)
+            {
+                accountLogin.UserId = account.UserId;
+                var tokenStr = GenerateJSONWebToken(accountLogin);
+                response = Ok(new { token = tokenStr });
+            }
+            
             return Ok(response);
 
         }
         private AccountVM AuthenticateAccount(AccountVM accountLogin)
         {
-            AccountVM accountVM = new AccountVM();      
+            AccountVM accountVM=new AccountVM();      
             var account = this._context.Accounts.FirstOrDefault(x => x.Username.Equals(accountLogin.Username.Trim()));
-           
-            if (account==null)
-            {
-                accountVM.message = "Username " + accountLogin.Username + " not exists1";
 
-            }
-            else
+            if (account != null && account.isActive)
             {
-                if (account.isActive)
+                if (BC.Verify(accountLogin.Password, account.Password))
                 {
-                    if (BC.Verify(accountLogin.Password, account.Password))
-                    {
-                        accountVM.message = "Successful authentication!";
-                    }
-                    else
-                    {
-                        accountVM.message = "Password incorrect!";
-                    }
+                    accountVM.Username = account.Username;
+                    accountVM.Password = account.Password;
+                    accountVM.UserId = account.UserId;
                 }
-                else
-                {
-                    accountVM.message = "Account is not activated!";
-                }
+                
             }
+            
             return accountVM;
 
         }
@@ -112,9 +102,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var credentials = new SigningCredentials(secuirityKey, SecurityAlgorithms.HmacSha256);
             var claim = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, account.Username),
-                new Claim(JwtRegisteredClaimNames.Sub, account.Password),
-                new Claim(JwtRegisteredClaimNames.Sub, account.message),
+                new Claim(JwtRegisteredClaimNames.Sub, account.Username),              
+                new Claim(JwtRegisteredClaimNames.Sub, account.UserId.ToString()),
+
             };
             var tokent = new JwtSecurityToken(
                 issuer: _config["Jwt:Key"],

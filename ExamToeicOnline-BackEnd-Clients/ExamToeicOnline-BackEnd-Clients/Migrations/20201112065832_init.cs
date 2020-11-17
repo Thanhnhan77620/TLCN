@@ -127,22 +127,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "Phonenumber" },
-                values: new object[] { new Guid("7c16f426-d4c0-44ee-8673-77e50b73971e"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, 12345678 });
+                values: new object[] { new Guid("c99721c1-1f1d-4b54-85c5-b8ff64b7f181"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, 12345678 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "Phonenumber" },
-                values: new object[] { new Guid("fb4d7403-b894-40e9-8d10-4f9e86940bad"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, 98765432 });
+                values: new object[] { new Guid("15afa0a9-7c81-41f4-a8fb-455c74a2a404"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, 98765432 });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 1, new DateTime(2020, 11, 11, 9, 30, 55, 96, DateTimeKind.Local).AddTicks(9854), "$2a$11$qSbDYNJVa/WLJ59NvUQIrOA7SWNtBA2tNZJPcrKRN1M5yXihXZfFq", new Guid("7c16f426-d4c0-44ee-8673-77e50b73971e"), "ngan", true, false });
+                values: new object[] { 1, new DateTime(2020, 11, 12, 13, 58, 31, 605, DateTimeKind.Local).AddTicks(1588), "$2a$11$Zpl1JMrQNA1xWafHu.MyxOLIPtQKgZqzWe5DDxF.R7xHtaUSTArtK", new Guid("c99721c1-1f1d-4b54-85c5-b8ff64b7f181"), "ngan", true, false });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 2, new DateTime(2020, 11, 11, 9, 30, 55, 96, DateTimeKind.Local).AddTicks(9854), "$2a$11$PkwSXllacHn/PAsobYT7bunpk7sqMrN/aJOvioCtESaiRZIDdOpqu", new Guid("fb4d7403-b894-40e9-8d10-4f9e86940bad"), "nhan", true, false });
+                values: new object[] { 2, new DateTime(2020, 11, 12, 13, 58, 31, 605, DateTimeKind.Local).AddTicks(1588), "$2a$11$p/Wd3n5JUF9Pf/GQPOlIvOohqGFZEzZwjnwqW2y9J/UbCGPbsEd1a", new Guid("15afa0a9-7c81-41f4-a8fb-455c74a2a404"), "nhan", true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
