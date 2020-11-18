@@ -1,12 +1,10 @@
+import { User } from 'src/app/model/user.model';
 import { UserService } from './../../../user/user.service';
-import { User } from './../../../model/user.model';
-import { getCurrentUser, State, getIsLogin } from './../../../user/state/user.reducer';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, pipe } from 'rxjs';
 
-import * as UserActions from '../../../user/state/user.action'
+
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -15,29 +13,27 @@ import * as UserActions from '../../../user/state/user.action'
 })
 export class NavbarComponent implements OnInit {
  
-  isLogin$: Observable<boolean>;
-  currentUser: User;
+  isAuthenticated = false;
+  private userSub: Subscription;
+  currentUser: User
+  constructor(
+    private userService: UserService
+  ) {}
 
-  constructor(  private router: Router,
-                private store: Store<State>,
-                ) { }
-
-
-  ngOnInit(): void {
-
-    this.isLogin$ = this.store.select(getIsLogin);
-    this.store.select(getCurrentUser).subscribe(
-      user =>this.currentUser = user
-    )
+  ngOnInit() {
+    this.userSub = this.userService.user.subscribe(user => {
+      this.currentUser = user;
+      this.isAuthenticated = !!user;
+      console.log(this.isAuthenticated)
+    });
   }
 
-  onLogout(){
-    this.store.dispatch(UserActions.logout());
-    this.router.navigate(['/home']);
+  onLogout() {
+    this.userService.logout();
   }
 
-  onRegister(){
-    this.router.navigate(['/auth/register'])
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
 }

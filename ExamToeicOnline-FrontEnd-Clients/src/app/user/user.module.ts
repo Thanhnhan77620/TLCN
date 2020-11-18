@@ -1,22 +1,17 @@
 import { RegisterComponent } from './register/register.component';
-import { UserEffects } from './state/user.effect';
-import { EffectsModule } from '@ngrx/effects';
-import { userReducer } from './state/user.reducer';
-import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module'; 
 import { LoginComponent } from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
 const userRoutes: Routes = [
   {
     path:'',
     component: LoginComponent,
     children:[
       {path: 'login', component:LoginComponent},
-      {path:'register', component: RegisterComponent},
+      {path:  'register', component: RegisterComponent},
       {path: 'user/profile', component: ProfileComponent}
     ]
   }
@@ -27,13 +22,11 @@ const userRoutes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(userRoutes),
-    StoreModule.forFeature('users', userReducer),
-    EffectsModule.forFeature([UserEffects]),
     RouterModule.forChild(userRoutes)
   
   ],
   declarations: [
     LoginComponent
-  ]
+  ],
 })
 export class UserModule { }

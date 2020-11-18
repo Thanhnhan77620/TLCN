@@ -1,12 +1,11 @@
-import { map, tap } from 'rxjs/operators';
-import { State, getCurrentUser } from './../state/user.reducer';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { AuthResponseData, UserService } from './../user.service';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm} from '@angular/forms';
-
-
-import * as UserActions from '../state/user.action';
-
+import jwt_decode from "jwt-decode";
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,13 +14,16 @@ import * as UserActions from '../state/user.action';
 export class LoginComponent implements OnInit {
   
   model: any = {
-    username: "Nhan",
+    username: "nhan",
     password: "12345678"
   };
-
+  
+  isLoading = false;
+  error: string = null;
 
   constructor(
-              private store: Store<State>,
+              private userService: UserService,
+              private router: Router
               ) {}
  
   ngOnInit(): void {
@@ -34,11 +36,7 @@ export class LoginComponent implements OnInit {
     var s = new Date(1210981217000).toLocaleDateString("en-US")
     // expected output "8/30/2017"  
     console.log(s);
-   this.store.dispatch(UserActions.login({username:username, password:password}));
-   
-   
+  //  this.store.dispatch(UserActions.login({username:username, password:password}));
     formSignIn.reset();
   }
-
-
 }

@@ -22,7 +22,9 @@
     },
     "ExamToeicOnline_BackEnd_Clients": {
       "commandName": "Project",
+
       "launchUrl": "api/exams/import",
+
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
