@@ -5,7 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
 const userRoutes: Routes = [
   {
     path:'',
@@ -28,6 +27,6 @@ const userRoutes: Routes = [
   ],
   declarations: [
     LoginComponent
-  ]
+  ],
 })
 export class UserModule { }

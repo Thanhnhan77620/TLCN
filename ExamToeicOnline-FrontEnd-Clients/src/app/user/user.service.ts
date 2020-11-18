@@ -1,21 +1,20 @@
-
-import { Account } from "./../model/account.model";
 import { BehaviorSubject } from "rxjs";
 import { User } from "./../model/user.model";
 import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { throwError, of, Subject } from "rxjs";
 import jwt_decode from "jwt-decode";
-
+import  { JwtHelperService } from '@auth0/angular-jwt' 
 export interface AuthResponseData {
+
   username: string
   expiresIn: string;
-  message: string;
- 
+  token: string;
+  status?: string;
 }
+
 @Injectable({ providedIn: "root" })
 export class UserService {
   constructor(private http: HttpClient, private router: Router) {}
@@ -23,11 +22,14 @@ export class UserService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
+  jwtHelper = new JwtHelperService();
+
   login(username: string, password: string) {
     return this.http
       .get<AuthResponseData>('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
       .pipe(
-        catchError(error => this.handleError),
+        catchError((error) => 
+          this.handleError(error)),
         tap(resData => {
           const user: any = resData;
           this.handleAuthentication(user.value.token);
@@ -60,16 +62,59 @@ export class UserService {
     return jwt_decode(token);
   }
 
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/home']);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
   private handleAuthentication(token: string) {
     const account:any = this.decocodeToken(token);
-    const expDate = account.exp;
-    console.log(account.sub[1]);
-    localStorage.setItem('token',token);
+    const user = new User(account.sub[0],account.sub[1], token, account.exp);
+    this.user.next(user);
+    this.autoLogout(account.exp);
+    localStorage.setItem('userData',JSON.stringify(user));
+  }
 
-    // const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    // const user = new User(email, userId, token, expirationDate);
-    // this.user.next(user);
-    // this.autoLogout(expiresIn * 1000);
-    // localStorage.setItem('userData', JSON.stringify(user));
+autoLogin() {
+    const userData: {
+      username: string;
+      userId: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.username,
+      userData.userId,
+      userData._token,
+      new Date(userData._tokenExpirationDate),
+    );
+
+    if (loadedUser._token) {
+      this.user.next(loadedUser);
+      // console.log(new Date(loadedUser._tokenExpirationDate).toLocaleDateString('en-US'));
+      console.log("ads" + new Date().getTime())
+      console.log("exp"+this.jwtHelper.isTokenExpired('',(new Date().getTime() - new Date( loadedUser._tokenExpirationDate).getTime()*1000)));
+      if( this.jwtHelper.isTokenExpired('',+loadedUser._tokenExpirationDate.getTime())){
+        this.autoLogout( Date.now() - new Date( loadedUser._tokenExpirationDate).getTime());
+      }
+      this.autoLogout(+loadedUser._tokenExpirationDate.getTime());
+    }
   }
 }

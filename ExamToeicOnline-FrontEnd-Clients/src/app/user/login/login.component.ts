@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     password: "12345678"
   };
   
-  isLoginMode = true;
   isLoading = false;
   error: string = null;
 
@@ -34,28 +33,21 @@ export class LoginComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    const email = form.value.email;
+    const username = form.value.username;
     const password = form.value.password;
 
     let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
 
-    if (this.isLoginMode) {
-      authObs = this.userService.login(email, password);
-    } else {
-      // authObs = this.authService.signup(email, password);
-    }
+    authObs = this.userService.login(username, password);
 
     authObs.subscribe(
       resData => {
-        this.isLoading = false;
         this.router.navigate(['/home']);
       },
       errorMessage => {
         console.log(errorMessage);
-        this.error = errorMessage;
-        this.isLoading = false;
       }
     );
 

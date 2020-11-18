@@ -1,11 +1,10 @@
-import { UserService } from './../../../user/user.service';
-import { tap } from 'rxjs/operators';
 import { User } from 'src/app/model/user.model';
+import { UserService } from './../../../user/user.service';
+
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, pipe, observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -14,35 +13,27 @@ import { Observable, pipe, observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
  
-  isLogin$: Observable<boolean>;
-  currentUser: User = null;
-  currentUser$: Observable<User>;
-  @Input() isLogin: boolean;
-  constructor(  private router: Router,
-                private userService: UserService) { }
+  isAuthenticated = false;
+  private userSub: Subscription;
+  currentUser: User
+  constructor(
+    private userService: UserService
+  ) {}
 
-
-  ngOnInit(): void {    
-    this.loggedIn();
+  ngOnInit() {
+    this.userSub = this.userService.user.subscribe(user => {
+      this.currentUser = user;
+      this.isAuthenticated = !!user;
+      console.log(this.isAuthenticated)
+    });
   }
 
-  loggedIn(){
-    // this.userService.loggedIn().subscribe(
-    //   (loggedIn) => {
-    //     this.isLogin = loggedIn;
-    //     console.log(this.isLogin)
-    //   }
-    // );
+  onLogout() {
+    this.userService.logout();
   }
 
-  onLogout(){
-    localStorage.removeItem('token');
-    this.router.navigate(['/home']);
-  }
-
-  onRegister(){
-    this.router.navigate(['/auth/register']),
-    this.isLogin = false;
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
 }
