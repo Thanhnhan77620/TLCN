@@ -35,7 +35,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._config = configuration;
 
         }
-        //GET: api/<UserController>
+        //GET: api/<UserController> 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -65,7 +65,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             AccountVM accountLogin = new AccountVM();
             accountLogin.Username = username;
             accountLogin.Password = password;
-            IActionResult response = Unauthorized();
+            IActionResult response = Unauthorized("Login fail");
             var account = AuthenticateAccount(accountLogin);
             if (account.Username!=null)
             {
@@ -81,6 +81,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             AccountVM accountVM=new AccountVM();      
             var account = this._context.Accounts.FirstOrDefault(x => x.Username.Equals(accountLogin.Username.Trim()));
+
+           
 
             if (account != null && account.isActive)
             {
@@ -110,7 +112,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 issuer: _config["Jwt:Key"],
                 audience: _config["Jwt:Issuer"],
                 claim,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: credentials
             );
 

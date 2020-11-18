@@ -7,6 +7,7 @@ import { catchError, map, tap } from "rxjs/operators";
 import { throwError, of, Subject } from "rxjs";
 import jwt_decode from "jwt-decode";
 import  { JwtHelperService } from '@auth0/angular-jwt' 
+import { Observable } from 'rxjs/internal/Observable';
 export interface AuthResponseData {
 
   username: string
@@ -23,44 +24,35 @@ export class UserService {
   private tokenExpirationTimer: any;
 
   jwtHelper = new JwtHelperService();
-
   login(username: string, password: string) {
     return this.http
       .get<AuthResponseData>('https://localhost:5001/api/accounts/login?username='+ username+ '&password=' + password)
-      .pipe(
-        catchError((error) => 
-          this.handleError(error)),
+      .pipe( 
+        catchError( (res: HttpErrorResponse) => this.handleError(res)),
         tap(resData => {
           const user: any = resData;
           this.handleAuthentication(user.value.token);
-          console.log(user.value.token);
+          
         })
       );
   }
 
-  public handleError(errorRes: HttpErrorResponse) {
-    let errorMessage = "An unknown error occurred!";
-    if (!errorRes.error || !errorRes.error.error) {
-      return throwError(errorMessage);
-    }
-    switch (errorRes.error.error.message) {
-      case "EMAIL_EXISTS":
-        errorMessage = "This email exists already";
+  public handleError(error: HttpErrorResponse) {
+    let errorMessage:string ;
+    switch (error.status) {
+      case 401:
+        errorMessage = "Login Fail";
         break;
-      case "EMAIL_NOT_FOUND":
-        errorMessage = "This email does not exist.";
-        break;
-      case "INVALID_PASSWORD":
-        errorMessage = "This password is not correct.";
-        break;
+      // case "EMAIL_NOT_FOUND":
+      //   errorMessage = "This email does not exist.";
+      //   break;
+      // case "INVALID_PASSWORD":
+      //   errorMessage = "This password is not correct.";
+      //   break;
     }
     return throwError(errorMessage);
   }
 
-
-  decocodeToken(token: string) {
-    return jwt_decode(token);
-  }
 
 
   logout() {
@@ -80,7 +72,9 @@ export class UserService {
   }
 
   private handleAuthentication(token: string) {
-    const account:any = this.decocodeToken(token);
+    const account:any = this.jwtHelper.decodeToken(token);
+    const tokenExpiration = this.jwtHelper.getTokenExpirationDate(token);
+
     const user = new User(account.sub[0],account.sub[1], token, account.exp);
     this.user.next(user);
     this.autoLogout(account.exp);
@@ -108,13 +102,10 @@ autoLogin() {
 
     if (loadedUser._token) {
       this.user.next(loadedUser);
-      // console.log(new Date(loadedUser._tokenExpirationDate).toLocaleDateString('en-US'));
-      console.log("ads" + new Date().getTime())
-      console.log("exp"+this.jwtHelper.isTokenExpired('',(new Date().getTime() - new Date( loadedUser._tokenExpirationDate).getTime()*1000)));
       if( this.jwtHelper.isTokenExpired('',+loadedUser._tokenExpirationDate.getTime())){
-        this.autoLogout( Date.now() - new Date( loadedUser._tokenExpirationDate).getTime());
+        this.autoLogout( new Date( loadedUser._tokenExpirationDate).getTime()*1000 - new Date().getTime());
       }
-      this.autoLogout(+loadedUser._tokenExpirationDate.getTime());
+      
     }
   }
 }
