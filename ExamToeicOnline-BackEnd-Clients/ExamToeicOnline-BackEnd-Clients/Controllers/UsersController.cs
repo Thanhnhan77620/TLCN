@@ -99,39 +99,41 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(user);
         }
        
-        [HttpPut("{UserId}")]
-        public async Task<IActionResult> Update([FromForm] Guid request)
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromForm] UserVM request)
         {
-            var user = await this._context.Users.Where(u=>u.Id==request).FirstOrDefaultAsync();
-            //if (user == null)
-            //{
-            //    return NotFound("Can not find user has ID=" + request.Id);
-            //}
-            //else
-            //{
-            //    user.Fullname = request.Fullname;
-            //    user.Phonenumber = request.Phonenumber;
-            //    user.Email = request.Email;
-            //    user.Birthday = request.Birthday;
-            //    //Save image
-            //    if (HttpContext.Request.Form.Files.Count > 0)
-            //    {
-            //        var file = HttpContext.Request.Form.Files[0];
+            //var user = await this._context.Users.Where(u => u.Id == request).FirstOrDefaultAsync();
+            var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound("Can not find user has ID=" + request.Id);
+            }
+            else
+            {
+                user.Fullname = request.Fullname;
+                user.PhoneNumber = request.PhoneNumber;
+                user.Email = request.Email;
+                user.Birthday = request.Birthday;
+                user.Image = request.Image;
+                //Save image
+                //if (HttpContext.Request.Form.Files.Count > 0)
+                //{
+                //    var file = HttpContext.Request.Form.Files[0];
 
-            //        byte[] fileData = null;
+                //    byte[] fileData = null;
 
-            //        using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-            //        {
-            //            fileData = binaryReader.ReadBytes((int)file.Length);
-            //        }
+                //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                //    {
+                //        fileData = binaryReader.ReadBytes((int)file.Length);
+                //    }
 
-            //        user.Image = fileData;
-            //    }
+                //    user.Image = fileData;
+                //}
 
-            //    this._context.Users.Update(user);
-            //    await this._context.SaveChangesAsync();
+                this._context.Users.Update(user);
+                await this._context.SaveChangesAsync();
 
-            //}
+            }
 
             return Ok(user);
         }

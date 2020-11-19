@@ -27,9 +27,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Fullname = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Phonenumber = table.Column<int>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     Birthday = table.Column<DateTime>(nullable: false),
-                    Image = table.Column<byte[]>(nullable: true)
+                    Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,23 +126,23 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "Phonenumber" },
-                values: new object[] { new Guid("1a904231-4ddd-40ba-8d5e-7d1730d0c690"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, 12345678 });
+                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
+                values: new object[] { new Guid("789988db-6fd3-4b3d-a88b-e292797fd497"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "Phonenumber" },
-                values: new object[] { new Guid("ff000d97-ff4e-4d27-a657-e96c51425d4a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, 98765432 });
+                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
+                values: new object[] { new Guid("543fead6-46b7-4eac-91df-582f2cbec31e"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 1, new DateTime(2020, 11, 18, 13, 16, 31, 532, DateTimeKind.Local).AddTicks(621), "$2a$11$B0OJPqDjQ6gfKeJrlxQdPezi4jh94SPTEkn1HTSI4oqYwrxECH/nW", new Guid("1a904231-4ddd-40ba-8d5e-7d1730d0c690"), "ngan", true, false });
+                values: new object[] { 1, new DateTime(2020, 11, 19, 15, 59, 29, 231, DateTimeKind.Local).AddTicks(3253), "$2a$11$rzq44vGgltETB0xAM8l7Lul/AMbQQ/gKCscoQstS07HH7/W7jnVLu", new Guid("789988db-6fd3-4b3d-a88b-e292797fd497"), "ngan", true, false });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 2, new DateTime(2020, 11, 18, 13, 16, 31, 532, DateTimeKind.Local).AddTicks(621), "$2a$11$o7rXjyETAxCO.5Nyg.I3GunvyaFixLj1m7OYkSlsYsJol.I/3zBpm", new Guid("ff000d97-ff4e-4d27-a657-e96c51425d4a"), "nhan", true, false });
+                values: new object[] { 2, new DateTime(2020, 11, 19, 15, 59, 29, 231, DateTimeKind.Local).AddTicks(3253), "$2a$11$4chGYf.EzIy5IBVAU2WoseoufTHhXwq5MvEUkS8XODdypJ8ukUh3u", new Guid("543fead6-46b7-4eac-91df-582f2cbec31e"), "nhan", true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

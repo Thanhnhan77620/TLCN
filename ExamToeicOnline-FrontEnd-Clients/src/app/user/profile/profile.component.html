@@ -1,5 +1,6 @@
+
 <div class="container py-4">
-    <div class="row">
+    <div class="row bg-info">
 
         <div class="col-lg-3 col-sm-4 pb-4">
             <mdb-card>
@@ -28,7 +29,7 @@
                                     <div class="col-md-2">
 
                                         <div class="row" *ngIf="myImage">
-                                            <img [src]="myImage|async" ngModel style="width: 100px; height: 100px;" class="img-fluid rounded-circle hoverable" alt="image">
+                                            <img [src]="myImage| async" ngModel style="width: 100px; height: 100px;" class="img-fluid rounded-circle hoverable" alt="image">
                                         </div>
                                       <div class="row py-4">
                                             <input type="file" ngModel name="image" (change)="onChange($event)" class="form-control"/>
@@ -61,7 +62,7 @@
                                             </div>
                                             <div class=" col-lg-9 col-sm-8 col-xs-12">
                                                 <div class="form-group">
-                                                    <input mdbInput type="date" name="birthday"  required class="form-control" />
+                                                    <input mdbInput type="date" ngModel  name="birthDate"  required class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
