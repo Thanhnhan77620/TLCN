@@ -20,9 +20,6 @@ export class ProfileService {
             })
         };
     }
-
-    
-
     updateProfile(id: Guid) {  
         return this.httpClient.put<any>(this.api+id,{id:id})
            .toPromise()
