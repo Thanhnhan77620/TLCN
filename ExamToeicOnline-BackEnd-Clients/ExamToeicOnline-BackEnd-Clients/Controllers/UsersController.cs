@@ -30,89 +30,107 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._storageService = storageService;
 
         }
-        // GET: api/<UserController>
+        // GET: get all user 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            IActionResult res;
             var user = await this._context.Users.Include(x => x.Accounts).ToArrayAsync();
             if (user == null)
             {
-                return NotFound("Can not found any Record!");
+                return NotFound("Can not found an record!");
+
+            }
+            return Ok(user);
+            
+
+        }
+        //GET: get one user
+       [HttpGet("{UserId}")]
+        public async Task<IActionResult> GetUserById(Guid UserId)
+        {
+            var user = await this._context.Users.Where(u => u.Id == UserId).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound("Can not foud the user with ID=" + UserId);
+
             }
             return Ok(user);
         }
 
-        //  POST: api/register
-        [HttpPost("register")]
+
+
+        //  POST: register
+        [HttpPost]
         public async Task<IActionResult> Create([FromForm] GuestVM request)
         {
             var user = await _context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync();
 
-            try
+            if (user != null)
             {
-                if (user != null)
-                {
-                    return NotFound("Email " + request.Email + " Exist");
-                }
-                else
-                {
-                    
-                    try
-                    {
-                        //create uer
-                        user = new User()
-                        {
-                            Fullname = request.Fullname,
-                            Email = request.Email, 
-                            
-                        };                    
-                        this._context.Users.Add(user);
-                        //create account
-                        var account = new Account()
-                        {
-                            Username = request.Email.Split('@')[0],                        
-                            CreateAt = DateTime.Now,
-                            UserId = user.Id,
-                            isActive=true
-                        };
-                      
-                        account.Password = BC.HashPassword(request.Password);
-                                   
-                        this._context.Accounts.Add(account);
-                        await this._context.SaveChangesAsync();
-                    }
-                    catch (Exception err)
-                    {
-
-                        return BadRequest("Error messgae: " + err.Message);
-                    }
-
-                }
+                return BadRequest("Email " + request.Email + " exist!");
             }
-            catch (Exception e)
+            else
             {
 
-                return BadRequest("Error messgae: " + e.Message);
+                try
+                {
+                    //create uer
+                    user = new User()
+                    {
+                        Fullname = request.Fullname,
+                        Email = request.Email,
+
+                    };
+                    this._context.Users.Add(user);
+                    //create account
+                    var account = new Account()
+                    {
+                        Username = request.Email.Split('@')[0],
+                        CreateAt = DateTime.Now,
+                        UserId = user.Id,
+                        isActive = true
+                    };
+
+                    account.Password = BC.HashPassword(request.Password);
+
+                    this._context.Accounts.Add(account);
+                    await this._context.SaveChangesAsync();
+                }
+                catch (Exception err)
+                {
+
+                    return BadRequest(err.Message);
+                }
+
             }
 
 
-            return Ok(user);
+            return Ok("Register successfully!");
         }
        
-        [HttpPut("update")]
+        [HttpPut("{UserId}")]
         public async Task<IActionResult> Update([FromForm] UserVM request)
         {
-            //var user = await this._context.Users.Where(u => u.Id == request).FirstOrDefaultAsync();
+           
             var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
             if (user == null)
             {
-                return NotFound("Can not find user has ID=" + request.Id);
+                return NotFound("Can not foud the user with ID=" + request.Id);
             }
             else
             {
                 user.Fullname = request.Fullname;
                 user.PhoneNumber = request.PhoneNumber;
-                user.Email = request.Email;
+                //check email exists
+                if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
+                {
+                    return BadRequest("Email " + request.Email + " exist!");
+                }
+                else
+                {
+                    user.Email = request.Email;
+                }
                 user.Birthday = request.Birthday;
                 user.Image = request.Image;
                 //Save image
@@ -134,8 +152,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 await this._context.SaveChangesAsync();
 
             }
-
-            return Ok(user);
+            return Ok("Update infomation successfully!");
         }
       
         
