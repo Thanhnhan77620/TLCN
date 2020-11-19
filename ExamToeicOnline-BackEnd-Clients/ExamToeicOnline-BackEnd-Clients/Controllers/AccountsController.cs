@@ -65,16 +65,17 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             AccountVM accountLogin = new AccountVM();
             accountLogin.Username = username;
             accountLogin.Password = password;
-            IActionResult response = Unauthorized("Login fail");
+            IActionResult response = Unauthorized();
             var account = AuthenticateAccount(accountLogin);
             if (account.Username!=null)
             {
                 accountLogin.UserId = account.UserId;
                 var tokenStr = GenerateJSONWebToken(accountLogin);
                 response = Ok(new { token = tokenStr });
+                return Ok(response);
             }
             
-            return Ok(response);
+            return Unauthorized("Login fail");
 
         }
         private AccountVM AuthenticateAccount(AccountVM accountLogin)
@@ -112,7 +113,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 issuer: _config["Jwt:Key"],
                 audience: _config["Jwt:Issuer"],
                 claim,
-                expires: DateTime.Now.AddMinutes(1),
+                expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: credentials
             );
 

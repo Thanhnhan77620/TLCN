@@ -15,36 +15,52 @@
                 <mdb-card-body class="px-lg-5 pt-0">
 
                     <!-- Form -->
-                    <form class="text-center" style="color: #757575;">
+                    <form class="text-center" style="color: #757575;" #formSignup="ngForm" (ngSubmit) = "onRegister(formSignup)">
 
                         <div class="form-row">
                             <div class="col">
                                 <!-- First name -->
                                 <div class="md-form">
-                                    <input type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
-                                    <label for="materialRegisterFormFirstName">First name</label>
+                                    <input 
+                                        type="text" 
+                                        id="materialRegisterFormEmail" 
+                                        class="form-control" 
+                                        mdbInput 
+                                        name = "fullname"
+                                        [(ngModel)]="fullname"
+                                        required>
+                                  <label for="materialRegisterFormEmail" >Full name</label>
                                 </div>
                             </div>
-                            <div class="col">
-                                <!-- Last name -->
-                                <div class="md-form">
-                                    <input type="email" id="materialRegisterFormLastName" class="form-control" mdbInput>
-                                    <label for="materialRegisterFormLastName">Last name</label>
-                                </div>
-                            </div>
+                            
                         </div>
+
 
                         <!-- E-mail -->
                        
                         <div class="md-form mt-0">
-                            <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
+                            <input 
+                                type="email" 
+                                id="materialRegisterFormEmail" 
+                                class="form-control" 
+                                mdbInput 
+                                name="email" 
+                                [(ngModel)]="email"
+                                required>
                             <label for="materialRegisterFormEmail" >E-mail<span style="color: red;;">&#42;</span></label>
                         </div>
 
                         <!-- Password -->
                         <div class="md-form">
-                            <input type="password" id="materialRegisterFormPassword" class="form-control"
-                                aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+                            <input 
+                                type="password" 
+                                id="materialRegisterFormPassword" 
+                                class="form-control"
+                                aria-describedby="materialRegisterFormPasswordHelpBlock" 
+                                mdbInput 
+                                name="password" 
+                                [(ngModel)]="password"
+                                required>
                             <label for="materialRegisterFormPassword">Password<span style="color: red;">&#42;</span></label>
                             <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-left">
                                 At least 8 characters and 1 digit
@@ -53,19 +69,29 @@
 
                         <!-- Password -->
                         <div class="md-form">
-                            <input type="password" id="materialRegisterFormPassword" class="form-control"
-                                aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+                            <input 
+                                type="password" 
+                                id="materialRegisterFormPassword" 
+                                class="form-control"
+                                aria-describedby="materialRegisterFormPasswordHelpBlock" 
+                                mdbInput 
+                                name="confirmPassword" 
+                                [(ngModel)]="confirmPassword"
+                                required>
                             <label for="materialRegisterFormPassword">Confirm Password</label>
                             
                         </div>
+
+                        <ng-template *ngIf="!(confirmPassword === password)">
+                            
+                        </ng-template>
 
                         <!-- Newsletter -->
                         <mdb-checkbox>Remember login</mdb-checkbox>
 
                         <!-- Sign up button -->
                         <button mdbBtn color="info" outline="true" rounded="true" block="true"
-                            class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" 
-                            (click) ="onRegister()">Sign Up</button>
+                            class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" >Sign Up</button>
 
                         <!-- You have a account -->
                         <p>You have a account?

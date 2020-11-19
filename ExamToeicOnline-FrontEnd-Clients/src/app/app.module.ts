@@ -1,4 +1,7 @@
-import { UserModule } from './user/user.module';
+import { ProfileComponent } from './user/profile/profile.component';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -18,9 +21,8 @@ import { HomeComponent } from './component/pages/home/home.component';
 import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './user/register/register.component';
 import { environment } from 'src/environments/environment';
-import {ProfileComponent} from './user/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +33,9 @@ import {ProfileComponent} from './user/profile/profile.component';
     HomeComponent,
     ContactComponent,
     BodyComponent,
+    LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,7 @@ import {ProfileComponent} from './user/profile/profile.component';
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
-    UserModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,7 @@
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { AuthResponseData, UserService } from './../user.service';
-import { Store } from '@ngrx/store';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm} from '@angular/forms';
-import jwt_decode from "jwt-decode";
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
@@ -35,20 +32,21 @@ export class LoginComponent implements OnInit {
     }
     const username = form.value.username;
     const password = form.value.password;
+    
 
     let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
 
     authObs = this.userService.login(username, password);
-    
 
     authObs.subscribe(
       resData => {
         this.router.navigate(['/home']);
       },
       errorMessage => {
-        console.log(errorMessage);
+        this.error = errorMessage;
+        alert(this.error);
       }
     );
 
