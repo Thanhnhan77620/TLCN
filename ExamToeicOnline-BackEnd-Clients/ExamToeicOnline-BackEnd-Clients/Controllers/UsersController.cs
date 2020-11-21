@@ -105,8 +105,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
             }
 
-
-            return Ok("Register successfully!");
+         
+            return Ok(user);
         }
        
         [HttpPut("{UserId}")]
