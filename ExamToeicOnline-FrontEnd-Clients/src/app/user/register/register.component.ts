@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterService } from './register.service';
+import { UserService } from './../user.service';
 import { NgForm, FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 
@@ -15,6 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private registerService: RegisterService,
+              private userService: UserService,
               private formBuilder: FormBuilder) { }
   
   ngOnInit(): void {
@@ -22,17 +24,11 @@ export class RegisterComponent implements OnInit {
       fullName: '',
       email: ['', [Validators.email]],
       passWord:['',[Validators.minLength(8)]],
-      confirmPassword:''
+      confirmPassword:'',
+      rememberMe:true
     })  
   }
-  // onRegister(formRegister:NgForm){
-  //   // this.router.navigate(['/register'])
-  //   if(this.registerService.register(formRegister.value.fullName,formRegister.value.email,formRegister.value.passWord)){
-  //     this.router.navigate(['auth/login'])
-  //   }
-    
-    
-  // }
+
   get f() { return this.formRegister.controls; }
   onRegister(){
     if (this.formRegister.invalid) {
@@ -40,8 +36,15 @@ export class RegisterComponent implements OnInit {
     }
     else{
       this.registerService.register(this.formRegister.value.fullName,this.formRegister.value.email,this.formRegister.value.passWord)
+      if(this.formRegister.value.rememberMe){
+        this.userService.login(this.formRegister.value.email.split('@')[0],this.formRegister.value.passWord)
+        alert('Login Success!')
+        this.router.navigate(['/home']);
+      }
+      
     } 
     console.log(this.formRegister.controls)
+    console.log(this.formRegister.value.email.split('@')[0])
   }
   message ='';
   checkConfirmPassword(){
