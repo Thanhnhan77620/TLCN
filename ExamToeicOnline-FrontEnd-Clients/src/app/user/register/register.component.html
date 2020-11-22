@@ -4,76 +4,109 @@
         <div class="col-lg-5">
             <!-- Material form register -->
             <mdb-card>
+
                 <mdb-card-header class="info-color white-text text-center py-4">
                     <h5>
                         <strong>Sign up</strong>
                     </h5>
                 </mdb-card-header>
+
                 <!--Card content-->
                 <mdb-card-body class="px-lg-5 pt-0">
+
                     <!-- Form -->
-                    <form class="text-center" style="color: #757575;" (ngSubmit)="onRegister()"
-                        [formGroup]="formRegister">
+                    <form class="text-center" style="color: #757575;" [formGroup]="registerForm" (ngSubmit) = "onRegister()">
+
                         <div class="form-row">
                             <div class="col">
                                 <!-- First name -->
                                 <div class="md-form">
-                                    <input type="text" class="form-control" mdbInput formControlName="fullName"
-                                        required>
-                                    <label>Full name</label>
+                                    <input type="text" id="materialRegisterFormFullName" class="form-control" mdbInput
+                                        formControlName="fullname"
+                                        [ngClass]="{'is-invalid': 
+                                            (registerForm.get('fullname').touched || 
+                                            registerForm.get('fullname').dirty) && 
+                                            !registerForm.get('fullname').valid }">
+                                   
+                                    <label for="materialRegisterFormFullName">Full name</label>
+                                    <span class="invalid-feedback">
+                                        <span *ngIf="registerForm.get('fullname').errors?.required">
+                                            Please enter your full name.
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
 
                         </div>
+
+
                         <!-- E-mail -->
+
                         <div class="md-form mt-0">
-                            <input type="email" class="form-control" mdbInput formControlName="email" required>
-                            <label>E-mail<span style="color: red;;">&#42;</span></label>
-                            <small class="form-text text-muted mb-4 text-left"
-                                *ngIf="!(formRegister.get('email').value.includes('@gmail.com'))&& formRegister.get('email').touched">
-                                <p style="color: red;">Email is must includes "@gmail.com"</p> 
-                                
-                            </small>
-                        </div>
-                        <!-- Password -->
-                        <div class="md-form">
-                            <input type="password" class="form-control"
-                                aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput
-                                formControlName="passWord" required>
+                            <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput
+                                formControlName="email"
+                                [ngClass]="{'is-invalid': 
+                                    (registerForm.get('email').touched || 
+                                    registerForm.get('email').dirty) && 
+                                    !registerForm.get('email').valid }">
+                            <label for="materialRegisterFormEmail">E-mail<span style="color: red;;">&#42;</span></label>
+                            <span class="invalid-feedback">
+                                <span *ngIf="registerForm.get('email').errors?.required">
+                                    Please enter your email address.
+                                </span>
+                                <span *ngIf="registerForm.get('email').errors?.email">
+                                    Email is invalid
+                                </span>
+                            </span>
 
-                            <label>Password<span style="color: red;">&#42;</span></label>
-                            <small class="form-text text-muted mb-4 text-left"
-                                *ngIf="formRegister.get('passWord').invalid && formRegister.get('passWord').touched">
-                                <p style="color: red;">At least 8 characters</p>
-                            </small>
                         </div>
 
-                        <!-- Password -->
-                        <div class="md-form">
-                            <input type="password" class="form-control"
-                                aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput (keyup)=" checkConfirmPassword()"
-                                formControlName="confirmPassword" required>
-                            <label>Confirm Password</label>
-                            <!-- <small class="form-text text-muted mb-4 text-left" style="color: red;"
-                                *ngIf="(formRegister.get('confirmPassword').value !== formRegister.get('confirmPassword'))">
-                                Password not match
-                            </small> -->
-                               <small class="form-text text-muted mb-4 text-left" style="color: red;">
-                                <p style="color: red;">{{message}}</p> 
-                            </small>
-                            
+                        <div formGroupName ="passwordGroup">
+                            <!-- Password -->
+                            <div class="md-form">
+                                <input type="password" id="materialRegisterFormPassword" class="form-control"
+                                    aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput
+                                    formControlName="password"
+                                    [ngClass]="{'is-invalid': (registerForm.get('passwordGroup.password').touched || registerForm.get('passwordGroup.password').dirty) && !registerForm.get('passwordGroup.password').valid }">
+                                <label for="materialRegisterFormPassword">Password<span
+                                        style="color: red;">&#42;</span></label>
+                                <small id="materialRegisterFormPasswordHelpBlock"
+                                    class="form-text text-muted mb-4 text-left">
+                                    At least 8 characters and 1 digit
+                                </small>
+                                <span class="invalid-feedback">
+                                    <span *ngIf="registerForm.get('passwordGroup.password').errors?.required">
+                                        Please enter your pasword.
+                                    </span>
+                                    <span *ngIf="registerForm.get('passwordGroup.password').errors?.minlength">
+                                        Password must be at least 8 characters
+                                    </span>
+                                </span>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="md-form">
+                                <input type="password" id="materialRegisterFormConfirmPassword" class="form-control"
+                                    aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput
+                                    formControlName="confirmPassword"
+                                    [ngClass]="{'is-invalid': registerForm.get('passwordGroup').errors || 
+                                                              (registerForm.get('passwordGroup.confirmPassword').touched || 
+                                                              registerForm.get('passwordGroup.confirmPassword').dirty) 
+                                                              && !registerForm.get('passwordGroup.confirmPassword').valid }">
+                                <label for="materialRegisterFormConfirmPassword">Confirm Password</label>
+                                <span class="invalid-feedback">
+                                    {{message}}
+                                </span>
+                            </div>
+
                         </div>
-
-                        <!-- <ng-template *ngIf="!(confirmPassword === password)">
-
-                        </ng-template> -->
 
                         <!-- Newsletter -->
-                        <mdb-checkbox>Remember login</mdb-checkbox>
+                        <mdb-checkbox formControlName = "rememberLogin">Remember login</mdb-checkbox>
 
                         <!-- Sign up button -->
                         <button mdbBtn color="info" outline="true" rounded="true" block="true"
-                            class="my-4 waves-effect z-depth-0" mdbWavesEffect>Sign Up</button>
+                            class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" [disabled]="!registerForm.valid">Sign Up</button>
 
                         <!-- You have a account -->
                         <p>You have a account?

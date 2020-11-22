@@ -1,17 +1,12 @@
-import { Guid } from 'guid-typescript';
 
 export class User {
     constructor(
-        public username: string,
         public id: string,
-        public _token: string,
-        public _tokenExpirationDate: Date
+        public fullname: string,
+        public email: string,
+        public phoneNumber: string,
+        public birthDay: Date,
+        public accountId: number,
+        public image?: string,
     ){}
-
-    get token() {
-        if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
-          return null;
-        }
-        return this._token;
-      }
 }

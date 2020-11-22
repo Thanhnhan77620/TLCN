@@ -46,13 +46,13 @@
 
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>
-          <span > {{ isAuthenticated ? currentUser.username : 'UserName'}}</span>
+          <span > {{ isAuthenticated ? currentAccount.username : 'UserName'}}</span>
         </a> 
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a routerLink="/auth/login"  class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isAuthenticated" >Login</a>
-          <a routerLink="/auth/user/profile"  class="dropdown-item waves-light" mdbWavesEffect  >Profile</a>
+          <a routerLink="/auth/user/profile"  class="dropdown-item waves-light" mdbWavesEffect *ngIf="isAuthenticated" >Profile</a>
           <a  class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()" *ngIf="isAuthenticated">Log Out</a> 
-          <a routerLink="/auth/register"  class="dropdown-item waves-light" mdbWavesEffect  >Register</a>
+          <a routerLink="/auth/register"  class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isAuthenticated" >Register</a>
         </div>  
       </li>
 

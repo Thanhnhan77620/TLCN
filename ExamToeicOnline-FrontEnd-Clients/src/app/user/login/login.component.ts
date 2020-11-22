@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               private router: Router
               ) {}
- 
+
   ngOnInit(): void {
   }
 
@@ -39,14 +39,14 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     authObs = this.userService.login(username, password);
-
+    
     authObs.subscribe(
       resData => {
         this.router.navigate(['/home']);
       },
       errorMessage => {
         this.error = errorMessage;
-        alert(this.error);
+        console.log(this.error)
       }
     );
 
