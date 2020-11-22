@@ -1,6 +1,5 @@
-import { User } from 'src/app/model/user.model';
+import { Account } from './../../../model/account.model';
 import { UserService } from './../../../user/user.service';
-
 
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -15,15 +14,15 @@ export class NavbarComponent implements OnInit {
  
   isAuthenticated = false;
   private userSub: Subscription;
-  currentUser: User
+  currentAccount: Account
   constructor(
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.userSub = this.userService.user.subscribe(user => {
-      this.currentUser = user;
-      this.isAuthenticated = !!user;
+    this.userSub = this.userService.account.subscribe(account => {
+      this.currentAccount = account;
+      this.isAuthenticated = !!account;
     });
   }
 
