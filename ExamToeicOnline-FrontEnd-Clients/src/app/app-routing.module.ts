@@ -1,3 +1,4 @@
+import { IntroduceDethiComponent } from './dethi/introduce-dethi/introduce-dethi.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 const routes: Routes= [
     {path: '' , redirectTo: '/home', pathMatch:'full'},
     {path: 'home', component: HomeComponent},
+    {path: 'introduce', component: IntroduceDethiComponent },
   
     {path: 'auth/login', component:LoginComponent},
     {path: 'auth/register', component: RegisterComponent},
