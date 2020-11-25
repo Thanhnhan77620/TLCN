@@ -35,25 +35,25 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._config = configuration;
 
         }
-        //GET: api/<UserController> 
+        //GET: get all accounts 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var accounts = await this._context.Accounts.ToArrayAsync();
             if (accounts == null)
             {
-                return NotFound("Can not found any Record!");
+                return NotFound("Can not found any record!");
             }
             return Ok(accounts);
         }
-        //GET:search
-        [HttpGet("search")]
+        //GET:get one account
+        [HttpGet("{username}")]
         public async Task<IActionResult> GetByUsernam(string username)
         {
             var account = await this._context.Accounts.Where(x => x.Username==username.Trim()).FirstOrDefaultAsync();
             if (account == null)
             {
-                return BadRequest("Can not found username");
+                return NotFound("Can not found account with username= "+username);
             }
             return Ok(account);
         }
@@ -82,9 +82,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             AccountVM accountVM=new AccountVM();      
             var account = this._context.Accounts.FirstOrDefault(x => x.Username.Equals(accountLogin.Username.Trim()));
-
-           
-
             if (account != null && account.isActive)
             {
                 if (BC.Verify(accountLogin.Password, account.Password))
@@ -121,7 +118,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var encodetoken = new JwtSecurityTokenHandler().WriteToken(tokent);
             return encodetoken;
         }
-        
+
         //[HttpGet("tokent")]
 
         //public st([FromForm] Tokent TOKENT)
@@ -135,32 +132,35 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
 
 
+        //Change password
+        [HttpPut("{username}")]
+        public async Task<IActionResult> ChangePassword([FromForm] AccountVM request)
+        {
+            var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
+            if (account == null)
+            {
+                return NotFound("Can not found account with username= " + request.Username);
+            }
+            account.Password = BC.HashPassword(request.Password);
+            this._context.Accounts.Update(account);
+            await this._context.SaveChangesAsync();
+            return Ok("Change password successfully!");
+        }
+
 
         //Delete accounts
-        [HttpPut("{disable}")]
+        [HttpPut("block")]
         public async Task<IActionResult> DisableAccounts([FromForm] AccountVM request)
         {
             var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
             if (account==null)
             {
-                return BadRequest("Account has username" + request.Username + " not exists!");
+                return NotFound("Can not found account with username= " + request.Username);
             }
-            else
-            {
-                try
-                {
-                    account.isActive = false;
-                    this._context.Accounts.Update(account);
-                    await this._context.SaveChangesAsync();
-                }
-                catch (Exception err)
-                {
-
-                    return BadRequest("The account has been locked!!!");
-                }
-                
-            }
-            return Ok(account);
+            account.isActive = false;
+            this._context.Accounts.Update(account);
+            await this._context.SaveChangesAsync();
+            return Ok("Account with username= "+ request.Username + " has been block!");
         }
 
     }

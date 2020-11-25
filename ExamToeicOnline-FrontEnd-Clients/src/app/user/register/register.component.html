@@ -27,12 +27,13 @@
                                             (registerForm.get('fullname').touched || 
                                             registerForm.get('fullname').dirty) && 
                                             !registerForm.get('fullname').valid }">
+                                   
+                                    <label for="materialRegisterFormFullName">Full name</label>
                                     <span class="invalid-feedback">
                                         <span *ngIf="registerForm.get('fullname').errors?.required">
                                             Please enter your full name.
                                         </span>
                                     </span>
-                                    <label for="materialRegisterFormFullName">Full name</label>
                                 </div>
                             </div>
 

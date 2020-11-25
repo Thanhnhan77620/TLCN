@@ -52,7 +52,4 @@ export class LoginComponent implements OnInit {
 
     form.reset();
   }
-
-  
-
 }

@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     let email = this.registerForm.get('email').value;
     let password = this.registerForm.get('passwordGroup.password').value;
     this.isRememberLogin = this.registerForm.get('rememberLogin').value;
+    
     this.userService.signup(fullname, email, password).subscribe(
       (resData: any) => {
         if(this.isRememberLogin){   

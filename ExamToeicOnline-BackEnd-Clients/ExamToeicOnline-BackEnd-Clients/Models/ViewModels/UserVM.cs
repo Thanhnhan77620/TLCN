@@ -13,8 +13,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Models.ViewModels
         public Guid Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
-        public int Phonenumber { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
-        public Byte Image { get; set; }
+        public string Image { get; set; }
     }
 }

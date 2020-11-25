@@ -31,7 +31,7 @@ export class UserService {
     body.append('password', password);
     return this.http
       .post<User>(
-        'https://localhost:5001/api/users/register',body
+        'https://localhost:5001/api/users',body
       )
       .pipe(
         catchError(this.handleError),

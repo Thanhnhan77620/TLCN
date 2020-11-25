@@ -22,7 +22,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Id = id1,
                    Fullname = "Nguyễn Thanh Nhân",
                    Email = "nhan@gmail.com",
-                   Phonenumber = 12345678,
+                   PhoneNumber = "12345678",
                    Birthday = new DateTime(1999 / 29 / 5)
 
                },
@@ -31,7 +31,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Id = id2,
                    Fullname = "Đỗ Thị Thanh Ngân",
                    Email = "ngan@gmail.com",
-                   Phonenumber = 98765432,
+                   PhoneNumber = "98765432",
                    Birthday=new DateTime(1999/29/11)
                }
             );
