@@ -12,7 +12,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/blocks/navbar/navbar.component';
 import { FooterComponent } from './component/blocks/footer/footer.component';
@@ -22,6 +21,7 @@ import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
+import { PlayerComponent } from './player/player.component';
 
 
 @NgModule({
@@ -36,6 +36,7 @@ import { environment } from 'src/environments/environment';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +50,7 @@ import { environment } from 'src/environments/environment';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     SharedModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -37,42 +37,30 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(questions);
         }
         [HttpGet("PartName")]
-        public async Task<IActionResult> GetQuestion(int examId,string partName, string questionNum)
+        public async Task<IActionResult> GetQuestion(int examId,string partName)
         {
 
-            //List<Question> questionList= new List<Question>();
-
-            //var questionList = await this._context.Questions.Where(q => q.ExamId == ExamId && q.PartName == partName).
-            //    Select(q=>q.Content).ToArrayAsync();
-            
-            if (partName=="Part 1" || partName == "Part 2" || partName == "Part 5")
+            var questionList = from q in this._context.Questions
+                               join g in this._context.GroupQuestions on q.GroupQuestionId equals g.Id
+                               //join f in this._context.FileAudios on q.GroupQuestionId equals f.Id
+                               join p in this._context.Paragraphs on q.GroupQuestionId equals p.Id
+                               where q.ExamId == examId && q.PartName == partName
+                               select (new QuestionVM()
+                               {
+                                   Id = q.Id,
+                                   Content = q.Content,
+                                   Image = q.Image,
+                                   FileAudio="",
+                                   GroupQuestionId = q.GroupQuestionId,
+                                   ImageGroup=p.image_Script
+                               });
+            if (questionList==null)
             {
-                var questionList =from q in this._context.Questions
-                                   where q.ExamId == examId && q.PartName == partName
-                                   select (new QuestionVM()
-                                   {
-                                       Id = q.Id,
-                                       Content = q.Content,
-                                       Image = q.Image,
-                                       GroupQuestionId = q.GroupQuestionId
-                                   });
-                return Ok(questionList);
+                return NotFound("Can not found any Record!");
             }
-            else
-            {
-                var questionList = from q in this._context.Questions
-                                 where q.ExamId == examId && q.PartName == partName
-                                 select (new QuestionVM()
-                                 {
-                                     Id = q.Id,
-                                     Content = q.Content,
-                                     Image = q.Image,
-                                     GroupQuestionId = q.GroupQuestionId
-                                 });
-                return Ok(questionList);
-            }
+            return Ok(questionList);
 
-           
+
         }
 
 

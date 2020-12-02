@@ -64,6 +64,7 @@ export class ProfileComponent implements OnInit  {
             this.readFile(file, subscriber);
             
         });
+       
         this.myImage.subscribe((d)=>{
             // this.userProfile.image=d.toString();
             // console.log(d.replace("data:image/jpeg;base64,",""))
