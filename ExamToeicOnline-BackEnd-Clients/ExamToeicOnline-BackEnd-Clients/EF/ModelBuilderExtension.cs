@@ -1,4 +1,5 @@
-﻿using ExamToeicOnline_FrontEnd_Clients.Models;
+﻿using ExamToeicOnline_BackEnd_Clients.Models;
+using ExamToeicOnline_FrontEnd_Clients.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,19 +33,19 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Fullname = "Đỗ Thị Thanh Ngân",
                    Email = "ngan@gmail.com",
                    PhoneNumber = "98765432",
-                   Birthday=new DateTime(1999/29/11)
+                   Birthday = new DateTime(1999 / 29 / 11)
                }
             );
             modelBuilder.Entity<Account>().HasData(
               new Account()
               {
-                  Id=1,
-                  Username="ngan",
-                  Password = BC.HashPassword("98765432"),
-                  isActive=true,
-                  isAdmin=false,
-                  CreateAt= dateTime,
-                  UserId =id1
+                  Id = 1,
+                  Username = "ngan",
+                  Password = BC.HashPassword("12345678"),
+                  isActive = true,
+                  isAdmin = false,
+                  CreateAt = dateTime,
+                  UserId = id1
               },
               new Account()
               {
@@ -57,6 +58,8 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                   UserId = id2
               }
           );
+           
+
         }
     }
 }

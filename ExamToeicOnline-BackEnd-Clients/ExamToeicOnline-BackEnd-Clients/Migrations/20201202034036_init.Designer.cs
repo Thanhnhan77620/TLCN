@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201122075257_inti")]
-    partial class inti
+    [Migration("20201202034036_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,12 +44,49 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.ToTable("Anwsers");
                 });
 
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.DoExam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Effort")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UserId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("dateStart")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("DoExams");
+                });
+
             modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Exam", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -59,30 +96,56 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.ToTable("Exams");
                 });
 
-            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Part", b =>
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.FileAudio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Direction")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ExamId")
+                    b.Property<int>("GroupQuestionId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("FilMP3")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("file_Audio")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId");
+                    b.HasIndex("GroupQuestionId");
 
-                    b.ToTable("Parts");
+                    b.ToTable("FileAudios");
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.GroupQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupQuestions");
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Paragraph", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupQuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("image_Script")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupQuestionId");
+
+                    b.ToTable("Paragraphs");
                 });
 
             modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
@@ -95,15 +158,23 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<int>("PartId")
+                    b.Property<int>("ExamId")
                         .HasColumnType("int");
+
+                    b.Property<int>("GroupQuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PartId");
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("GroupQuestionId");
 
                     b.ToTable("Questions");
                 });
@@ -143,9 +214,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 11, 22, 14, 52, 56, 623, DateTimeKind.Local).AddTicks(5031),
-                            Password = "$2a$11$Feye9bJDQDZPQ1EBZsFKnO8.hK2Ad3O2RUYn2mdMpDhA4ycgL1Hni",
-                            UserId = new Guid("515a082b-ef9a-4464-962e-7c4aa4bb303b"),
+                            CreateAt = new DateTime(2020, 12, 2, 10, 40, 35, 605, DateTimeKind.Local).AddTicks(9278),
+                            Password = "$2a$11$SpluLquG/b4vv7fyFKr4De2h4jTGU2fn1JR0LU.yLZ3JoKV5110Pq",
+                            UserId = new Guid("81a46bfc-db19-416f-a91b-0893ed240cdc"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -153,9 +224,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 11, 22, 14, 52, 56, 623, DateTimeKind.Local).AddTicks(5031),
-                            Password = "$2a$11$1aa.UW0uiINykgLsT025quuY5K1arwzTyEgIlw/mYHTNKFLRcJA8i",
-                            UserId = new Guid("3c894824-2b50-4960-bd0e-5fe24baf4446"),
+                            CreateAt = new DateTime(2020, 12, 2, 10, 40, 35, 605, DateTimeKind.Local).AddTicks(9278),
+                            Password = "$2a$11$0xq7KxHCgClTPUOkGY7fneZp5ZXx3g8OOEW1QBR15Bt1o15kx700e",
+                            UserId = new Guid("1c7d7b3f-7587-4ef2-b1ea-5e228edb1fc9"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -190,7 +261,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("515a082b-ef9a-4464-962e-7c4aa4bb303b"),
+                            Id = new Guid("81a46bfc-db19-416f-a91b-0893ed240cdc"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -198,7 +269,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3c894824-2b50-4960-bd0e-5fe24baf4446"),
+                            Id = new Guid("1c7d7b3f-7587-4ef2-b1ea-5e228edb1fc9"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
@@ -215,20 +286,48 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Part", b =>
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.DoExam", b =>
                 {
                     b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Exam", "Exam")
-                        .WithMany("Parts")
+                        .WithMany("DoExams")
                         .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExamToeicOnline_FrontEnd_Clients.Models.User", "User")
+                        .WithMany("DoExams")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.FileAudio", b =>
+                {
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.GroupQuestion", "GroupQuestion")
+                        .WithMany("FileAudios")
+                        .HasForeignKey("GroupQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Paragraph", b =>
+                {
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.GroupQuestion", "GroupQuestion")
+                        .WithMany("Paragraphs")
+                        .HasForeignKey("GroupQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.Question", b =>
                 {
-                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Part", "Part")
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.Exam", "Exam")
                         .WithMany("Questions")
-                        .HasForeignKey("PartId")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExamToeicOnline_BackEnd_Clients.Models.GroupQuestion", "GroupQuestion")
+                        .WithMany("Questions")
+                        .HasForeignKey("GroupQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
