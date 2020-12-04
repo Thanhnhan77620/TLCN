@@ -1,6 +1,4 @@
-import { ProfileComponent } from './user/profile/profile.component';
-import { RegisterComponent } from './user/register/register.component';
-import { LoginComponent } from './user/login/login.component';
+import { DethiModule } from './dethi/dethi.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -10,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/blocks/navbar/navbar.component';
@@ -21,8 +19,9 @@ import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
-import { PlayerComponent } from './player/player.component';
-
+import { ProfileComponent } from './user/profile/profile.component';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { PlayerComponent } from './player/player.component';
     BodyComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent,
-    PlayerComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +48,7 @@ import { PlayerComponent } from './player/player.component';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     SharedModule,
-
+    DethiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
