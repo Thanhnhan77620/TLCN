@@ -36,6 +36,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.9",
           "Microsoft.IdentityModel.Tokens": "6.8.0",
           "System.Text.Encoding.CodePages": "4.7.1",
+          "iTextSharp": "5.5.13.2",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -322,6 +323,17 @@
           "lib/netstandard2.1/BCrypt.Net-Next.dll": {}
         }
       },
+      "BouncyCastle/1.8.6.1": {
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.6.0",
+            "fileVersion": "1.8.20052.1"
+          }
+        },
+        "compile": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "DocumentFormat.OpenXml/2.11.3": {
         "dependencies": {
           "System.IO.Packaging": "4.7.0"
@@ -345,6 +357,20 @@
         },
         "compile": {
           "lib/netstandard2.0/ExcelDataReader.dll": {}
+        }
+      },
+      "iTextSharp/5.5.13.2": {
+        "dependencies": {
+          "BouncyCastle": "1.8.6.1"
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {
+            "assemblyVersion": "5.5.13.2",
+            "fileVersion": "5.5.13.2"
+          }
+        },
+        "compile": {
+          "lib/itextsharp.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.9": {
@@ -3248,6 +3274,13 @@
       "path": "bcrypt.net-next/4.0.0",
       "hashPath": "bcrypt.net-next.4.0.0.nupkg.sha512"
     },
+    "BouncyCastle/1.8.6.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rkqpuKmJkdcfTMBkIj1b5nMdBAWKwAyh+I/BQYeqqSD2jkIlhwc9qBNKmSbnpmmm5c29qHZGLpvBSTNWvDLtQA==",
+      "path": "bouncycastle/1.8.6.1",
+      "hashPath": "bouncycastle.1.8.6.1.nupkg.sha512"
+    },
     "DocumentFormat.OpenXml/2.11.3": {
       "type": "package",
       "serviceable": true,
@@ -3261,6 +3294,13 @@
       "sha512": "sha512-eXyxTwG7EEWpgQX3juZ2KcndqTqm/ydx9GXS2lUiMJU54U4h5eXdygRtVgINv0t60ezPWEb+lL7uM7Q+wm5BBA==",
       "path": "exceldatareader/3.6.0",
       "hashPath": "exceldatareader.3.6.0.nupkg.sha512"
+    },
+    "iTextSharp/5.5.13.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8m9oT1nh9F4Z1tzWUey/8lEzZtMGFCDXQY5+8/SSmPgUWAAAWniRo8pimKUZyteNqJr5vtFBxjAhRwLxG7Q0zQ==",
+      "path": "itextsharp/5.5.13.2",
+      "hashPath": "itextsharp.5.5.13.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.9": {
       "type": "package",

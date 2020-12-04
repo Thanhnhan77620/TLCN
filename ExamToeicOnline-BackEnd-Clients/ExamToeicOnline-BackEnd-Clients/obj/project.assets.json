@@ -11,6 +11,15 @@
           "lib/netstandard2.1/BCrypt.Net-Next.dll": {}
         }
       },
+      "BouncyCastle/1.8.6.1": {
+        "type": "package",
+        "compile": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "DocumentFormat.OpenXml/2.11.3": {
         "type": "package",
         "dependencies": {
@@ -30,6 +39,18 @@
         },
         "runtime": {
           "lib/netstandard2.0/ExcelDataReader.dll": {}
+        }
+      },
+      "iTextSharp/5.5.13.2": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle": "1.8.6.1"
+        },
+        "compile": {
+          "lib/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.9": {
@@ -1680,6 +1701,19 @@
         "lib/netstandard2.1/BCrypt.Net-Next.xml"
       ]
     },
+    "BouncyCastle/1.8.6.1": {
+      "sha512": "rkqpuKmJkdcfTMBkIj1b5nMdBAWKwAyh+I/BQYeqqSD2jkIlhwc9qBNKmSbnpmmm5c29qHZGLpvBSTNWvDLtQA==",
+      "type": "package",
+      "path": "bouncycastle/1.8.6.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "bouncycastle.1.8.6.1.nupkg.sha512",
+        "bouncycastle.nuspec",
+        "lib/BouncyCastle.Crypto.dll"
+      ]
+    },
     "DocumentFormat.OpenXml/2.11.3": {
       "sha512": "dCugN386ka+LwcOHnxi4gUHbiDeIw0/GEYw1sXFhYiErGFbJpRpscRcn5b12dywUReFCOgGNJ/l16zG5udkC/A==",
       "type": "package",
@@ -1723,6 +1757,22 @@
         "lib/netstandard2.0/ExcelDataReader.dll",
         "lib/netstandard2.0/ExcelDataReader.pdb",
         "lib/netstandard2.0/ExcelDataReader.xml"
+      ]
+    },
+    "iTextSharp/5.5.13.2": {
+      "sha512": "8m9oT1nh9F4Z1tzWUey/8lEzZtMGFCDXQY5+8/SSmPgUWAAAWniRo8pimKUZyteNqJr5vtFBxjAhRwLxG7Q0zQ==",
+      "type": "package",
+      "path": "itextsharp/5.5.13.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itextsharp.5.5.13.2.nupkg.sha512",
+        "itextsharp.nuspec",
+        "lib/iTextSharp.xml",
+        "lib/itextsharp.dll",
+        "notice.txt"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.9": {
@@ -5923,7 +5973,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.9",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.9",
       "Microsoft.IdentityModel.Tokens >= 6.8.0",
-      "System.Text.Encoding.CodePages >= 4.7.1"
+      "System.Text.Encoding.CodePages >= 4.7.1",
+      "iTextSharp >= 5.5.13.2"
     ]
   },
   "packageFolders": {
@@ -6014,6 +6065,10 @@
           "System.Text.Encoding.CodePages": {
             "target": "Package",
             "version": "[4.7.1, )"
+          },
+          "iTextSharp": {
+            "target": "Package",
+            "version": "[5.5.13.2, )"
           }
         },
         "imports": [
@@ -6037,5 +6092,33 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Nam 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BouncyCastle 1.8.6.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "BouncyCastle",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'iTextSharp 5.5.13.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

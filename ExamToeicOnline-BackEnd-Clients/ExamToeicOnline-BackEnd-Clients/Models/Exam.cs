@@ -9,7 +9,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public ICollection<Part> Parts { get; set; }
+        public int Duration { get; set; }
+        public ICollection<DoExam> DoExams { get; set; }      
+        public ICollection<Question> Questions { get; set; }
 
     }
 }
