@@ -3,7 +3,7 @@
         <div class="col"></div>
         <div class="col-lg-5">
             <!-- Material form login -->
-            <mdb-card >
+            <mdb-card>
                 <mdb-card-header class="primary-color white-text text-center py-4">
                     <h5>
                         <strong>Sign in</strong>
@@ -12,27 +12,18 @@
                 <!--Card content-->
                 <mdb-card-body class="px-lg-5 pt-0">
                     <!-- Form -->
-                    <form (ngSubmit)="onSubmit(formSignIn)" #formSignIn="ngForm" class="text-center" style="color: #757575;">
+                    <form (ngSubmit)="onSubmit(formSignIn)" #formSignIn="ngForm" class="text-center"
+                        style="color: #757575;">
                         <!-- Email -->
                         <div class="md-form">
-                            <input  
-                                type="text"  
-                                name="username" 
-                                class="form-control"  
-                                [(ngModel)] = "model.username"
-                                mdbInput
-                                required>
-                            <label >User Name<span style="color: red;;">&#42;</span></label>
+                            <input type="text" name="username" class="form-control" [(ngModel)]="model.username"
+                                mdbInput required>
+                            <label>User Name<span style="color: red;;">&#42;</span></label>
                         </div>
                         <!-- Password -->
                         <div class="md-form">
-                            <input 
-                                type="password" 
-                                [(ngModel)] = "model.password" 
-                                name="password" 
-                                class="form-control" 
-                                mdbInput
-                                required>
+                            <input type="password" [(ngModel)]="model.password" name="password" class="form-control"
+                                mdbInput required>
                             <label>Password<span style="color: red;;">&#42;</span></label>
                         </div>
                         <div class="d-flex justify-content-around">
@@ -47,15 +38,15 @@
                         </div>
                         <!-- Sign in button -->
                         <button mdbBtn color="info" outline="true" rounded="true" block="true"
-                            class="my-4 waves-effect z-depth-0" type="submit" mdbWavesEffect 
-                            [disabled] = "!formSignIn.valid">Sign In</button>
+                            class="my-4 waves-effect z-depth-0" type="submit" mdbWavesEffect
+                            [disabled]="!formSignIn.valid">Sign In</button>
                         <!-- Register -->
                         <p>Not a member?
-                            <a routerLink="/auth/register" >Register</a>
+                            <a routerLink="/auth/register">Register</a>
                         </p>
                         <!-- Social login -->
                         <p>or sign in with:</p>
-                        
+
                         <a type="button" class="light-blue-text mx-2">
                             <mdb-icon fab icon="facebook fa-2x"></mdb-icon>
                         </a>
@@ -65,11 +56,11 @@
                     </form>
                     <!-- Form -->
                 </mdb-card-body>
-    
+
             </mdb-card>
             <!-- Material form login -->
         </div>
         <div class="col"></div>
     </div>
-   
+
 </div>

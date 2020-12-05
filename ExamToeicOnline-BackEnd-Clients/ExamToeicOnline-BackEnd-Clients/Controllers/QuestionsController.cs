@@ -37,42 +37,26 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(questions);
         }
         [HttpGet("PartName")]
-        public async Task<IActionResult> GetQuestion(int examId,string partName, string questionNum)
+        public async Task<IActionResult> GetQuestion(int examId,string partName)
         {
 
-            //List<Question> questionList= new List<Question>();
-
-            //var questionList = await this._context.Questions.Where(q => q.ExamId == ExamId && q.PartName == partName).
-            //    Select(q=>q.Content).ToArrayAsync();
-            
-            if (partName=="Part 1" || partName == "Part 2" || partName == "Part 5")
+            var questionList = from q in this._context.Questions
+                               where q.ExamId == examId && q.PartName == partName
+                               select (new QuestionVM()
+                               {
+                                   Id = q.Id,
+                                   Content = q.Content,
+                                   Image = q.Image,
+                                   GroupQuestionId = q.GroupQuestionId
+                               });
+            if (questionList==null)
             {
-                var questionList =from q in this._context.Questions
-                                   where q.ExamId == examId && q.PartName == partName
-                                   select (new QuestionVM()
-                                   {
-                                       Id = q.Id,
-                                       Content = q.Content,
-                                       Image = q.Image,
-                                       GroupQuestionId = q.GroupQuestionId
-                                   });
-                return Ok(questionList);
+                return NotFound("Can not found any record!");
             }
-            else
-            {
-                var questionList = from q in this._context.Questions
-                                 where q.ExamId == examId && q.PartName == partName
-                                 select (new QuestionVM()
-                                 {
-                                     Id = q.Id,
-                                     Content = q.Content,
-                                     Image = q.Image,
-                                     GroupQuestionId = q.GroupQuestionId
-                                 });
-                return Ok(questionList);
-            }
+            return Ok(questionList);
 
-           
+
+
         }
 
 

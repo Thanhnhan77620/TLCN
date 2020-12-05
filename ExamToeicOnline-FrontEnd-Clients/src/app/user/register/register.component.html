@@ -15,19 +15,19 @@
                 <mdb-card-body class="px-lg-5 pt-0">
 
                     <!-- Form -->
-                    <form class="text-center" style="color: #757575;" [formGroup]="registerForm" (ngSubmit) = "onRegister()">
+                    <form class="text-center" style="color: #757575;" [formGroup]="registerForm"
+                        (ngSubmit)="onRegister()">
 
                         <div class="form-row">
                             <div class="col">
                                 <!-- First name -->
                                 <div class="md-form">
                                     <input type="text" id="materialRegisterFormFullName" class="form-control" mdbInput
-                                        formControlName="fullname"
-                                        [ngClass]="{'is-invalid': 
+                                        formControlName="fullname" [ngClass]="{'is-invalid': 
                                             (registerForm.get('fullname').touched || 
                                             registerForm.get('fullname').dirty) && 
                                             !registerForm.get('fullname').valid }">
-                                   
+
                                     <label for="materialRegisterFormFullName">Full name</label>
                                     <span class="invalid-feedback">
                                         <span *ngIf="registerForm.get('fullname').errors?.required">
@@ -44,8 +44,7 @@
 
                         <div class="md-form mt-0">
                             <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput
-                                formControlName="email"
-                                [ngClass]="{'is-invalid': 
+                                formControlName="email" [ngClass]="{'is-invalid': 
                                     (registerForm.get('email').touched || 
                                     registerForm.get('email').dirty) && 
                                     !registerForm.get('email').valid }">
@@ -61,7 +60,7 @@
 
                         </div>
 
-                        <div formGroupName ="passwordGroup">
+                        <div formGroupName="passwordGroup">
                             <!-- Password -->
                             <div class="md-form">
                                 <input type="password" id="materialRegisterFormPassword" class="form-control"
@@ -102,11 +101,12 @@
                         </div>
 
                         <!-- Newsletter -->
-                        <mdb-checkbox formControlName = "rememberLogin">Remember login</mdb-checkbox>
+                        <mdb-checkbox formControlName="rememberLogin">Remember login</mdb-checkbox>
 
                         <!-- Sign up button -->
                         <button mdbBtn color="info" outline="true" rounded="true" block="true"
-                            class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" [disabled]="!registerForm.valid">Sign Up</button>
+                            class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit"
+                            [disabled]="!registerForm.valid">Sign Up</button>
 
                         <!-- You have a account -->
                         <p>You have a account?

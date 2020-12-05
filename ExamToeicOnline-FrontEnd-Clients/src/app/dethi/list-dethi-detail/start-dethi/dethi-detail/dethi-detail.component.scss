@@ -1,0 +1,23 @@
+.learn-section {
+  background-color: #d4d4d4;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.container {
+  width: 1000px;
+}
+.container {
+  position: relative;
+}
+
+.question-content-wrap {
+  background-color: #d4d4d4;
+}
+
+.sidebar-content.show {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition-delay: 2s;
+}
