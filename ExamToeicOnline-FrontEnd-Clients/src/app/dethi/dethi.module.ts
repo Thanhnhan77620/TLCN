@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListDethiComponent } from './list-dethi/list-dethi.component';
 import { ListDethiDetailComponent } from './list-dethi-detail/list-dethi-detail.component';
+import { StartDethiComponent } from './list-dethi-detail/start-dethi/start-dethi.component';
 
 
 
@@ -13,7 +14,8 @@ import { ListDethiDetailComponent } from './list-dethi-detail/list-dethi-detail.
     IntroduceDethiComponent,
     ListDethiComponent,
     DethiComponent,
-    ListDethiDetailComponent
+    ListDethiDetailComponent,
+    StartDethiComponent
   ],
   imports: [
     CommonModule

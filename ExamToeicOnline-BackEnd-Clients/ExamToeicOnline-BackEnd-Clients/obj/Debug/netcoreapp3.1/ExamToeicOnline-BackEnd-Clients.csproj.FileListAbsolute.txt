@@ -445,3 +445,5 @@ D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\itextsharp.dll
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.csproj.CoreCompileInputs.cache
 D:\Nam 4\HK I\TLCN\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\obj\Debug\netcoreapp3.1\ExamToeicOnline-BackEnd-Clients.MvcApplicationPartsAssemblyInfo.cache
+D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\IT\NAM4-HK1\TLCN\TLCN_Mr.P\TLCN\ExamToeicOnline-BackEnd-Clients\ExamToeicOnline-BackEnd-Clients\bin\Debug\netcoreapp3.1\itextsharp.dll
