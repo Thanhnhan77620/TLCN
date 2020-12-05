@@ -7,8 +7,6 @@ import { User } from 'src/app/model/user.model';
 
 import { ProfileService } from './profile.service';
 
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -51,8 +49,6 @@ export class ProfileComponent implements OnInit {
     }
     console.log(this.userProfile)
     this.profileService.updateProfile(this.userProfile)
-
-
   }
 
   onChange($event: Event) {
