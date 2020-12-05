@@ -1,11 +1,9 @@
-import { ContactComponent } from "./../component/pages/contact/contact.component";
 import { RouterModule } from "@angular/router";
 import { RegisterComponent } from "./register/register.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { LoginComponent } from "./login/login.component";
 import { SharedModule } from "./../shared/shared.module";
 import { NgModule } from "@angular/core";
-import { MDBBootstrapModule } from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [LoginComponent, ProfileComponent, RegisterComponent],
@@ -28,7 +26,7 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
             component: RegisterComponent,
           },
           {
-            path: "user/profile",
+            path: ":id/profile",
             component: ProfileComponent,
           },
         ],
@@ -37,4 +35,4 @@ import { MDBBootstrapModule } from "angular-bootstrap-md";
   ],
   providers: [],
 })
-export class UserModule {}
+export class UserModule { }

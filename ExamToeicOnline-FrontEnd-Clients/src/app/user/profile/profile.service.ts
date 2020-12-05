@@ -1,9 +1,6 @@
 import { User } from "./../../model/user.model";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Guid } from "guid-typescript";
-import { map } from "rxjs/operators";
-import { UserProfile } from "src/app/model/userProfile.model";
 
 @Injectable({ providedIn: "root" })
 export class ProfileService {
@@ -19,12 +16,12 @@ export class ProfileService {
     };
   }
 
-  updateProfile(userProfile: UserProfile) {
+  updateProfile(userProfile: User) {
     var formData = new FormData();
     formData.append("id", userProfile.id);
-    formData.append("fullname", userProfile.fullName);
+    formData.append("fullname", userProfile.fullname);
     formData.append("email", userProfile.email);
-    formData.append("phone", userProfile.phone);
+    formData.append("phone", userProfile.phoneNumber);
     formData.append("birthday", userProfile.birthDate.toString());
     formData.append("image", userProfile.image);
 

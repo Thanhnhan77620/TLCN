@@ -1,56 +1,37 @@
-import { UserService } from "./../user.service";
-import { Observable, Subscriber } from "rxjs";
-import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
-import { Component, OnInit, HostListener, OnChanges, SimpleChanges, Input, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
-import { User } from "src/app/model/user.model";
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from './../user.service';
+import { observable, Observable, Subscriber } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { User } from 'src/app/model/user.model';
 
-import { ProfileService } from "./profile.service";
-import { Guid } from "guid-typescript";
-import { UserProfile } from "./../../model/userProfile.model";
+import { ProfileService } from './profile.service';
+
+
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input() profileForm: FormGroup;
-  userProfile: UserProfile = null;
+
+export class ProfileComponent implements OnInit {
+
+  userProfile: User;
   myImage: Observable<any>;
+  file: string;
   currentUser: User;
 
-  isChanged: boolean = false;
-
-  @ViewChild(NgForm) formProfile: NgForm;
-
-  file: string;
-
-  constructor(
-    private profileService: ProfileService,
+  constructor(private profileService: ProfileService,
     private userService: UserService,
-    private fb: FormBuilder
-  ) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes" + changes)
-  }
-  ngAfterViewInit(): void {
-    console.log(this.formProfile);
-    console.log(this.formProfile.touched);
-    console.log(this.formProfile.dirty)
-  }
-
+    private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.getUser();
   }
 
   getUser() {
-    const userData: {
-      username: string;
-      userId: string;
-      _token: string;
-      _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem("userData"));
-
-    this.userService.getUser(userData.userId).subscribe(
+    const userId = this.route.snapshot.paramMap.get('id');
+    this.userService.getUser(userId).subscribe(
       (data) => {
         this.currentUser = data;
         console.log(this.currentUser);
@@ -59,7 +40,48 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
     );
   }
 
-  onSaveData() {
-      
+  onSave(formProFile: NgForm) {
+    this.userProfile = {
+      id: this.currentUser.id,
+      fullname: formProFile.value.fullName,
+      birthDate: formProFile.value.birthDate ? formProFile.value.birthDate : null,
+      phoneNumber: formProFile.value.phoneNumber,
+      email: formProFile.value.email,
+      image: this.file
+    }
+    console.log(this.userProfile)
+    this.profileService.updateProfile(this.userProfile)
+
+
+  }
+
+  onChange($event: Event) {
+    const file = ($event.target as HTMLInputElement).files[0];
+    this.ConvertToBase64(file);
+  }
+  ConvertToBase64(file: File) {
+    this.myImage = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+
+    });
+    this.myImage.subscribe((d) => {
+      this.file = d.replace("data:image/jpeg;base64,", "")
+    })
+  }
+
+
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+
+
+    };
+    fileReader.onerror = (error) => {
+      subscriber.error(error);
+    }
   }
 }
+
