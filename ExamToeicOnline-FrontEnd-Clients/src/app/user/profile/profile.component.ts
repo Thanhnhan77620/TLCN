@@ -1,11 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from './../user.service';
-import { observable, Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 
 import { ProfileService } from './profile.service';
+<<<<<<< HEAD
+=======
+import { AngularFireStorage } from "@angular/fire/storage";
+import { finalize } from 'rxjs/operators';
+
+>>>>>>> Ngan
 
 @Component({
   selector: 'app-profile',
@@ -18,11 +24,26 @@ export class ProfileComponent implements OnInit {
   userProfile: User;
   myImage: Observable<any>;
   file: string;
-  currentUser: User;
+  currentUser: User = {
+    id: '',
+    fullname: '',
+    email: '',
+    phoneNumber: '',
+    birthDate: null,
+    image: null
+  };
+
+  selectedFile: File = null;
+  fb;
+  downloadURL: Observable<string>;
+  defaultImg = "../../../assets/image/defautl.png"
 
   constructor(private profileService: ProfileService,
     private userService: UserService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private storage: AngularFireStorage) { }
+
+
   ngOnInit(): void {
     this.getUser();
   }
@@ -39,45 +60,48 @@ export class ProfileComponent implements OnInit {
   }
 
   onSave(formProFile: NgForm) {
+
     this.userProfile = {
       id: this.currentUser.id,
       fullname: formProFile.value.fullName,
-      birthDate: formProFile.value.birthDate ? formProFile.value.birthDate : null,
+      birthDate: formProFile.value.birthDate ? formProFile.value.birthDate : new Date(),
       phoneNumber: formProFile.value.phoneNumber,
       email: formProFile.value.email,
-      image: this.file
+      image: this.fb
     }
     console.log(this.userProfile)
+<<<<<<< HEAD
     this.profileService.updateProfile(this.userProfile)
+=======
+    this.profileService.updateProfile(this.userProfile);
+>>>>>>> Ngan
   }
 
-  onChange($event: Event) {
-    const file = ($event.target as HTMLInputElement).files[0];
-    this.ConvertToBase64(file);
-  }
-  ConvertToBase64(file: File) {
-    this.myImage = new Observable((subscriber: Subscriber<any>) => {
-      this.readFile(file, subscriber);
+  onFileSelected(event) {
+    var n = this.currentUser.id;
+    const file = event.target.files[0];
+    const filePath = `avatar/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`avatar/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
 
-    });
-    this.myImage.subscribe((d) => {
-      this.file = d.replace("data:image/jpeg;base64,", "")
-    })
-  }
-
-
-  readFile(file: File, subscriber: Subscriber<any>) {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      subscriber.next(fileReader.result);
-      subscriber.complete();
-
-
-    };
-    fileReader.onerror = (error) => {
-      subscriber.error(error);
-    }
   }
 }
 

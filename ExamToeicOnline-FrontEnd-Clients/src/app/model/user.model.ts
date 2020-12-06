@@ -5,8 +5,8 @@ export class User {
         public fullname: string,
         public email: string,
         public phoneNumber: string,
-        public birthDate: Date,
-        public accountId?: number,
-        public image?: string,
+        public birthDate: Date | null,
+        public accountId?: number | null,
+        public image?: string | null,
     ) { }
 }

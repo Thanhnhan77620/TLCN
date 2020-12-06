@@ -1,3 +1,6 @@
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from './../environments/environment';
 import { UserModule } from "./user/user.module";
 import { DethiModule } from "./dethi/dethi.module";
 import { BrowserModule } from "@angular/platform-browser";
@@ -14,6 +17,9 @@ import { HomeComponent } from "./component/pages/home/home.component";
 import { ContactComponent } from "./component/pages/contact/contact.component";
 import { BodyComponent } from "./component/blocks/body/body.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { AngularFireModule } from '@angular/fire';
+
+
 
 @NgModule({
   declarations: [
@@ -33,8 +39,11 @@ import { AppRoutingModule } from "./app-routing.module";
     AppRoutingModule,
     UserModule,
     DethiModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

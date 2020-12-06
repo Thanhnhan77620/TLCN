@@ -28,18 +28,19 @@
                                 <div class="row">
                                     <div class="col-md-2">
 
-                                        <div class="row" *ngIf="myImage">
-                                            <img [src]="myImage| async" [(ngModel)]="currentUser.image"
+                                        <div class="row">
+                                            <img [src]="currentUser.image ? currentUser.image :defaultImg"
                                                 style="width: 100px; height: 100px;"
                                                 class="img-fluid rounded-circle hoverable" alt="image">
                                         </div>
                                         <div class="row py-4">
                                             <input type="file" [(ngModel)]="currentUser.image" name="image"
-                                                (change)="onChange($event)" style="border-style: none"
-                                                class="form-control" />
+                                                style="border-style: none" class="form-control"
+                                                (change)="onFileSelected($event)" />
                                         </div>
-
                                     </div>
+                                    <img style="width: 100px; height: 100px" src="data:image/png;base64,{{file}}"
+                                        alt="Red dot" />
                                     <div class=" col-md-1 "></div>
                                     <div class="col-md-9 col-xs-12 ">
                                         <div class="row text-left">
