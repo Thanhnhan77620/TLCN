@@ -6,12 +6,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 
 import { ProfileService } from './profile.service';
-<<<<<<< HEAD
-=======
 import { AngularFireStorage } from "@angular/fire/storage";
 import { finalize } from 'rxjs/operators';
 
->>>>>>> Ngan
 
 @Component({
   selector: 'app-profile',
@@ -70,11 +67,7 @@ export class ProfileComponent implements OnInit {
       image: this.fb
     }
     console.log(this.userProfile)
-<<<<<<< HEAD
     this.profileService.updateProfile(this.userProfile)
-=======
-    this.profileService.updateProfile(this.userProfile);
->>>>>>> Ngan
   }
 
   onFileSelected(event) {
