@@ -1,10 +1,7 @@
 
-import { User } from './../../model/user.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Guid } from 'guid-typescript';
-import { map } from 'rxjs/operators';
-import { UserProfile } from 'src/app/model/userProfile.model';
+import { UserProfile } from "./../../model/userProfile.model";
 
 
   
@@ -15,7 +12,7 @@ export class ProfileService {
     httpOptions:any
     
     constructor(private httpClient: HttpClient) {
-        this.api ="https://localhost:5001/api/users/update/";
+        this.api ="https://localhost:5001/api/users/";
         this.httpOptions={
             headers:new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -42,7 +39,3 @@ export class ProfileService {
             
     }
 }
- 
-
-
-    

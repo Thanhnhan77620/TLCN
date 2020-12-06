@@ -1,130 +1,84 @@
 .learn-section {
-    background-color: #d4d4d4;
-    padding-top: 80px;
-    padding-bottom: 80px;
+  background-color: #d4d4d4;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.container {
+  position: relative;
+}
+
+.container {
+  width: 1000px;
 }
 
 .question-content-wrap {
-    background-color: #d4d4d4;
-}
-.question-content-wrap {
-    background-color: #fff;
-}
-
-.question-content-wrap .question-content .sm {
-    color: #525252;
-    margin-top: 5px;
-}
-
-body {
-    font-family: SVN-Gilroy Light;
-}
-
-body {
-    line-height: 1.4;
-    font-size: 14px;
-    font-family: raleway, sans-serif;
-    color: #000;
-}
-
-.exam-content {
-    transition: width 2s;
-    -moz-transition: width 2s;
-    -webkit-transition: width 2s;
-    -o-transition: width 2s;
-}
-
-.exam-content {
-    background-color: #fff;
+  background-color: #d4d4d4;
 }
 
 .col-md-12.exam-content .question-content {
-    max-width: 90%;
-    margin: 0 auto 0 auto;
+  max-width: 90%;
+  margin: 0 auto 0 auto;
 }
 
 .intro-content {
-    text-align: center;
-    padding: 70px 40px 70px 40px !important;
+  text-align: center;
+  padding: 70px 40px 70px 40px !important;
+}
+
+.exam-content {
+  background-color: #fff;
+}
+
+.exam-info p {
+  margin-top: 5px !important;
+}
+
+.exam-info .total-time-info b {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.exam-info svg {
+  color: #66cc9b;
+  margin-right: 15px;
+}
+
+.exam-info p b {
+  color: #000000;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .question-content-wrap .question-content .mc-btn {
-    margin-top: 30px;
-    margin-right: 6px;
+  margin-top: 30px;
+  margin-right: 6px;
 }
-
-.question-content-wrap .question-content .sm {
-    color: #525252;
-    margin-top: 5px;
-}
-.sm, h5 {
-    font-family: Lato, sans-serif;
-    font-size: 18px;
-    line-height: 1.5em;
-    color: #fff;
-}
-.md, h4 {
-    font-family: Lato, sans-serif;
-    font-size: 24px;
-    line-height: 1.5em;
-    color: #fff;
-}
-
 .btn-start a {
-    width: 300px;
-    height: 70px;
-    padding: 18px 0;
-    background: #3ABF7C;
-    border-radius: 35px;
-    color: #FFFFFF;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 31px;
-    text-align: center;
+  width: 300px;
+  height: 70px;
+  padding: 18px 0;
+  background: #3abf7c;
+  border-radius: 35px;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 31px;
+  text-align: center;
 }
 
 .mc-btn {
-    font-size: 20px;
-    padding: 0 50px;
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+  font-family: Lato, sans-serif;
+  line-height: 40px !important;
+  margin-bottom: 15px;
 }
-.btn-style-1, .btn-style-1:focus, .btn-style-6, .btn-style-6:focus {
-    background-color: #42BF80;
-    color: #fff;
-    text-transform: uppercase;
-}
-.btn-style-6, .btn-style-6:focus {
-    background-color: #f0f0f0;
-    color: #666;
-}
-.mc-btn {
-    display: inline-block;
-    border: 0;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: Lato, sans-serif;
-    font-size: 16px;
-    height: 40px;
-    line-height: 40px !important;
-    padding: 0 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    text-align: center;
-    text-transform: capitalize;
-    -webkit-transition: all 0.3s linear 0s;
-    -moz-transition: all 0.3s linear 0s;
-    -ms-transition: all 0.3s linear 0s;
-    -o-transition: all 0.3s linear 0s;
-    transition: all 0.3s linear 0s;
-}
-a {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-a, button, input, select, textarea {
-    outline: 0;
+.exam-info h4 b {
+  color: #3740ff;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 48px;
 }

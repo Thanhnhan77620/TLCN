@@ -1,11 +1,8 @@
 import { observable, Observable, Subscriber} from 'rxjs';
 import { NgForm} from '@angular/forms';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { User } from 'src/app/model/user.model';
-
 import { ProfileService } from './profile.service'
-import { Guid } from 'guid-typescript';
-import { UserProfile } from './../../model/userProfile.model';
+import { UserProfile } from "./../../model/userProfile.model";
 
 
 
@@ -36,7 +33,7 @@ export class ProfileComponent implements OnInit  {
         // this.userProfile.email=formProFile.value.email;
         // this.userProfile.image=this.file;
         this.userProfile={  
-            id:"543fead6-46b7-4eac-91df-582f2cbec31e",
+            id:"B1B71AC8-AB3B-4897-A6AF-4A64B6F9A731",
             fullName:formProFile.value.fullName,
             birthDate: formProFile.value.birthDate,
             phone: formProFile.value.phoneNumber,
@@ -44,7 +41,7 @@ export class ProfileComponent implements OnInit  {
             image: this.file
         } 
         console.log(this.userProfile)
-        this.profileService.updateProfile(this.userProfile)
+        // this.profileService.updateProfile(this.userProfile)
    
        
     }
@@ -64,7 +61,6 @@ export class ProfileComponent implements OnInit  {
             this.readFile(file, subscriber);
             
         });
-       
         this.myImage.subscribe((d)=>{
             // this.userProfile.image=d.toString();
             // console.log(d.replace("data:image/jpeg;base64,",""))
@@ -93,5 +89,3 @@ export class ProfileComponent implements OnInit  {
         }
     }
 }
-
-

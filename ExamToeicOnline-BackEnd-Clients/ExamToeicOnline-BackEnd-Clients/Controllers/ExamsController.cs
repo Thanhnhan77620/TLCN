@@ -34,9 +34,19 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._context = examToeicOnlineDBContext;
             this._storageService = storageService;
         }
-        
-        //GET: get list exams
+        //GET: get exam
         [HttpGet]
+        public async Task<IActionResult> getExamById(int examId)
+        {
+            var exam = await this._context.Exams.Where(x => x.Id == examId).FirstOrDefaultAsync();
+            if (exam == null)
+            {
+                return NotFound("Can not found any Record!");
+            }
+            return Ok(exam);
+        }
+        //GET: get list exams
+        [HttpGet("list")]
         public async Task<IActionResult> getListExam()
         {
             var listExam = await this._context.Exams.ToArrayAsync();

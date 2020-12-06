@@ -14,7 +14,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            DateTime dateTime = DateTime.Now;
+            DateTime dateTime=DateTime.Now;
             var id1 = Guid.NewGuid();
             var id2 = Guid.NewGuid();
             modelBuilder.Entity<User>().HasData(
@@ -24,7 +24,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Fullname = "Nguyễn Thanh Nhân",
                    Email = "nhan@gmail.com",
                    PhoneNumber = "12345678",
-                   Birthday = new DateTime(1999 / 29 / 5)
+                   Birthday =DateTime.Parse("05/29/1999")
 
                },
                new User()
@@ -33,7 +33,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                    Fullname = "Đỗ Thị Thanh Ngân",
                    Email = "ngan@gmail.com",
                    PhoneNumber = "98765432",
-                   Birthday = new DateTime(1999 / 29 / 11)
+                   Birthday = DateTime.Parse("11/29/1999")
                }
             );
             modelBuilder.Entity<Account>().HasData(
