@@ -1,80 +1,12 @@
 <div class="list-item-body outline-learn-body ps-container">
-   <div class="section-learn-outline">
-      <h5 class="section-title">LISTENING TEST</h5>
+   <div class="section-learn-outline" *ngFor="let part of listPart">
+      <h5 class="section-title" *ngIf="part.partName===1">LISTENING TEST</h5>
+      <h5 class="section-title" *ngIf="part.partName===5">READING TEST</h5>
       <ul class="section-list">
          <li class="o-view active">
-            <div class="list-body">
-               <h5>
-                  Part I: Picture Description
-                  <a href="#">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(6, 1)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-            <div class="list-body">
-               <h5>
-                  Part II: Question - Response
-                  <a href="#">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(25, 7)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-            <div class="list-body">
-               <h5>
-                  Part III: Short Conversations
-                  <a href="#">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(39, 32)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-            <div class="list-body">
-               <h5>
-                  Part IV: Short Talks
-                  <a href="#">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(30, 71)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
+            <app-number-question-detail [partName]="part.partName" [start]="part.start" [end]="part.end">
+            </app-number-question-detail>
          </li>
       </ul>
    </div>
-   <div class="section-learn-outline">
-      <h5 class="section-title">READING TEST</h5>
-      <ul class="section-list">
-         <li class="o-view active">
-            <div class="list-body">
-               <h5>
-                  Part V: Incomplete Sentences
-                  <a href="#">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(30, 101)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-            <div class="list-body">
-               <h5>
-                  Part VI: Incomplete Sentences
-                  <a href="/vi/Toeictest/part-6-intro">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(11, 131)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-            <div class="list-body">
-               <h5>
-                  Part VII: Reading Comprehension
-                  <a href="/vi/Toeictest/part-7-intro">Instruction</a>
-               </h5>
-               <div class="list-q-n inline" *ngFor="let number of arrayQuestion(60, 141)">
-                  <a href="#" class="btn btn-default question-n">{{ number }}</a>
-               </div>
-            </div>
-         </li>
-      </ul>
-   </div>
-
 </div>

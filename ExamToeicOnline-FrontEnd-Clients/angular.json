@@ -130,6 +130,10 @@
               "devServerTarget": "mdb-angular-free:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

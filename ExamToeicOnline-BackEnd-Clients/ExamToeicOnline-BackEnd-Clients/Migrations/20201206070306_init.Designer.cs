@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201202053538_init")]
+    [Migration("20201206070306_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,9 +214,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 12, 2, 12, 35, 37, 809, DateTimeKind.Local).AddTicks(9866),
-                            Password = "$2a$11$D9UgIDZFQMYRAQbS8zD8a.HsnVvM2Z0KyrxLnXaYP0GVxnOfdf9k.",
-                            UserId = new Guid("dc10c757-e876-4c48-b846-b134f4dbf0cd"),
+                            CreateAt = new DateTime(2020, 12, 6, 14, 3, 5, 658, DateTimeKind.Local).AddTicks(6197),
+                            Password = "$2a$11$Kc1EgViMO3yQg32Gxi/wdOVQK3K/PmSUEQuvY1TOqJx/KarIxkoM.",
+                            UserId = new Guid("57a1b939-3d35-4802-af4c-56fdfd7b41ee"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -224,9 +224,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 12, 2, 12, 35, 37, 809, DateTimeKind.Local).AddTicks(9866),
-                            Password = "$2a$11$8a6BTCFsA0rtvk1GM9QkWe3oGtf2r/XC68dIRHXGxQ9W2OVCq8SUG",
-                            UserId = new Guid("b6685512-70fb-4e70-a9c5-b57cbb857294"),
+                            CreateAt = new DateTime(2020, 12, 6, 14, 3, 5, 658, DateTimeKind.Local).AddTicks(6197),
+                            Password = "$2a$11$VwM9grQuk6vLsDJIghQEFuntgbJUXw2kuyL53IBKBKn3VMKsS8qRy",
+                            UserId = new Guid("79e4ff06-bde4-4457-a60f-f1466d0b5a85"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -239,7 +239,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Birthday")
+                    b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -261,7 +261,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc10c757-e876-4c48-b846-b134f4dbf0cd"),
+                            Id = new Guid("57a1b939-3d35-4802-af4c-56fdfd7b41ee"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -269,7 +269,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b6685512-70fb-4e70-a9c5-b57cbb857294"),
+                            Id = new Guid("79e4ff06-bde4-4457-a60f-f1466d0b5a85"),
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",

@@ -122,15 +122,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             {
                 user.Fullname = request.Fullname;
                 user.PhoneNumber = request.PhoneNumber;
-                //check email exists
-                if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
-                {
-                    return BadRequest("Email " + request.Email + " exist!");
-                }
-                else
-                {
-                    user.Email = request.Email;
-                }
+                ////check email exists
+                //if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
+                //{
+                //    return BadRequest("Email " + request.Email + " exist!");
+                //}
+                //else
+                //{
+                //    user.Email = request.Email;
+                //}
+                user.Email = request.Email;
                 user.Birthday = request.Birthday;
                 user.Image = request.Image;
                 //Save image

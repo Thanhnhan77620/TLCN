@@ -10,7 +10,7 @@ import { Question } from "../model/question.model";
   providedIn: "root",
 })
 export class DethiService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getAllDeThi() {
     return this.http
@@ -28,9 +28,9 @@ export class DethiService {
     return this.http
       .get<Question[]>(
         "https://localhost:5001/api/questions/PartName?examId=" +
-          dethiId +
-          "&partName=Part " +
-          partId
+        dethiId +
+        "&partName=Part " +
+        partId
       )
       .pipe(catchError(this.handleError));
   }
@@ -49,5 +49,13 @@ export class DethiService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+
+  getListQuestion(dethiId: number, partId: number): Observable<Question[]> {
+    return this.http.get<Question[]>(`https://localhost:5001/api/questions/PartName?examId=${dethiId}&partName=Part ${partId}`).pipe(
+      tap((data) => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 }

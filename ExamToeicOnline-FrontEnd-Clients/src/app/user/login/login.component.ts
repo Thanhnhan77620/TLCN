@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
       resData => {
         this.router.navigate(['/home']);
       },
+      error => {
+        alert(error);
+      }
     );
 
     form.reset();

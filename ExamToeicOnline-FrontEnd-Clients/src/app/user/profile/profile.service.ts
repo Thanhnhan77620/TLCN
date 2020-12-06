@@ -7,6 +7,7 @@ export class ProfileService {
   api: string = "";
   httpOptions: any;
 
+
   constructor(private httpClient: HttpClient) {
     this.api = "https://localhost:5001/api/users/update/";
     this.httpOptions = {
@@ -23,6 +24,7 @@ export class ProfileService {
     formData.append("email", userProfile.email);
     formData.append("phone", userProfile.phoneNumber);
     formData.append("birthday", userProfile.birthDate.toString());
+
     formData.append("image", userProfile.image);
 
     return this.httpClient.put<any>(this.api, formData).subscribe((data) => {

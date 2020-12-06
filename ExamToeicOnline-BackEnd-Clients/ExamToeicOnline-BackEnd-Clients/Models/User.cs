@@ -14,7 +14,7 @@ namespace ExamToeicOnline_FrontEnd_Clients.Models
         public string Fullname { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
         public string Image { get; set; }
         public ICollection<Account> Accounts { get; set; }
         public ICollection<DoExam> DoExams { get; set; }
