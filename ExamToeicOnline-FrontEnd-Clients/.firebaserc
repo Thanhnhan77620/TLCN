@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "english-cent": {
+      "hosting": {
+        "mdb-angular-free": [
+          "english-cent"
+        ]
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { LoginComponent } from "./login/login.component";
 import { SharedModule } from "./../shared/shared.module";
 import { NgModule } from "@angular/core";
 
+
 @NgModule({
   declarations: [LoginComponent, ProfileComponent, RegisterComponent],
   imports: [

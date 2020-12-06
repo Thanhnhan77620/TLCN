@@ -1,0 +1,30 @@
+<img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
+<div class="answer" id="{{question.id}}">
+    <p><b>{{question.content}}</b></p>
+    <ul class="answer-list" *ngFor="let answer of ">
+        <li>
+            <input type="radio" name="Answers[{{question.id}}]" value="14276" id="answers-{{question.id}}-14276"> <label
+                for="771">
+                <i class="icon icon_radio"></i>
+                A </label>
+        </li>
+        <li>
+            <input type="radio" name="Answers[{{question.id}}]" value="14277" id="answers-{{question.id}}-14277"> <label
+                for="771">
+                <i class="icon icon_radio"></i>
+                B </label>
+        </li>
+        <li>
+            <input type="radio" name="Answers[{{question.id}}]" value="14278" id="answers-{{question.id}}-14278"> <label
+                for="771">
+                <i class="icon icon_radio"></i>
+                C </label>
+        </li>
+        <li>
+            <input type="radio" name="Answers[{{question.id}}]" value="14279" id="answers-{{question.id}}-14279"> <label
+                for="771">
+                <i class="icon icon_radio"></i>
+                D </label>
+        </li>
+    </ul>
+</div>

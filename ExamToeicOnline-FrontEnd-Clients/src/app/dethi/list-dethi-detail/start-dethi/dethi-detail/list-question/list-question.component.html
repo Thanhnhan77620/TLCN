@@ -1,12 +1,34 @@
-<p>list-question works!</p>
-<!-- src="data:audio/ogg;base64,BASE64CODE"  -->
+<div class="container">
+    <div class="question-content">
+        <p class="text-justify">
+            <b>Mark your answer on your answer sheet:</b>
+        </p>
+        <hr>
 
-<audio controls src="data:audio/ogg;base64,{{filePath}}" ></audio>
-
-
-<br><br><br>
-
-<input type="file" (change)="change($event)"/><br><br><br>
-
-<img style="width: 100px; height: 100px" src="data:image/png;base64,{{file}}" alt="Red dot" />
-
+        <form>
+            <div style="display: none;"></div>
+            <p>Please refrain from replaying the audio, you can only listen one time when in real exam.</p>
+            <p><b>Audio: </b></p>
+            <div class="audioplayer">
+                <audio type="audio/mp3" src="#"></audio>
+                <div class="audioplayer-playpause" title=""><a href="#"></a></div>
+                <div class="audioplayer-time audioplayer-time-current">00:00</div>
+                <div class="audioplayer-bar">
+                    <div class="audioplayer-bar-loaded" style="width: 67%;"></div>
+                </div>
+                <div class="audioplayer-time audioplayer-time-duration">00:00</div>
+                <div class="audioplayer-volume">
+                    <div class="audioplayer-volume-button" title=""><a href="#"></a></div>
+                    <div class="audioplayer-volume-adjust">
+                        <div>
+                            <div style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let question of listQuestion">
+                <app-question-detail [question]="question"></app-question-detail>
+            </div>
+        </form>
+    </div>
+</div>

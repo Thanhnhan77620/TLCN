@@ -15,9 +15,6 @@ import { ContactComponent } from './component/pages/contact/contact.component';
 import { BodyComponent } from './component/blocks/body/body.component';
 import { AppRoutingModule } from './app-routing.module';
 
-  
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +35,8 @@ import { AppRoutingModule } from './app-routing.module';
     DethiModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

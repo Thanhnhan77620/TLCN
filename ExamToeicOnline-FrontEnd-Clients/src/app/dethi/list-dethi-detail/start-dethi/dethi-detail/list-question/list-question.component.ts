@@ -1,8 +1,7 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
-import { ListQuestionService } from './list-question.service';
-declare var window;
-
-
+import { Question } from 'src/app/model/question.model';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DethiService } from 'src/app/dethi/dethi.service';
 
 @Component({
   selector: 'app-list-question',
@@ -12,20 +11,23 @@ declare var window;
 })
 export class ListQuestionComponent implements OnInit {
 
-  constructor(private listquestionService: ListQuestionService) { }
-  file="iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
-  filePath=""
-  ngOnInit(): void {
-    this.listquestionService.getBase64().then(data => {
-       this.filePath=data.file_Audio;;
-        console.log(this.filePath)
-     })
-    
-  }
-  change($event:Event){
-    const file=($event.target as HTMLInputElement).files[0]; 
-    console.log(file)
-  }
+  listQuestion: Question[] = [];
+  errorMessage: string;
 
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private detThiService: DethiService) { }
+
+  ngOnInit(): void {
+    const examId = this.route.snapshot.queryParamMap.get('examId');
+    const partId = this.route.snapshot.queryParamMap.get('part');
+    console.log(examId + "  " + partId)
+    this.detThiService.getListQuestion(+examId, +partId).subscribe(
+      (data) => {
+        this.listQuestion = data;
+      },
+      (error) => (this.errorMessage = error)
+    )
+  }
 }
 
