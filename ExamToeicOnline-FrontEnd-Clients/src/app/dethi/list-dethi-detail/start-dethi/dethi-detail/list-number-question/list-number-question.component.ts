@@ -1,6 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { DethiService } from "src/app/dethi/dethi.service";
 import { Question } from "src/app/model/question.model";
 
@@ -8,7 +8,6 @@ import { Question } from "src/app/model/question.model";
   selector: "app-list-number-question",
   templateUrl: "./list-number-question.component.html",
   styleUrls: ["./list-number-question.component.scss"],
-  encapsulation: ViewEncapsulation.None
 })
 export class ListNumberQuestionComponent implements OnInit {
   constructor(

@@ -1,13 +1,12 @@
 import { Question } from 'src/app/model/question.model';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DethiService } from 'src/app/dethi/dethi.service';
 
 @Component({
   selector: 'app-list-question',
   templateUrl: './list-question.component.html',
-  styleUrls: ['./list-question.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./list-question.component.scss']
 })
 export class ListQuestionComponent implements OnInit {
 
@@ -30,4 +29,3 @@ export class ListQuestionComponent implements OnInit {
     )
   }
 }
-
