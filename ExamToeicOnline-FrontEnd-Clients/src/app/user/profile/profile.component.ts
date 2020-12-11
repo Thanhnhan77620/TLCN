@@ -6,12 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 
 import { ProfileService } from './profile.service';
-<<<<<<< HEAD
-=======
-import { AngularFireStorage } from "@angular/fire/storage";
-import { finalize } from 'rxjs/operators';
-
->>>>>>> Ngan
 
 @Component({
   selector: 'app-profile',
@@ -40,8 +34,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private profileService: ProfileService,
     private userService: UserService,
-    private route: ActivatedRoute,
-    private storage: AngularFireStorage) { }
+    private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -70,37 +63,33 @@ export class ProfileComponent implements OnInit {
       image: this.fb
     }
     console.log(this.userProfile)
-<<<<<<< HEAD
-    this.profileService.updateProfile(this.userProfile)
-=======
     this.profileService.updateProfile(this.userProfile);
->>>>>>> Ngan
   }
 
   onFileSelected(event) {
-    var n = this.currentUser.id;
-    const file = event.target.files[0];
-    const filePath = `avatar/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`avatar/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log(this.fb);
-          });
-        })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
-      });
+    // var n = this.currentUser.id;
+    // const file = event.target.files[0];
+    // const filePath = `avatar/${n}`;
+    // const fileRef = this.storage.ref(filePath);
+    // const task = this.storage.upload(`avatar/${n}`, file);
+    // task
+    //   .snapshotChanges()
+    //   .pipe(
+    //     finalize(() => {
+    //       this.downloadURL = fileRef.getDownloadURL();
+    //       this.downloadURL.subscribe(url => {
+    //         if (url) {
+    //           this.fb = url;
+    //         }
+    //         console.log(this.fb);
+    //       });
+    //     })
+    //   )
+    //   .subscribe(url => {
+    //     if (url) {
+    //       console.log(url);
+    //     }
+    //   });
 
   }
 }

@@ -3,5 +3,11 @@ export class DeThi {
     public id: string,
     public title: string,
     public duration: number
-  ) {}
+  ) { }
+}
+
+
+export interface ListDeThiResolved {
+  listDeThis: DeThi[];
+  error?: any;
 }

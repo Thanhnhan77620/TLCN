@@ -1,18 +1,16 @@
 <div class="list-body">
     <h5>
-        Part {{partName}}:<span>
-            <div *ngIf='partName===1'>Picture Description</div>
-            <div *ngIf='partName===2'>Question - Response</div>
-            <div *ngIf='partName===3'>Short Conversations</div>
-            <div *ngIf='partName===4'> Short Talks</div>
-            <div *ngIf='partName===5'>Incomplete Sentences</div>
-            <div *ngIf='partName===6'>Incomplete Sentences</div>
-            <div *ngIf='partName===7'>Reading Comprehension</div>
-        </span>
-
+        Part {{partName}}: <span *ngIf='partName===1'>Picture Description</span>
+        <span *ngIf='partName===2'>Question - Response</span>
+        <span *ngIf='partName===3'>Short Conversations</span>
+        <span *ngIf='partName===4'> Short Talks</span>
+        <span *ngIf='partName===5'>Incomplete Sentences</span>
+        <span *ngIf='partName===6'>Incomplete Sentences</span>
+        <span *ngIf='partName===7'>Reading Comprehension</span>
+        <br>
         <a href="#">Instruction</a>
     </h5>
-    <div class="list-q-n inline" *ngFor="let number of arrayQuestion(end, start)">
+    <div class="list-q-n" *ngFor="let number of arrayQuestion(end, start)">
         <a href="#" class="btn btn-default question-n">{{ number }}</a>
     </div>
 </div>

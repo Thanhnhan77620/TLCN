@@ -1,3 +1,5 @@
+import { DethiService } from 'src/app/dethi/dethi.service';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DethiDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private deThiService: DethiService) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.queryParamMap.get('examId');
+
   }
 
 }

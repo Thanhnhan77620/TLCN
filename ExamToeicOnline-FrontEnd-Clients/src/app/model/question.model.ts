@@ -4,5 +4,10 @@ export class Question {
     public content: string,
     public groupQuestionId: number,
     public image?: BinaryType
-  ) {}
+  ) { }
+}
+
+export interface ListQuestionResolved {
+  listQuestions: Question[];
+  error?: any;
 }

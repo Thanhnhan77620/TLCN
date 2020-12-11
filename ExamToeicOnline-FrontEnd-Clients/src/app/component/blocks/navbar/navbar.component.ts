@@ -1,4 +1,6 @@
-import { ProfileService } from "./../../../user/profile/profile.service";
+import { ActivatedRoute } from '@angular/router';
+import { DethiService } from 'src/app/dethi/dethi.service';
+import { Router } from '@angular/router';
 import { Account } from "./../../../model/account.model";
 import { UserService } from "./../../../user/user.service";
 
@@ -16,23 +18,29 @@ export class NavbarComponent implements OnInit {
   currentAccount: Account;
   constructor(
     private userService: UserService,
-    private profileService: ProfileService
-  ) {}
+    private router: Router,
+
+  ) { }
+
 
   ngOnInit() {
     this.userSub = this.userService.account.subscribe((account) => {
       this.currentAccount = account;
       this.isAuthenticated = !!account;
     });
+
   }
 
   onLogout() {
     this.userService.logout();
   }
 
-  onShowProfile() {}
+  onShowProfile() { }
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+  }
+  onLogin() {
+    this.router.navigate(['/auth/login']);
   }
 }

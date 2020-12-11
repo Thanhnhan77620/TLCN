@@ -1,3 +1,4 @@
+import { QuestionResolver } from './dethi-resolver.service';
 import { StartDethiComponent } from "./list-dethi-detail/start-dethi/start-dethi.component";
 import { SharedModule } from "./../shared/shared.module";
 import { RouterModule } from "@angular/router";
@@ -31,22 +32,19 @@ import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/d
     CommonModule,
     RouterModule.forChild([
       {
-        path: "introduce",
+        path: "",
         children: [
           {
-            path: "",
-            component: IntroduceDethiComponent,
-          },
-          {
-            path: ":id",
+            path: ":examId",
             component: StartDethiComponent,
           },
-        ],
-      },
-      {
-        path: "ToeicTest",
-        component: DethiDetailComponent,
-      },
+          {
+            path: "",
+            component: DethiDetailComponent,
+            resolve: { resolvedListQuestionsData: QuestionResolver }
+          },
+        ]
+      }
     ]),
     SharedModule,
   ],

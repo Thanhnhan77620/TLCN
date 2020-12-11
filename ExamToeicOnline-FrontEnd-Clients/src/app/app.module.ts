@@ -18,6 +18,9 @@ import { ContactComponent } from "./component/pages/contact/contact.component";
 import { BodyComponent } from "./component/blocks/body/body.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AngularFireModule } from '@angular/fire';
+import { PublicLayoutComponent } from './public-layout/public-layout.component';
+import { TestLayoutComponent } from './test-layout/test-layout.component';
+import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.component';
 
 
 
@@ -30,6 +33,9 @@ import { AngularFireModule } from '@angular/fire';
     HomeComponent,
     ContactComponent,
     BodyComponent,
+    PublicLayoutComponent,
+    TestLayoutComponent,
+    NavbarTestComponent,
   ],
   imports: [
     BrowserModule,

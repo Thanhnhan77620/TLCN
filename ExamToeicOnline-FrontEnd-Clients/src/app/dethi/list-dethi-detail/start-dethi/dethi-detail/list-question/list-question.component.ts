@@ -1,3 +1,4 @@
+import { ListQuestionResolved } from './../../../../../model/question.model';
 import { Question } from 'src/app/model/question.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,14 +19,20 @@ export class ListQuestionComponent implements OnInit {
     private detThiService: DethiService) { }
 
   ngOnInit(): void {
-    const examId = this.route.snapshot.queryParamMap.get('examId');
-    const partId = this.route.snapshot.queryParamMap.get('part');
-    console.log(examId + "  " + partId)
-    this.detThiService.getListQuestion(+examId, +partId).subscribe(
-      (data) => {
-        this.listQuestion = data;
-      },
-      (error) => (this.errorMessage = error)
-    )
+    // const examId = this.route.snapshot.queryParamMap.get('examId');
+    // const partId = this.route.snapshot.queryParamMap.get('part');
+    // console.log(examId + "  " + partId)
+    // this.detThiService.getListQuestion(+examId, +partId).subscribe(
+    //   (data) => {
+    //     this.listQuestion = data;
+    //   },
+    //   (error) => (this.errorMessage = error)
+    // )
+
+    const resolvedData: ListQuestionResolved = this.route.snapshot.data['resolvedListQuestionsData'];
+    this.errorMessage = resolvedData.error;
+    this.listQuestion = resolvedData.listQuestions;
+
+
   }
 }

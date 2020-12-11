@@ -196,38 +196,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-<<<<<<< HEAD:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201205110139_init.cs
-                values: new object[] { new Guid("09634b2b-6c07-4228-a2da-547f6b9becf3"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
-=======
-                values: new object[] { new Guid("57a1b939-3d35-4802-af4c-56fdfd7b41ee"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
->>>>>>> Ngan:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201206070306_init.cs
+                values: new object[] { new Guid("f201504b-38a2-46ef-a335-7c90bd191de1"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(13), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-<<<<<<< HEAD:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201205110139_init.cs
-                values: new object[] { new Guid("68097a66-5329-440f-a3d2-d4f98ca3162d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
-=======
-                values: new object[] { new Guid("79e4ff06-bde4-4457-a60f-f1466d0b5a85"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
->>>>>>> Ngan:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201206070306_init.cs
+                values: new object[] { new Guid("4ce5bd4d-6efe-4bbf-85f9-b57e333dde57"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(6), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-<<<<<<< HEAD:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201205110139_init.cs
-                values: new object[] { 1, new DateTime(2020, 12, 5, 18, 1, 39, 126, DateTimeKind.Local).AddTicks(2842), "$2a$11$y9xbLt5YkIDpk/v6yOQfUu02uj0/nVMMmuUyIg6GMTw7GtR0yEQnK", new Guid("09634b2b-6c07-4228-a2da-547f6b9becf3"), "ngan", true, false });
-=======
-                values: new object[] { 1, new DateTime(2020, 12, 6, 14, 3, 5, 658, DateTimeKind.Local).AddTicks(6197), "$2a$11$Kc1EgViMO3yQg32Gxi/wdOVQK3K/PmSUEQuvY1TOqJx/KarIxkoM.", new Guid("57a1b939-3d35-4802-af4c-56fdfd7b41ee"), "ngan", true, false });
->>>>>>> Ngan:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201206070306_init.cs
+                values: new object[] { 1, new DateTime(2020, 12, 7, 11, 25, 16, 352, DateTimeKind.Local).AddTicks(2436), "$2a$11$.1lWO8ccuus5pYCkzF6qZeNZk9RE3oHcfr.OYxBlMzgYXGMybHt3e", new Guid("f201504b-38a2-46ef-a335-7c90bd191de1"), "ngan", true, false });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-<<<<<<< HEAD:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201205110139_init.cs
-                values: new object[] { 2, new DateTime(2020, 12, 5, 18, 1, 39, 126, DateTimeKind.Local).AddTicks(2842), "$2a$11$JLTGYPfSXp39GIV9/o2U0OFi8Ob3RH.DhlmPt63ijxjsU.zK364lS", new Guid("68097a66-5329-440f-a3d2-d4f98ca3162d"), "nhan", true, false });
-=======
-                values: new object[] { 2, new DateTime(2020, 12, 6, 14, 3, 5, 658, DateTimeKind.Local).AddTicks(6197), "$2a$11$VwM9grQuk6vLsDJIghQEFuntgbJUXw2kuyL53IBKBKn3VMKsS8qRy", new Guid("79e4ff06-bde4-4457-a60f-f1466d0b5a85"), "nhan", true, false });
->>>>>>> Ngan:ExamToeicOnline-BackEnd-Clients/ExamToeicOnline-BackEnd-Clients/Migrations/20201206070306_init.cs
+                values: new object[] { 2, new DateTime(2020, 12, 7, 11, 25, 16, 352, DateTimeKind.Local).AddTicks(2436), "$2a$11$pDFdqITGxqRcRtCciKg6vuEIrPntnI80Aw99Lf/EHjn.L.Sr3zoEi", new Guid("4ce5bd4d-6efe-4bbf-85f9-b57e333dde57"), "nhan", true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
