@@ -107,9 +107,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                         else { partid = 7; count_image = 1; anwser_in_question_num = 4; countQuestion = 2; question_in_group_num = 2; count_group = 1; }
                         string base64ImageRepresentation_Question = null;
                         string base64ImageRepresentation_Group = null;
-                        //create PartInExam
-                        //this._context.PartInExams.Add(new PartInExam() { PartId = partid, ExamId = exam.Id });
-                       // await this._context.SaveChangesAsync();
+                       
                         int line = 0;
                         int n = 1;
                         while (reader.Read())//read each row
@@ -257,6 +255,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._context.Paragraphs.Add(new Paragraph()
             {
                 image_Script = base64ImageRepresentation_Group,
+                GroupQuestionId = GroupQuestionId
+            });
+            await this._context.SaveChangesAsync();
+            return 1;
+        }
+        private async Task<int> createFiliAudio(string filiAudio, int GroupQuestionId)
+        {
+            this._context.FileAudios.Add(new FileAudio()
+            {
+                file_Audio = filiAudio,
                 GroupQuestionId = GroupQuestionId
             });
             await this._context.SaveChangesAsync();

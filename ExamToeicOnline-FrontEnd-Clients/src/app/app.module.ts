@@ -1,6 +1,3 @@
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from './../environments/environment';
 import { UserModule } from "./user/user.module";
 import { DethiModule } from "./dethi/dethi.module";
 import { BrowserModule } from "@angular/platform-browser";
@@ -45,9 +42,7 @@ import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.
     AppRoutingModule,
     UserModule,
     DethiModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireDatabaseModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

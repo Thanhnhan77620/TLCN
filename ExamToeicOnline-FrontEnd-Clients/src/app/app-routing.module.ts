@@ -2,8 +2,8 @@ import { TestLayoutComponent } from './test-layout/test-layout.component';
 import { IntroduceDethiComponent } from './dethi/introduce-dethi/introduce-dethi.component';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 
-import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
 
 import { HomeComponent } from "./component/pages/home/home.component";
 
@@ -54,6 +54,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

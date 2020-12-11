@@ -109,54 +109,84 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(user);
         }
        
-        [HttpPut("{UserId}")]
-        public async Task<IActionResult> Update([FromForm] UserVM request)
-        {
-           
-            var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
-            if (user == null)
-            {
-                return NotFound("Can not foud the user with ID=" + request.Id);
-            }
-            else
-            {
-                user.Fullname = request.Fullname;
-                user.PhoneNumber = request.PhoneNumber;
-                ////check email exists
-                //if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
-                //{
-                //    return BadRequest("Email " + request.Email + " exist!");
-                //}
-                //else
-                //{
-                //    user.Email = request.Email;
-                //}
-                user.Email = request.Email;
-                user.Birthday = request.Birthday;
-                user.Image = request.Image;
-                //Save image
-                //if (HttpContext.Request.Form.Files.Count > 0)
-                //{
-                //    var file = HttpContext.Request.Form.Files[0];
+        //[HttpPut("{UserId}")]
+        //public async Task<IActionResult> Update([FromForm] UserVM request)
+        //{
+        //    var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
+        //    if (user == null)
+        //    {
+        //        return NotFound("Can not foud the user with ID=" + request.Id);
+        //    }
+        //    else
+        //    {
+        //        user.Fullname = request.Fullname;
+        //        user.PhoneNumber = request.PhoneNumber;
+        //        //check email exists
+        //        if(await checkEmailNotExit(request.Id, request.Email)==false)
+        //        {
+        //            return BadRequest("Email " + request.Email + " exist!");
+        //        }
+        //        else
+        //        {
+        //            user.Email = request.Email;
+        //        }
+        //        user.Birthday = request.Birthday;
+        //        user.Image = request.Image;
+        //        this._context.Users.Update(user);
+        //        await this._context.SaveChangesAsync();
 
-                //    byte[] fileData = null;
+        //    }
+        //    return Ok("Update infomation successfully!");
+        //}
 
-                //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-                //    {
-                //        fileData = binaryReader.ReadBytes((int)file.Length);
-                //    }
+        //[HttpGet("pp")]
+        //public async Task<IActionResult> checkEmailNotExit(Guid id ,string email)
+        //{
+        //    var user1 = from u in this._context.Users
+        //               where u.Id==id
+        //               select u;
+        //    var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
+        //    if (user == null)
+        //    {
+        //        return NotFound("Can not foud the user with ID=" + request.Id);
+        //    }
+        //    else
+        //    {
+        //        user.Fullname = request.Fullname;
+        //        user.PhoneNumber = request.PhoneNumber;
+        //        ////check email exists
+        //        //if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
+        //        //{
+        //        //    return BadRequest("Email " + request.Email + " exist!");
+        //        //}
+        //        //else
+        //        //{
+        //        //    user.Email = request.Email;
+        //        //}
+        //        user.Email = request.Email;
+        //        user.Birthday = request.Birthday;
+        //        user.Image = request.Image;
+        //        //Save image
+        //        //if (HttpContext.Request.Form.Files.Count > 0)
+        //        //{
+        //        //    var file = HttpContext.Request.Form.Files[0];
 
-                //    user.Image = fileData;
-                //}
+        //        //    byte[] fileData = null;
 
-                this._context.Users.Update(user);
-                await this._context.SaveChangesAsync();
+        //        //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+        //        //    {
+        //        //        fileData = binaryReader.ReadBytes((int)file.Length);
+        //        //    }
 
-            }
-            return Ok("Update infomation successfully!");
-        }
-      
-        
+
+        //    var user2 = from u in this._context.Users
+        //                where !(from m in this._context.Users select m.Id).Contains(id)
+        //                select u;
+
+        //    var user = await this._context.Users.Select(user => user.Id).Contains("d");
+
+        //    return Ok((from m in this._context.Users select m.Id).Contains(id));
+        //}
         
     }
 }
