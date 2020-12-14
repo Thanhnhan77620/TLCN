@@ -13,5 +13,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Models.ViewModels
         public string FileAudio { get; set; }
         public int GroupQuestionId { get; set; }
         public string ImageGroup { get; set; }
+        public Anwser anwsers { get; set; }
     }
 }

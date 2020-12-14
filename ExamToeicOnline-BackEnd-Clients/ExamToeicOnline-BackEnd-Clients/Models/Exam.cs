@@ -12,6 +12,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Models
         public int Duration { get; set; }
         public ICollection<DoExam> DoExams { get; set; }      
         public ICollection<Question> Questions { get; set; }
+        public ICollection<GroupQuestion> GroupQuestions { get; set; }
+
 
     }
 }
