@@ -315,7 +315,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             this._context.Paragraphs.Add(new Paragraph()
             {
-                image_Script = base64ImageRepresentation_Group,
+                image_Script = base64ImageRepresentation_Group.ToLower(),
                 GroupQuestionId = GroupQuestionId
             });
             await this._context.SaveChangesAsync();
@@ -325,7 +325,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             this._context.FileAudios.Add(new FileAudio()
             {
-                file_Audio = filiAudio,
+                file_Audio = filiAudio.ToLower(),
                 GroupQuestionId = GroupQuestionId
             });
             await this._context.SaveChangesAsync();
