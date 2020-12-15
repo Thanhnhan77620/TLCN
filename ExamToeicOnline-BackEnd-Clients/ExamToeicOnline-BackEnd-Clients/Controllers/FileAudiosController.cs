@@ -29,24 +29,11 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var audioBase64 = await this._context.FileAudios.FirstOrDefaultAsync();
             return Ok(audioBase64);
         }
-        [HttpPost]
-        public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVMt)
+        [HttpGet("{fileId}")]
+        public async Task<IActionResult> GetFileAudioById(int fileId)
         {
-            var file = HttpContext.Request.Form.Files[0];
-            byte[] fileAudio = null;
-            using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-            {
-                fileAudio = binaryReader.ReadBytes((int)file.Length);
-            }
-            //byte[] fileAudio = System.IO.File.ReadAllBytes(file);
-            string base64File = Convert.ToBase64String(fileAudio);
-            this._context.FileAudios.Add(new Models.FileAudio()
-            {
-                file_Audio= base64File,
-                GroupQuestionId=1
-            });
-            await this._context.SaveChangesAsync();
-            return Ok(base64File);
+            var audioBase64 = await this._context.FileAudios.FindAsync(fileId);
+            return Ok(audioBase64);
         }
     }
 }

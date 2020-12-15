@@ -42,12 +42,13 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             try
             {
                 var question = await this._context.Questions.Where(q => q.ExamId == examId).Skip(numberQuestion - 1).Take(1).FirstOrDefaultAsync();
-                var questionList = await this._context.GroupQuestions.Where(g => g.ExamId == examId && g.Id == question.GroupQuestionId)
+                int GroupQuestionId = question.GroupQuestionId;
+                var questionList = await this._context.GroupQuestions.Where(g => g.ExamId == examId && g.Id == GroupQuestionId)
                                     .Include(g => g.Questions)
-                                     .ThenInclude(g => g.Anwsers)
+                                        .ThenInclude(g => g.Anwsers)
                                     .Include(g => g.FileAudios)
                                     .Include(g => g.Paragraphs)
-                                    .ToListAsync();
+                                    .ToArrayAsync();
 
                 return Ok(questionList);
             }
