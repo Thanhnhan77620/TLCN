@@ -12,7 +12,7 @@
                 <source type="audio/mp3" src="https://toeic24.vn/upload/audio/1579320667/1579321247.mp3" />
             </audio>
             <div *ngIf="!isImage_Scritp">
-                <img src="data:image/png;base64,{{listQuestion[0].paragraphs[0].image_Script }}"
+                <img src="{{listQuestion[0].paragraphs[0].image_Script }}"
                     alt="1. Select the answer" style="width: 100%">
             </div>
             <div *ngFor="let question of listQuestion[0].questions">

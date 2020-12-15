@@ -1,24 +1,24 @@
-import { observable, Observable, Subscriber } from 'rxjs';
-import { NgForm } from '@angular/forms';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { observable, Observable, Subscriber} from 'rxjs';
+import { NgForm} from '@angular/forms';
+import { Component, OnInit, Output,HostListener ,EventEmitter} from '@angular/core';
 import { ProfileService } from './profile.service'
 import { UserProfile } from "./../../model/userProfile.model";
-
-
+import { HttpEventType, HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html'
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit  {
+  
 
-
-    constructor(private profileService: ProfileService) { }
+    constructor(private profileService: ProfileService ){}
     ngOnInit(): void {
 
     }
-    userProfile: UserProfile
-    myImage: Observable<any>;
+
+    userProfile:UserProfile   
+    myImage:Observable<any>;
 
     file: string;
 
@@ -38,21 +38,17 @@ export class ProfileComponent implements OnInit {
             phone: formProFile.value.phoneNumber,
             email: formProFile.value.email,
             image: this.file
-        }
-        console.log(this.userProfile)
+        } 
+       // console.log(this.userProfile)
         // this.profileService.updateProfile(this.userProfile)
-
+        console.log(formProFile.value);
 
     }
 
     onChange($event: Event) {
         const file = ($event.target as HTMLInputElement).files[0];
         this.ConvertToBase64(file);
-
-        //console.log(file);
-
-
-
+       
 
     }
     ConvertToBase64(file: File) {

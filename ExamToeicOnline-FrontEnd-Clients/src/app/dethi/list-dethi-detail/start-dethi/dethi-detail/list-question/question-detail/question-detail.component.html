@@ -1,7 +1,7 @@
 <div class="answer" id="{{question.id}}">
     <p><b>{{question.content}}</b></p>
     <div *ngIf="question.image">
-        <img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
+        <img src="{{question.image}}" alt="1. Select the answer" style="width: 100%">
     </div>
     <ul class="answer-list">
         <li *ngFor="let answer of question.anwsers">

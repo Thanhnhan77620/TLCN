@@ -29,10 +29,12 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     {
         private readonly ExamToeicOnlineDBContext _context;
         private readonly IStorageService _storageService;
-        public ExamsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ExamsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService, IWebHostEnvironment webHostEnvironment)
         {
             this._context = examToeicOnlineDBContext;
             this._storageService = storageService;
+            this._webHostEnvironment = webHostEnvironment;
         }
         //GET: get exam
         [HttpGet]
@@ -58,13 +60,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         }
 
         [HttpPost("{import}")]
-        public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVM, [FromServices] IHostingEnvironment hostingEnvironment)
+        public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVM)
         {
-           
-            string filePath = $"{hostingEnvironment.WebRootPath}\\File\\Exam01\\{importExamVM.ExcelFile.FileName}";
-            using (FileStream fileStream = System.IO.File.Create(filePath))
+            string nameFile = importExamVM.ExcelFile.FileName;
+            string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\exams\\"; 
             {
-                importExamVM.ExcelFile.CopyTo(fileStream);
+                Directory.CreateDirectory(filePath);
+            }
+            using (FileStream fileStream = System.IO.File.Create(filePath+ nameFile))
+            {
+                await importExamVM.ExcelFile.CopyToAsync(fileStream);
                 fileStream.Flush();
             }
             //create exam
@@ -81,38 +86,41 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             int anwser_in_question_num = 0;
             int question_in_group_num = 0;
             int count_image = 0;
+            int count_audio = 0;
             int countAnwser = 4;
             int countQuestion = 0;
             int QuestionId = 0;
             int GroupQuestionId = 0;
             int count_group = 0;
-            string base64FileAudiopresentation = null;
+            //string base64FileAudiopresentation = null;
             var file = "";
             byte[] imageArray;
+            byte[] audioArray;
             int kt = 1;
-            using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            using (var stream = System.IO.File.Open(filePath+nameFile, FileMode.Open, FileAccess.Read, FileShare.None))
             {
                 using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
 
                     do
                     {
-                       
+
                         if (reader.Name == "Part 1") { partid = 1; count_image = 1; anwser_in_question_num = 4; countQuestion = 6; question_in_group_num = 6; }
                         else if (reader.Name == "Part 2") { partid = 2; countAnwser = 3; anwser_in_question_num = 3; countQuestion = 25; question_in_group_num = 25; }
-                        else if (reader.Name == "Part 3") { partid = 3; countAnwser = 4; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
-                        else if (reader.Name == "Part 4") { partid = 4; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
-                        else if (reader.Name == "Part 5") { partid = 5; anwser_in_question_num = 4; countQuestion = 30; question_in_group_num = 30; }
+                        else if (reader.Name == "Part 3") { partid = 3; count_audio = 1; countAnwser = 4; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
+                        else if (reader.Name == "Part 4") { partid = 4; count_audio = 1; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
+                        else if (reader.Name == "Part 5") { partid = 5; count_audio = 1; anwser_in_question_num = 4; countQuestion = 30; question_in_group_num = 30; }
                         else if (reader.Name == "Part 6") { partid = 6; count_image = 1; anwser_in_question_num = 4; countQuestion = 4; question_in_group_num = 4; }
                         else { partid = 7; count_image = 1; anwser_in_question_num = 4; countQuestion = 2; question_in_group_num = 2; count_group = 1; }
                         string base64ImageRepresentation_Question = null;
                         string base64ImageRepresentation_Group = null;
-                       
+                        string base64FileAudio = null;
+
                         int line = 0;
                         int n = 1;
                         while (reader.Read())//read each row
                         {
-                            
+
                             if (line != 1)
                             {
                                 line++;
@@ -122,36 +130,79 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                 //create GroupQuestion
                                 if (countQuestion == question_in_group_num)
                                 {
-                                   
-                                    this._context.GroupQuestions.Add(new GroupQuestion() { ExamId=exam.Id }); 
+
+                                    this._context.GroupQuestions.Add(new GroupQuestion() { ExamId = exam.Id });
                                     await this._context.SaveChangesAsync();
                                     var groupQuestion = await this._context.GroupQuestions.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                                     GroupQuestionId = groupQuestion.Id;
                                     countQuestion = 0;
-                                    //if (reader.Name=="Part 1")
-                                    //{
-                                    //    //create FileAudio
-                                    //    this._context.FileAudios.Add(new FileAudio() { file_Audio = "", GroupQuestionId = GroupQuestionId });
-                                    //    await this._context.SaveChangesAsync();
-                                    //}
-                                    if (reader.Name == "Part 6")
+
+                                    if (reader.Name == "Part 1")
                                     {
-                                        file = "./File/Exam01/part6_" + count_image + ".png";
+                                        //save file audio
+                                        var fileAudio = "/wwwroot/uploads/audios/part1.mp3";
+                                        //audioArray = System.IO.File.ReadAllBytes(fileAudio);
+                                        //base64FileAudio = Convert.ToBase64String(//audioArray);
+                                        base64FileAudio = "https://localhost:5001"+fileAudio;
+                                        await this.createFiliAudio(base64FileAudio, GroupQuestionId);
+                                    }
+                                    else if (reader.Name == "Part 2")
+                                    {
+                                        //save file audio
+                                        var fileAudio = "/wwwroot/uploads/audios/part2.mp3";
+                                        //audioArray = System.IO.File.ReadAllBytes(fileAudio);
+                                        //base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        await this.createFiliAudio(base64FileAudio, GroupQuestionId);
+                                    }
+                                    else if (reader.Name == "Part 3")
+                                    {
+                                        //save file audio
+                                        var fileAudio = "/wwwroot/uploads/audios/part3." + count_audio + ".mp3";
+                                        count_audio++;
+                                        //audioArray = System.IO.File.ReadAllBytes(fileAudio);
+                                        // base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        await this.createFiliAudio(base64FileAudio, GroupQuestionId);
+
+                                    }
+                                    else if (reader.Name == "Part 4")
+                                    {
+                                        //save file audio
+                                        var fileAudio = "/wwwroot/uploads/audios/part4." + count_audio + ".mp3";
+                                        count_audio++;
+                                        //audioArray = System.IO.File.ReadAllBytes(fileAudio);
+                                        base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        await this.createFiliAudio(base64FileAudio, GroupQuestionId);
+                                    }
+                                    else if (reader.Name == "Part 5")
+                                    {
+                                        //save file audio
+                                        var fileAudio = "/wwwroot/uploads/audios/part5." + count_audio + ".mp3";
+                                        count_audio++;
+                                        //audioArray = System.IO.File.ReadAllBytes(fileAudio);
+                                        base64FileAudio = "https://localhost:5001" + fileAudio;
+                                        await this.createFiliAudio(base64FileAudio, GroupQuestionId);
+                                    }
+                                    else if (reader.Name == "Part 6")
+                                    {
+                                        file = "/wwwroot/uploads/images/part6_" + count_image + ".png";
                                         count_image++;
-                                        imageArray = System.IO.File.ReadAllBytes(file);
-                                        base64ImageRepresentation_Group = Convert.ToBase64String(imageArray);
+                                        //imageArray = System.IO.File.ReadAllBytes(file);
+                                        // base64ImageRepresentation_Group = Convert.ToBase64String(//imageArray);
+                                        base64ImageRepresentation_Group = "https://localhost:5001"+ file;
                                         await this.createParagraph(base64ImageRepresentation_Group, GroupQuestionId);
                                     }
                                     else if (reader.Name == "Part 7")
                                     {
 
 
-                                        if (count_group<11)
+                                        if (count_group < 11)
                                         {
                                             if (count_group <= 4)
                                             {
-                                                file = "./File/Exam01/part7_" + count_image + ".png";
-                                                
+                                                file = "/wwwroot/uploads/images/part7_" + count_image + ".png";
+
                                                 count_image++;
                                             }
                                             else if (count_group <= 7)
@@ -163,7 +214,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                                     kt++;//k=2
                                                 }
 
-                                                file = "./File/Exam01/part7_" + count_image + ".png";
+                                                file = "/wwwroot/uploads/images/part7_" + count_image + ".png";
                                                 count_image++;
 
                                             }
@@ -174,12 +225,12 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                                     question_in_group_num = 4;
                                                     kt++;//k=3
                                                 }
-                                                file = "./File/Exam01/part7_" + count_image + ".png";
+                                                file = "/wwwroot/uploads/images/part7_" + count_image + ".png";
                                                 count_image++;
 
                                             }
-                                            imageArray = System.IO.File.ReadAllBytes(file);
-                                            base64ImageRepresentation_Group = Convert.ToBase64String(imageArray);
+                                            //imageArray = System.IO.File.ReadAllBytes(file);
+                                            base64ImageRepresentation_Group= "https://localhost:5001"+ file;
                                             await this.createParagraph(base64ImageRepresentation_Group, GroupQuestionId);
                                             count_group++;
                                         }
@@ -195,10 +246,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                             {
                                                 while (n < 3)
                                                 {
-                                                    file = "./File/Exam01/part7_" + count_image + "_" + n + ".png";
+                                                    file = "/wwwroot/uploads/images/part7_" + count_image + "_" + n + ".png";
                                                     n++;
-                                                    imageArray = System.IO.File.ReadAllBytes(file);
-                                                    base64ImageRepresentation_Group = Convert.ToBase64String(imageArray);
+                                                    //imageArray = System.IO.File.ReadAllBytes(file);
+                                                    base64ImageRepresentation_Group= "https://localhost:5001"+ file;
                                                     await this.createParagraph(base64ImageRepresentation_Group, GroupQuestionId);
                                                 }
                                                 n = 1;
@@ -207,10 +258,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                             {
                                                 while (n < 4)
                                                 {
-                                                    file = "./File/Exam01/part7_" + count_image + "_" + n + ".png";
+                                                    file = "/wwwroot/uploads/images/part7_" + count_image + "_" + n + ".png";
                                                     n++;
-                                                    imageArray = System.IO.File.ReadAllBytes(file);
-                                                    base64ImageRepresentation_Group = Convert.ToBase64String(imageArray);
+                                                    //imageArray = System.IO.File.ReadAllBytes(file);
+                                                    base64ImageRepresentation_Group= "https://localhost:5001"+ file;
                                                     await this.createParagraph(base64ImageRepresentation_Group, GroupQuestionId);
                                                 }
                                                 n = 1;
@@ -219,6 +270,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                             count_group++;
                                         }
                                     }
+
+
+
                                 }
                                 //create fileAudio
 
@@ -228,10 +282,12 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                     if (reader.Name == "Part 1")
                                     {
 
-                                        file = "./File/Exam01/part1_" + count_image + ".PNG";
-                                        imageArray = System.IO.File.ReadAllBytes(file);
-                                        base64ImageRepresentation_Question = Convert.ToBase64String(imageArray);
+                                        file = "/wwwroot/uploads/images/part1_" + count_image + ".PNG";
+                                        //imageArray = System.IO.File.ReadAllBytes(file);
+                                        //base64ImageRepresentation_Question = Convert.ToBase64String(//imageArray);
                                         count_image++;
+                                        base64ImageRepresentation_Question = "https://localhost:5001" + file;
+                                        
                                     }
 
                                     await this.createQuestion(reader.GetValue(1).ToString(), reader.Name, partid, base64ImageRepresentation_Question, GroupQuestionId, exam.Id);
@@ -242,9 +298,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                 //create anwser
                                 else
                                 {
-                                    await this.createAnwser(reader.GetValue(1).ToString(),true, QuestionId);
+                                    await this.createAnwser(reader.GetValue(1).ToString(), true, QuestionId);
                                     countAnwser++;
-                                    if (countAnwser == anwser_in_question_num) { countQuestion++;}
+                                    if (countAnwser == anwser_in_question_num) { countQuestion++; }
                                 }
                             }
                         }
@@ -259,7 +315,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             this._context.Paragraphs.Add(new Paragraph()
             {
-                image_Script = base64ImageRepresentation_Group,
+                image_Script = base64ImageRepresentation_Group.ToLower(),
                 GroupQuestionId = GroupQuestionId
             });
             await this._context.SaveChangesAsync();
@@ -269,7 +325,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             this._context.FileAudios.Add(new FileAudio()
             {
-                file_Audio = filiAudio,
+                file_Audio = filiAudio.ToLower(),
                 GroupQuestionId = GroupQuestionId
             });
             await this._context.SaveChangesAsync();
