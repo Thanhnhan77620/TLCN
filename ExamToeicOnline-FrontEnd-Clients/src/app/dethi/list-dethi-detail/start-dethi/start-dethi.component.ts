@@ -23,6 +23,8 @@ export class StartDethiComponent implements OnInit {
   ngOnInit(): void {
 
     const id = this.route.snapshot.paramMap.get("examId");
+    this.detThiService.changedDeThi(+id);
+
     this.detThiService.getDeThi(+id).subscribe(
       (data) => {
         this.deThiCurrent = data;
@@ -32,6 +34,11 @@ export class StartDethiComponent implements OnInit {
   }
 
   onStart() {
-    this.router.navigate(['exam'], { queryParams: { examId: this.deThiCurrent.id, part: 1 } },)
+    this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiCurrent.id, part: 1 } })
+    this.detThiService.changeTestingMode(true);
+    this.detThiService.changedpart(1);
   }
+
+
+
 }

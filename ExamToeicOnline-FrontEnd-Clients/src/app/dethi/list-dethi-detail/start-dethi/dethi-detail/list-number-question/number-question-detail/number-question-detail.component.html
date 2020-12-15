@@ -8,7 +8,7 @@
         <span *ngIf='partName===6'>Incomplete Sentences</span>
         <span *ngIf='partName===7'>Reading Comprehension</span>
         <br>
-        <a href="#">Instruction</a>
+        <a (click)="onInstruction(partName)" class="text-primary"> Instruction</a>
     </h5>
     <div class="list-q-n" *ngFor="let number of arrayQuestion(end, start)">
         <a href="#" class="btn btn-default question-n">{{ number }}</a>

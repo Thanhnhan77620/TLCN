@@ -21,7 +21,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             string filePath = "./File/Intro/Intro.xlsx";
             IntroVM introVM = new IntroVM();
-            introVM.Anwsers = new List<string>();
+            introVM.Answers = new List<string>();
             int line = 0;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
@@ -45,8 +45,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                         introVM.Title = reader.GetValue(0).ToString();
                                         introVM.Description = reader.GetValue(1).ToString();
                                         introVM.Introduce = reader.GetValue(2).ToString();
-                                        introVM.CorrectAnwser = reader.GetValue(3).ToString();
-                                        introVM.ScriptAnwser = reader.GetValue(4).ToString();
+                                        introVM.CorrectAnswer = reader.GetValue(3).ToString();
+                                        introVM.ScriptAnswer = reader.GetValue(4).ToString();
                                     }
                                     else 
                                     {
@@ -56,7 +56,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                         }
                                         else
                                         {
-                                            introVM.Anwsers.Add(reader.GetValue(2).ToString());
+                                            introVM.Answers.Add(reader.GetValue(2).ToString());
                                         }
                                     }
                                     line++;

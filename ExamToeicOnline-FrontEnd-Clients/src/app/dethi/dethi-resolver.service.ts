@@ -4,7 +4,7 @@ import { DethiService } from 'src/app/dethi/dethi.service';
 
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { ListDeThiResolved } from '../model/dethi.model';
 
@@ -18,14 +18,14 @@ export class QuestionResolver implements Resolve<ListQuestionResolved>{
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ListQuestionResolved | Observable<ListQuestionResolved> | Promise<ListQuestionResolved> {
-        const deThiId = route.queryParamMap.get('examId');
+        const deThiId = route.paramMap.get('examId');
+        console.log('resolver :' + deThiId);
         const partId = route.queryParamMap.get('part');
         if (isNaN(+deThiId) || isNaN(+partId)) {
             const message = `DeThi was invalid`;
             console.error(message);
             return of({ listQuestions: null, error: message });
         }
-
         return this.deThiService.getListQuestion(+deThiId, +partId).pipe(
             map(listQuestions => ({ listQuestions: listQuestions })),
             catchError(error => {

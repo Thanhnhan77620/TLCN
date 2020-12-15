@@ -33,16 +33,7 @@ export class ListNumberQuestionComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    // const deThiId = this.route.snapshot.paramMap.get("id");
-    // console.log(deThiId);
-    // for (let index = 1; index < 8; index++) {
-    //   this.dethiService.getAllQuestionInPart(+deThiId, index).subscribe(
-    //     (listQuestions) => {
-    //       this.listQuestion = listQuestions;
-    //     },
-    //     (error) => (this.errorMessage = error)
-    //   );
-    // }
+
   }
 
 }

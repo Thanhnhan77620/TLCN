@@ -14,6 +14,7 @@ import { ListNumberQuestionComponent } from "./list-dethi-detail/start-dethi/det
 import { ListQuestionComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/list-question.component';
 import { QuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/question-detail/question-detail.component';
 import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-number-question/number-question-detail/number-question-detail.component';
+import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail/intro-part/intro-part.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/d
     ListQuestionComponent,
     QuestionDetailComponent,
     NumberQuestionDetailComponent,
+    IntroPartComponent,
   ],
   imports: [
     CommonModule,
@@ -39,9 +41,19 @@ import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/d
             component: StartDethiComponent,
           },
           {
-            path: "",
+            path: "ToeicTest",
             component: DethiDetailComponent,
-            resolve: { resolvedListQuestionsData: QuestionResolver }
+            children: [
+              {
+                path: 'intro',
+                component: IntroPartComponent,
+              },
+              {
+                path: ':examId',
+                component: ListQuestionComponent,
+                resolve: { resolvedListQuestionsData: QuestionResolver },
+              }
+            ]
           },
         ]
       }

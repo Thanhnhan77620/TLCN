@@ -9,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DethiDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
-    private deThiService: DethiService) { }
+  introPart: number;
+  deThiId: number;
+  part: number;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('examId');
 
+    const id = this.route.snapshot.paramMap.get('examId');
+    console.log("dethi-detail: dethiid " + id)
+    this.route.queryParamMap.subscribe(
+      (params) => {
+        this.part = + params.get('part');
+        console.log('dethi detail: part' + this.part);
+      }
+    )
   }
 
 }

@@ -26,7 +26,7 @@ const routes: Routes = [
         component: IntroduceDethiComponent,
         resolve: { resolvedListDeThiComponent: ListExamResolver }
       },
-      { path: "contact", component: ContactComponent },
+      { path: 'contact', component: ContactComponent },
       {
         path: 'auth',
         data: { preload: false },

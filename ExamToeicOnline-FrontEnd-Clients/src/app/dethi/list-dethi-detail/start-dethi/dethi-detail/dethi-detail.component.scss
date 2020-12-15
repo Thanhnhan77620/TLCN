@@ -11,17 +11,10 @@
   position: relative;
 }
 
-.question-content-wrap {
-  background-color: #d4d4d4;
-}
 
 .sidebar-content.show {
   display: flex !important;
   align-items: flex-start;
   justify-content: flex-end;
   transition-delay: 2s;
-}
-
-.exam-content {
-  background-color: #fff;
 }

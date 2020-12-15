@@ -1,4 +1,6 @@
-<img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
+<div *ngIf="question.image.trim()">
+    <img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
+</div>
 <div class="answer" id="{{question.id}}">
     <p><b>{{question.content}}</b></p>
     <ul class="answer-list">

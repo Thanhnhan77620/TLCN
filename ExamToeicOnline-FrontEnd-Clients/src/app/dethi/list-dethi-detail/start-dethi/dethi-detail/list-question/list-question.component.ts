@@ -15,24 +15,13 @@ export class ListQuestionComponent implements OnInit {
   errorMessage: string;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private detThiService: DethiService) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // const examId = this.route.snapshot.queryParamMap.get('examId');
-    // const partId = this.route.snapshot.queryParamMap.get('part');
-    // console.log(examId + "  " + partId)
-    // this.detThiService.getListQuestion(+examId, +partId).subscribe(
-    //   (data) => {
-    //     this.listQuestion = data;
-    //   },
-    //   (error) => (this.errorMessage = error)
-    // )
 
     const resolvedData: ListQuestionResolved = this.route.snapshot.data['resolvedListQuestionsData'];
     this.errorMessage = resolvedData.error;
     this.listQuestion = resolvedData.listQuestions;
-
 
   }
 }

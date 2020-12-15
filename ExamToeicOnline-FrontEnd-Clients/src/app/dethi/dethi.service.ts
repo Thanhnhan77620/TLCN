@@ -1,9 +1,10 @@
+import { Instruction } from '../model/instruction.model';
 import { tap, catchError } from "rxjs/operators";
 import { DeThi } from "./../model/dethi.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, throwError, Subject } from "rxjs";
+import { Observable, throwError, BehaviorSubject } from "rxjs";
 import { Question } from "../model/question.model";
 
 @Injectable({
@@ -11,6 +12,12 @@ import { Question } from "../model/question.model";
 })
 export class DethiService {
 
+  private deThiSelected = new BehaviorSubject<number | null>(null);
+  selectedDeThiChanged$ = this.deThiSelected.asObservable();
+  private isTested = new BehaviorSubject<boolean | null>(null);
+  isTesting$ = this.isTested.asObservable();
+  private partSelected = new BehaviorSubject<number | null>(null);
+  selectedPartChanged$ = this.partSelected.asObservable();
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -43,10 +50,26 @@ export class DethiService {
 
   getListQuestion(dethiId: number, partId: number): Observable<Question[]> {
     return this.http.get<Question[]>(`https://localhost:5001/api/questions/PartName?examId=${dethiId}&partName=Part ${partId}`).pipe(
-      tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
+  getInstructionOnPart(partName: number) {
+    return this.http.get<Instruction>(`https://localhost:5001/api/Intros/?partName=Part ${partName}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  changedDeThi(deThiId: number | null) {
+    this.deThiSelected.next(deThiId);
+  }
+
+  changeTestingMode(value: boolean | null) {
+    this.isTested.next(value);
+  }
+
+  changedpart(part: number | null) {
+    this.partSelected.next(part);
+  }
 
 }

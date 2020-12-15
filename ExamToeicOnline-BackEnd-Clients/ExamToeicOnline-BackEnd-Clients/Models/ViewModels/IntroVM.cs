@@ -11,8 +11,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Models.ViewModels
         public string Description { get; set; }
         public string Introduce { get; set; }
         public string Question { get; set; }
-        public string CorrectAnwser { get; set; }
-        public List<string> Anwsers { get; set; }
-        public string ScriptAnwser { get; set; }
+        public string CorrectAnswer { get; set; }
+        public List<string> Answers { get; set; }
+        public string ScriptAnswer { get; set; }
     }
 }
