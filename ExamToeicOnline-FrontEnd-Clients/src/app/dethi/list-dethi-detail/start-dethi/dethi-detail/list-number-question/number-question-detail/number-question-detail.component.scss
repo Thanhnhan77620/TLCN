@@ -1,34 +1,48 @@
 .list-body {
-  padding: 10px 7px 10px 7px;
+  text-align: left;
 }
 
-.list-body h5 {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.list-body a.btn {
+  display: inline-block;
+  line-height: 3;
+  font-size: 14px;
 }
 
 .list-q-n {
-  margin: 5px;
-  display: inline;
-  text-align: center;
-}
-.question-n {
-  margin-bottom: 10px;
-  padding: 4px;
-  font-size: 16px;
-  width: 35px;
-  height: 35px;
-  border-radius: 0;
-  text-align: center;
-  color: black;
-}
-.btn-default {
-  background-color: #f0f0f0 !important;
-}
-.btn {
-  box-shadow: none;
+  background-color: #ffffff;
+  padding: 10px 5px;
+  display: inline-block;
 }
 
-.list-body h5 a {
-  display: flex;
+.question-n {
+  //margin-bottom: 0px 0px 10px 0px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+}
+.btn-default {
+  color: #333 !important;
+  background-color: #cccccc !important;
+  border-color: #ccc;
+}
+
+.btn {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  box-shadow: none;
+  user-select: none;
+  margin: auto;
+}
+a,
+button,
+input,
+select,
+textarea {
+  outline: 0;
 }

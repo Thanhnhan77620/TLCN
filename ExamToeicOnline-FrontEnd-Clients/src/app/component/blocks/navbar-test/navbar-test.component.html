@@ -1,0 +1,20 @@
+<div class="top-nav">
+    <div class="container">
+        <div class="row intro-page">
+            <h4 class="sm white bold part-tile">
+                <a class="title-bar navbar-brand" routerLink="/">Toeic247</a>
+                <b *ngIf="isTesting">{{partName}}</b>
+            </h4>
+            <ul class="top-nav-list nav-item ml-auto">
+                <li class="timer"><a href="javascript:void(0);" *ngIf="isTesting"><b class="countdown">02:00:00</b></a>
+                </li>
+                <li class="end-exam header-b" *ngIf="isTesting"><a class="finish-all" href="#"><b>SUBMIT</b></a></li>
+                <li class="backpage header-b exit">
+                    <a class="exit-exam" href="#" style="background-color: red;">
+                        <b>Cancel</b>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

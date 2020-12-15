@@ -1,4 +1,4 @@
-<section id="quizz-intro-section" class="quizz-intro-section learn-section" style="min-height: 920px;">
+<section id="quizz-intro-section" class="quizz-intro-section learn-section" style="min-height: 753px;">
     <div class="container">
         <div class="question-content-wrap">
             <div class="row">
@@ -28,8 +28,7 @@
                             </p>
                         </div>
                         <div class="text-center btn-start">
-                            <a class="btn-start mc-btn btn-style-6" [routerLink]="['/ToeicTest']"
-                                [queryParams]="{examId: deThiCurrent.id, part: 1}"><b>START</b></a>
+                            <a class="btn-start mc-btn btn-style-6" (click)="onStart()"><b>START</b></a>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <ul class="course-lession-list" *ngFor="let dethi of listDeThi">
     <li class="clearfix">
-        <a [routerLink]="['/introduce', dethi.id]">
+        <a (click)="onStart(dethi.id)">
             <div class="row gap-20">
                 <div class="col-sm-9 col-md-9 text-primary">
                     {{dethi.title}}

@@ -1,8 +1,12 @@
+import { Answer } from './answer.model';
 export class Question {
-  constructor(
-    public id: number,
-    public content: string,
-    public groupQuestionId: number,
-    public image?: BinaryType
-  ) {}
+  id: number;
+  content: string;
+  groupQuestionId: number;
+  partName: string;
+  examId: number;
+  anwsers: Answer[];
+  image?: string;
 }
+
+

@@ -1,9 +1,8 @@
-import { catchError } from "rxjs/operators";
-import { DeThi } from "./../../model/dethi.model";
+
+import { DeThi, ListDeThiResolved } from "./../../model/dethi.model";
 import { DethiService } from "./../dethi.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-list-dethi-detail",
@@ -11,21 +10,19 @@ import { map } from "rxjs/operators";
   styleUrls: ["./list-dethi-detail.component.scss"],
 })
 export class ListDethiDetailComponent implements OnInit {
-  constructor(private router: Router, private deThiService: DethiService) {}
+  constructor(private router: Router, private deThiService: DethiService, private route: ActivatedRoute) { }
 
   listDeThi: DeThi[] = [];
   errorMessage: string;
 
+
   ngOnInit(): void {
-    this.deThiService.getAllDeThi().subscribe({
-      next: (deThis) => {
-        this.listDeThi = deThis;
-      },
-      error: (err) => (this.errorMessage = err),
-    });
+    const resolvedData: ListDeThiResolved = this.route.snapshot.data['resolvedListDeThiComponent'];
+    this.errorMessage = resolvedData.error;
+    this.listDeThi = resolvedData.listDeThis;
   }
 
-  // onStart() {
-  //   this.router.navigate(["/start"]);
-  // }
+  onStart(id: number) {
+    this.router.navigate(["exam", id]);
+  }
 }

@@ -25,6 +25,15 @@ export class UserService {
   account = new BehaviorSubject<Account>(null);
   private tokenExpirationTimer: any;
   jwtHelper = new JwtHelperService();
+  private _isLoginMode: boolean = false;
+
+  get isLoginMode(): boolean {
+    return this._isLoginMode;
+  }
+
+  set isLoginMode(value: boolean) {
+    this._isLoginMode = value;
+  }
 
   signup(fullname: string, email: string, password: string) {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
@@ -35,6 +44,7 @@ export class UserService {
     return this.http
       .post<User>("https://localhost:5001/api/users", body)
       .pipe(catchError(this.handleError));
+
   }
 
   login(username: string, password: string) {
@@ -60,6 +70,7 @@ export class UserService {
           );
         })
       );
+
   }
 
   public handleError(errorRes: HttpErrorResponse) {
@@ -79,6 +90,7 @@ export class UserService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+    this.isLoginMode = false;
   }
 
   autoLogout(expirationDuration: number) {

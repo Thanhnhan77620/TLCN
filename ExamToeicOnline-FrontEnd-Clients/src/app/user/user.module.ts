@@ -12,12 +12,8 @@ import { NgModule } from "@angular/core";
     SharedModule,
     RouterModule.forChild([
       {
-        path: "auth",
+        path: "",
         children: [
-          {
-            path: "",
-            component: LoginComponent,
-          },
           {
             path: "login",
             component: LoginComponent,

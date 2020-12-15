@@ -1,3 +1,4 @@
+import { QuestionResolver } from './dethi-resolver.service';
 import { StartDethiComponent } from "./list-dethi-detail/start-dethi/start-dethi.component";
 import { SharedModule } from "./../shared/shared.module";
 import { RouterModule } from "@angular/router";
@@ -13,6 +14,7 @@ import { ListNumberQuestionComponent } from "./list-dethi-detail/start-dethi/det
 import { ListQuestionComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/list-question.component';
 import { QuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/question-detail/question-detail.component';
 import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-number-question/number-question-detail/number-question-detail.component';
+import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail/intro-part/intro-part.component';
 
 @NgModule({
   declarations: [
@@ -26,27 +28,37 @@ import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/d
     ListQuestionComponent,
     QuestionDetailComponent,
     NumberQuestionDetailComponent,
+    IntroPartComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
-        path: "introduce",
+        path: "",
         children: [
           {
-            path: "",
-            component: IntroduceDethiComponent,
-          },
-          {
-            path: ":id",
+            path: ":examId",
             component: StartDethiComponent,
           },
-        ],
-      },
-      {
-        path: "ToeicTest",
-        component: DethiDetailComponent,
-      },
+          {
+            path: "ToeicTest",
+            component: DethiDetailComponent,
+            children: [
+              {
+                path: 'intro',
+                component: IntroPartComponent,
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+              },
+              {
+                path: ':examId',
+                component: ListQuestionComponent,
+                resolve: { resolvedListQuestionsData: QuestionResolver },
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange'
+              }
+            ]
+          },
+        ]
+      }
     ]),
     SharedModule,
   ],

@@ -1,5 +1,4 @@
 import { Question } from 'src/app/model/question.model';
-import { map, catchError } from "rxjs/operators";
 import { DethiService } from "./../../dethi.service";
 import { DeThi } from "./../../../model/dethi.model";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -19,10 +18,12 @@ export class StartDethiComponent implements OnInit {
   deThiCurrent: DeThi;
   errorMessage: string;
   listQuestion: Question[] = [];
+  isStartDethi: boolean;
 
   ngOnInit(): void {
 
-    const id = this.route.snapshot.paramMap.get("id");
+    const id = this.route.snapshot.paramMap.get("examId");
+    this.detThiService.changedDeThi(+id);
 
     this.detThiService.getDeThi(+id).subscribe(
       (data) => {
@@ -31,5 +32,13 @@ export class StartDethiComponent implements OnInit {
       (error) => (this.errorMessage = error)
     );
   }
+
+  onStart() {
+    this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiCurrent.id, part: 1 } })
+    this.detThiService.changedpart(1);
+    this.detThiService.changeTestingMode(true);
+  }
+
+
 
 }

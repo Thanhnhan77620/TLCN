@@ -1,3 +1,5 @@
+import { Instruction } from '../../../../../../model/instruction.model';
+import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/model/question.model';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -8,7 +10,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class QuestionDetailComponent implements OnInit {
   @Input() question: Question;
-  constructor() { }
+  instruction: Instruction = null;
+
+
+  introPart: number;
+  errorMessage: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
