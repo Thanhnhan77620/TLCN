@@ -20,17 +20,9 @@ export class NavbarTestComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.route.queryParamMap.subscribe(
-    //   (params) => {
-    //     this.partIntro = +params.get('part');
-    //     // console.log('nav: ' + this.partIntro)
-    //     this.onPartName(this.partIntro);
-    //   }
-    // )
     this.deThiService.selectedPartChanged$.subscribe(
       (part) => {
         this.partIntro = part;
-        console.log('nav: ' + this.partIntro)
         this.onPartName(this.partIntro);
       }
     )
@@ -45,10 +37,8 @@ export class NavbarTestComponent implements OnInit {
         this.deThiService.getDeThi(+deThiID).subscribe(
           (data) => {
             this.deThiCurrent = data;
-            //console.log("nav: " + JSON.stringify(this.deThiCurrent));
           }
         )
-        // console.log('intro-part dethiID ' + this.deThiId)
       }
     )
 

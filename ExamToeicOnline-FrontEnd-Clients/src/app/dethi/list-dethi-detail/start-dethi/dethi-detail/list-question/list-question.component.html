@@ -11,10 +11,15 @@
             <audio controls style="width: 100%;">
                 <source type="audio/mp3" src="https://toeic24.vn/upload/audio/1579320667/1579321247.mp3" />
             </audio>
-            <div *ngFor="let question of listQuestion">
-                <app-question-detail [question]="question"></app-question-detail>
+            <div *ngIf="!isImage_Scritp">
+                <img src="data:image/png;base64,{{listQuestion[0].paragraphs[0].image_Script }}"
+                    alt="1. Select the answer" style="width: 100%">
             </div>
-            <button type="submit" class="mc-btn btn-style-6">Next</button>
+            <div *ngFor="let question of listQuestion[0].questions">
+                <app-question-detail [question]="question">
+                </app-question-detail>
+            </div>
+            <button class="mc-btn btn-style-6" (click)="onNext()">Next</button>
         </form>
     </div>
 </div>

@@ -17,6 +17,19 @@ export class IntroPartComponent implements OnInit {
   errorMessage: string;
   correctAnswer: number;
   deThiId: number;
+  numberQuestion: number | null;
+
+
+  listPart = [
+    { partName: 1, start: 1, end: 6 },
+    { partName: 2, start: 7, end: 25 },
+    { partName: 3, start: 32, end: 39 },
+    { partName: 4, start: 71, end: 30 },
+    { partName: 5, start: 101, end: 30 },
+    { partName: 6, start: 131, end: 11 },
+    { partName: 7, start: 141, end: 60 },
+  ]
+
 
   constructor(private route: ActivatedRoute,
     private deThiService: DethiService,
@@ -26,19 +39,16 @@ export class IntroPartComponent implements OnInit {
     this.deThiService.selectedDeThiChanged$.subscribe(
       (deThiID) => {
         this.deThiId = deThiID;
-        // console.log('intro-part dethiID ' + this.deThiId)
       }
     )
     this.route.queryParamMap.subscribe(
       (params) => {
         this.introPart = +params.get('part');
-        // console.log('intro-part : ' + this.introPart);
         if (this.introPart) {
           this.deThiService.getInstructionOnPart(this.introPart).subscribe(
             (instruction) => {
               this.instruction = instruction;
               this.onAnswerCorrect(this.instruction.correctAnswer);
-              // console.log(JSON.stringify(this.correctAnswer));
             },
             (error) => {
               this.errorMessage = error;
@@ -77,8 +87,46 @@ export class IntroPartComponent implements OnInit {
     }
   }
 
+  onNumberQuestionStartPart(part: number) {
+    switch (part) {
+      case 1: {
+        this.numberQuestion = 1;
+        break;
+      }
+      case 2: {
+        this.numberQuestion = 7;
+        break;
+      }
+      case 3: {
+        this.numberQuestion = 32;
+        break;
+      }
+      case 4: {
+        this.numberQuestion = 71;
+        break;
+      }
+      case 5: {
+        this.numberQuestion = 101;
+        break;
+      }
+      case 6: {
+        this.numberQuestion = 131;
+        break;
+      }
+      case 7: {
+        this.numberQuestion = 141;
+        break;
+      }
+      default: {
+        this.numberQuestion = null;
+        break;
+      }
+    }
+  }
+
   onStart() {
-    this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.introPart } })
+    this.onNumberQuestionStartPart(this.introPart);
+    this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.introPart, numberQuestion: this.numberQuestion } })
     this.deThiService.changedpart(this.introPart);
   }
 

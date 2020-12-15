@@ -1,16 +1,16 @@
-<div *ngIf="question.image.trim()">
-    <img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
-</div>
 <div class="answer" id="{{question.id}}">
     <p><b>{{question.content}}</b></p>
+    <div *ngIf="question.image">
+        <img src="data:image/png;base64,{{question.image}}" alt="1. Select the answer" style="width: 100%">
+    </div>
     <ul class="answer-list">
-        <li>
-            <input type="radio" name="Answers[{{question.id}}]" value="14276" id="answers-{{question.id}}-14276"> <label
+        <li *ngFor="let answer of question.anwsers">
+            <input type="radio" name="Answers[{{answer.id}}]" value="14276" id="answers-{{answer.id}}-14276"> <label
                 for="771">
                 <i class="icon icon_radio"></i>
-                A </label>
+                {{answer.content}} </label>
         </li>
-        <li>
+        <!-- <li>
             <input type="radio" name="Answers[{{question.id}}]" value="14277" id="answers-{{question.id}}-14277"> <label
                 for="771">
                 <i class="icon icon_radio"></i>
@@ -27,6 +27,6 @@
                 for="771">
                 <i class="icon icon_radio"></i>
                 D </label>
-        </li>
+        </li> -->
     </ul>
 </div>

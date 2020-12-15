@@ -1,4 +1,6 @@
-import { ListQuestionResolved } from './../model/question.model';
+import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
+
 import { of } from 'rxjs';
 import { DethiService } from 'src/app/dethi/dethi.service';
 
@@ -7,27 +9,32 @@ import { Observable } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { ListDeThiResolved } from '../model/dethi.model';
+import { ListQuestionResolved } from '../model/groupQuestion.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class QuestionResolver implements Resolve<ListQuestionResolved>{
-    constructor(private deThiService: DethiService) {
 
+    numberQuestion: number | null;
+    deThiId: number | null;
+
+    constructor(private deThiService: DethiService, private route: ActivatedRoute) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ListQuestionResolved | Observable<ListQuestionResolved> | Promise<ListQuestionResolved> {
-        const deThiId = route.paramMap.get('examId');
-        console.log('resolver :' + deThiId);
-        const partId = route.queryParamMap.get('part');
-        if (isNaN(+deThiId) || isNaN(+partId)) {
+        this.deThiId = +route.paramMap.get('examId');
+        this.numberQuestion = +route.queryParamMap.get('numberQuestion');
+        console.log('resolver numberQuestion:' + this.numberQuestion);
+        if (isNaN(+this.deThiId) || isNaN(+this.numberQuestion)) {
             const message = `DeThi was invalid`;
             console.error(message);
             return of({ listQuestions: null, error: message });
         }
-        return this.deThiService.getListQuestion(+deThiId, +partId).pipe(
-            map(listQuestions => ({ listQuestions: listQuestions })),
+        return this.deThiService.getGroupQuestion(+this.deThiId, +this.numberQuestion).pipe(
+            map((listQuestions) => ({ listQuestions: listQuestions })),
             catchError(error => {
                 const message = `Retrieval error: ${error}`;
                 console.log(message);
@@ -35,7 +42,6 @@ export class QuestionResolver implements Resolve<ListQuestionResolved>{
             })
         )
     }
-
 }
 
 @Injectable({
