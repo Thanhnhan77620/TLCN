@@ -36,33 +36,28 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             return Ok(questions);
         }
-        [HttpGet("PartName")]
-        public async Task<IActionResult> GetQuestion(int examId,string partName)
+        [HttpGet("list")]
+        public async Task<IActionResult> GetQuestion(int examId, int numberQuestion)
         {
-
-            var questionList = from q in this._context.Questions
-
-                               join g in this._context.GroupQuestions on q.GroupQuestionId equals g.Id
-                               //join f in this._context.FileAudios on q.GroupQuestionId equals f.Id
-                               join p in this._context.Paragraphs on q.GroupQuestionId equals p.Id
-
-
-                               where q.ExamId == examId && q.PartName == partName
-                               select (new QuestionVM()
-                               {
-                                   Id = q.Id,
-                                   Content = q.Content,
-                                   Image = q.Image,
-                                   FileAudio="",
-                                   GroupQuestionId = q.GroupQuestionId,
-                                   ImageGroup=p.image_Script
-                               });
-            if (questionList==null)
+            try
             {
+                var question = await this._context.Questions.Where(q => q.ExamId == examId).Skip(numberQuestion - 1).Take(1).FirstOrDefaultAsync();
+                var questionList = await this._context.GroupQuestions.Where(g => g.ExamId == examId && g.Id == question.GroupQuestionId)
+                                    .Include(g => g.Questions)
+                                     .ThenInclude(g => g.Anwsers)
+                                    .Include(g => g.FileAudios)
+                                    .Include(g => g.Paragraphs)
+                                    .ToListAsync();
+
+                return Ok(questionList);
+            }
+            catch (Exception e)
+            {
+
                 return NotFound("Can not found any Record!");
             }
-            return Ok(questionList);
-
+           
+            
 
         }
 

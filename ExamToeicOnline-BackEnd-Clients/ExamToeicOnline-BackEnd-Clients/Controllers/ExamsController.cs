@@ -123,12 +123,17 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                                 if (countQuestion == question_in_group_num)
                                 {
                                    
-                                    this._context.GroupQuestions.Add(new GroupQuestion()); 
+                                    this._context.GroupQuestions.Add(new GroupQuestion() { ExamId=exam.Id }); 
                                     await this._context.SaveChangesAsync();
-                                  
                                     var groupQuestion = await this._context.GroupQuestions.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                                     GroupQuestionId = groupQuestion.Id;
                                     countQuestion = 0;
+                                    //if (reader.Name=="Part 1")
+                                    //{
+                                    //    //create FileAudio
+                                    //    this._context.FileAudios.Add(new FileAudio() { file_Audio = "", GroupQuestionId = GroupQuestionId });
+                                    //    await this._context.SaveChangesAsync();
+                                    //}
                                     if (reader.Name == "Part 6")
                                     {
                                         file = "./File/Exam01/part6_" + count_image + ".png";
