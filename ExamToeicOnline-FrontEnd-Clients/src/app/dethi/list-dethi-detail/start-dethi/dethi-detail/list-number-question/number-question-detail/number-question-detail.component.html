@@ -11,6 +11,6 @@
         <a (click)="onInstruction(partName)" class="text-primary"> Instruction</a>
     </h5>
     <div class="list-q-n" *ngFor="let number of arrayQuestion(end, start)">
-        <a href="#" class="btn btn-default question-n">{{ number }}</a>
+        <a (click)="onClickQuestion(number)" class="btn btn-default question-n">{{ number }}</a>
     </div>
 </div>

@@ -17,11 +17,11 @@ export class DethiDetailComponent implements OnInit {
   ngOnInit(): void {
 
     const id = this.route.snapshot.paramMap.get('examId');
-    console.log("dethi-detail: dethiid " + id)
+    //console.log("dethi-detail: dethiid " + id)
     this.route.queryParamMap.subscribe(
       (params) => {
         this.part = + params.get('part');
-        console.log('dethi detail: part' + this.part);
+        //console.log('dethi detail: part' + this.part);
       }
     )
   }

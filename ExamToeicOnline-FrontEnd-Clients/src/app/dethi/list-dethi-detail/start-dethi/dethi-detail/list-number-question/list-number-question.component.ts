@@ -28,8 +28,8 @@ export class ListNumberQuestionComponent implements OnInit {
     { partName: 3, start: 32, end: 39 },
     { partName: 4, start: 71, end: 30 },
     { partName: 5, start: 101, end: 30 },
-    { partName: 6, start: 131, end: 11 },
-    { partName: 7, start: 141, end: 60 },
+    { partName: 6, start: 131, end: 16 },
+    { partName: 7, start: 147, end: 54 },
   ]
 
   ngOnInit(): void {

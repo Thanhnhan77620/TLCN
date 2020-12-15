@@ -1,3 +1,4 @@
+import { GroupQuestion } from './../model/groupQuestion.model';
 import { Instruction } from '../model/instruction.model';
 import { tap, catchError } from "rxjs/operators";
 import { DeThi } from "./../model/dethi.model";
@@ -50,6 +51,12 @@ export class DethiService {
 
   getListQuestion(dethiId: number, partId: number): Observable<Question[]> {
     return this.http.get<Question[]>(`https://localhost:5001/api/questions/PartName?examId=${dethiId}&partName=Part ${partId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getGroupQuestion(dethiId: number, numberQuestion: number): Observable<GroupQuestion[]> {
+    return this.http.get<GroupQuestion[]>(`https://localhost:5001/api/questions/list?examId=${dethiId}&numberQuestion=${numberQuestion}`).pipe(
       catchError(this.handleError)
     );
   }

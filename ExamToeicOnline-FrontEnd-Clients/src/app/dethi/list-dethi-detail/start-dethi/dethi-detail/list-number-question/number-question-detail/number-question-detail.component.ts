@@ -24,7 +24,6 @@ export class NumberQuestionDetailComponent implements OnInit {
     this.deThiService.selectedDeThiChanged$.subscribe(
       (deThiID) => {
         this.deThiId = deThiID;
-        console.log(' number question detail dethiId: ' + this.deThiId);
       }
     )
 
@@ -37,5 +36,10 @@ export class NumberQuestionDetailComponent implements OnInit {
   onInstruction(partName: number) {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: partName } })
     this.deThiService.changedpart(partName);
+  }
+
+  onClickQuestion(numberQuestion) {
+    this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.partName, numberQuestion: numberQuestion } })
+    this.deThiService.changedpart(this.partName);
   }
 }

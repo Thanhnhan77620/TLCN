@@ -47,11 +47,13 @@ import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail
               {
                 path: 'intro',
                 component: IntroPartComponent,
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
               },
               {
                 path: ':examId',
                 component: ListQuestionComponent,
                 resolve: { resolvedListQuestionsData: QuestionResolver },
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange'
               }
             ]
           },

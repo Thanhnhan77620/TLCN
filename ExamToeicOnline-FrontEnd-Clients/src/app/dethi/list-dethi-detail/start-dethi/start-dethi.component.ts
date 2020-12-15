@@ -35,8 +35,8 @@ export class StartDethiComponent implements OnInit {
 
   onStart() {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiCurrent.id, part: 1 } })
-    this.detThiService.changeTestingMode(true);
     this.detThiService.changedpart(1);
+    this.detThiService.changeTestingMode(true);
   }
 
 

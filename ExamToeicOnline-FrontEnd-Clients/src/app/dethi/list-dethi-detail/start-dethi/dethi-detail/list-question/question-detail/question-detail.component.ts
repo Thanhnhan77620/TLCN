@@ -1,7 +1,5 @@
-import { DethiService } from 'src/app/dethi/dethi.service';
 import { Instruction } from '../../../../../../model/instruction.model';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 import { Question } from 'src/app/model/question.model';
 import { Component, Input, OnInit } from '@angular/core';
 
