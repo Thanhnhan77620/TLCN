@@ -1,3 +1,4 @@
+import { Question } from './../../../../../model/question.model';
 import { DethiService } from 'src/app/dethi/dethi.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,8 +13,10 @@ export class ListQuestionComponent implements OnInit {
 
   resolvedData: ListQuestionResolved;
   listQuestion: GroupQuestion[];
+  listQuestionSort: Question[];
   errorMessage: string;
   isImage_Scritp: boolean = false;
+  isFileAudio: boolean = false;
   numberQuestion: number | null;
   deThiId: number;
   partNumber: number;
@@ -34,7 +37,12 @@ export class ListQuestionComponent implements OnInit {
     )
     this.errorMessage = this.resolvedData.error;
     this.listQuestion = this.resolvedData.listQuestions;
+    this.listQuestionSort = this.listQuestion[0].questions.sort(
+      (a, b) => a.id - b.id
+    )
     this.isImage_Scritp = !this.listQuestion[0].paragraphs.length;
+    this.isFileAudio = !this.listQuestion[0].fileAudios.length;
+    console.log("isFileAudio: " + this.isFileAudio);
     this.partNumber = +this.route.snapshot.queryParamMap.get('part');
     console.log("partNumber: " + this.partNumber)
     this.deThiId = +this.route.snapshot.paramMap.get('examId');
@@ -51,7 +59,6 @@ export class ListQuestionComponent implements OnInit {
       this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: this.partNumberChanged } })
       this.deThiService.changedpart(this.partNumberChanged);
       this.deThiService.changeTestingMode(true);
-
     } else {
       this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.partNumberChanged, numberQuestion: this.numberQuestion } })
     }

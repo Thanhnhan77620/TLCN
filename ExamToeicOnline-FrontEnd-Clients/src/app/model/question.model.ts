@@ -7,6 +7,7 @@ export class Question {
   examId: number;
   anwsers: Answer[];
   image?: string;
+  answerSelected?: any;
 }
 
 

@@ -15,21 +15,23 @@ export class NavbarTestComponent implements OnInit {
   isTesting: boolean = false;
   deThiId: number;
   deThiCurrent: DeThi;
+  duration = (Date.now() + 120 * 60 * 60 * 1000) - Date.now();
 
   constructor(private deThiService: DethiService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.deThiService.selectedPartChanged$.subscribe(
-      (part) => {
-        this.partIntro = part;
+
+    this.route.queryParamMap.subscribe(
+      (params) => {
+        this.isTesting = !(+params.get('examId') || +params.get('numberQuestion'));
+        this.partIntro = +params.get('part');
         this.onPartName(this.partIntro);
+        console.log('is Testing: ' + !this.isTesting);
+        console.log('is part: ' + this.partIntro);
       }
     )
 
-    this.deThiService.isTesting$.subscribe(
-      (value) => this.isTesting = value
-    )
 
     this.deThiService.selectedDeThiChanged$.subscribe(
       (deThiID) => {

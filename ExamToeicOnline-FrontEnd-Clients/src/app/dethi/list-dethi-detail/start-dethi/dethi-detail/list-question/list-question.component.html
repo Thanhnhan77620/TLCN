@@ -5,17 +5,19 @@
         </p>
         <hr>
         <form>
-            <div style="display: none;"></div>
-            <p>Please refrain from replaying the audio, you can only listen one time when in real exam.</p>
-            <p><b>Audio: </b></p>
-            <audio controls style="width: 100%;">
-                <source type="audio/mp3" src="https://toeic24.vn/upload/audio/1579320667/1579321247.mp3" />
-            </audio>
-            <div *ngIf="!isImage_Scritp">
-                <img src="{{listQuestion[0].paragraphs[0].image_Script }}"
-                    alt="1. Select the answer" style="width: 100%">
+            <div *ngIf="!isFileAudio">
+                <div style="display: none;"></div>
+                <p>Please refrain from replaying the audio, you can only listen one time when in real exam.</p>
+                <p><b>Audio: </b></p>
+                <audio controls style="width: 100%;">
+                    <source type="audio/mp3" src="{{listQuestion[0].fileAudios[0].file_Audio}}" />
+                </audio>
             </div>
-            <div *ngFor="let question of listQuestion[0].questions">
+            <div *ngIf="!isImage_Scritp">
+                <img src="{{listQuestion[0].paragraphs[0].image_Script }}" alt="1. Select the answer"
+                    style="width: 100%">
+            </div>
+            <div *ngFor="let question of listQuestionSort">
                 <app-question-detail [question]="question">
                 </app-question-detail>
             </div>
