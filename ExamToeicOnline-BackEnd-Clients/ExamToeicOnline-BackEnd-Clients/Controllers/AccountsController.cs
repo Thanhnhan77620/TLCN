@@ -114,19 +114,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return encodetoken;
         }
 
-        //[HttpGet("tokent")]
-
-        //public st([FromForm] Tokent TOKENT)
-        //{
-        //   // var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //    var identity = TOKENT.tokent;
-        //    IList<Claim> claim = identity.Claims.ToList();
-        //    var username = claim[0].Value;
-        //    return Ok(username);
-        //}
-
-
-
+        
         //Change password
         [HttpPut("{username}")]
         public async Task<IActionResult> ChangePassword([FromForm] AccountVM request)

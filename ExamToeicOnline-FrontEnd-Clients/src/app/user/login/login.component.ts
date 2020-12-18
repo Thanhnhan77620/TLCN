@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   model: any = {
-    username: "nhan",
+    username: "ngan",
     password: "12345678"
   };
 
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
+       
         this.router.navigate(['/home']);
       },
       error => {

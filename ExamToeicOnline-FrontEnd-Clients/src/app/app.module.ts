@@ -5,6 +5,7 @@ import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HttpClientModule } from "@angular/common/http";
+import { ToastModule } from 'ng-uikit-pro-standard';
 
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./component/blocks/navbar/navbar.component";
@@ -38,6 +39,7 @@ import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.
     BrowserModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
+    ToastModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     UserModule,

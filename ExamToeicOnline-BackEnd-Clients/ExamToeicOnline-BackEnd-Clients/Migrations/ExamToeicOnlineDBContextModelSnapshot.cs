@@ -58,10 +58,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("UserId1")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("dateStart")
@@ -71,7 +68,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("DoExams");
                 });
@@ -217,9 +214,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 12, 15, 20, 39, 27, 308, DateTimeKind.Local).AddTicks(7051),
-                            Password = "$2a$11$tEvVXx8G8R46i7X/9E1niutUm/Z0G9/8dHKPjzO5UEI8FSK9kxd3S",
-                            UserId = new Guid("4795e26a-8cc8-479b-811f-4052dad34236"),
+                            CreateAt = new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929),
+                            Password = "$2a$11$kS468wJogxZJp6LxscqaJu3Z2AloFWgi4OSDvsmkFoh5bMqNxa7Jy",
+                            UserId = new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -227,9 +224,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 12, 15, 20, 39, 27, 308, DateTimeKind.Local).AddTicks(7051),
-                            Password = "$2a$11$xD6zwVjeAMJyTYdCj8DOkOQRdGno.HbCwPHDJY9Fst5O5SBxF7hgK",
-                            UserId = new Guid("da35c6eb-edf8-4dd9-b807-ff6660753d78"),
+                            CreateAt = new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929),
+                            Password = "$2a$11$AK7Ywbv5IJSN0rMWT10QkuO9gUl0vz7J0au8pkuPJHCuh6dooF01e",
+                            UserId = new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -264,7 +261,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4795e26a-8cc8-479b-811f-4052dad34236"),
+                            Id = new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"),
                             Birthday = new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -272,7 +269,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("da35c6eb-edf8-4dd9-b807-ff6660753d78"),
+                            Id = new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"),
                             Birthday = new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
@@ -299,7 +296,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
 
                     b.HasOne("ExamToeicOnline_FrontEnd_Clients.Models.User", "User")
                         .WithMany("DoExams")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ExamToeicOnline_BackEnd_Clients.Models.FileAudio", b =>

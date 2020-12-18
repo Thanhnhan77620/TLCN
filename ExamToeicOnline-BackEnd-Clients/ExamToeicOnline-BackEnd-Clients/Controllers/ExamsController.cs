@@ -112,13 +112,13 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                     {
                         if (reader.Name != "answer")
                         {
-                            if (reader.Name == "Part 1") { partid = 1; count_image = 1; anwser_in_question_num = 4; countQuestion = 6; question_in_group_num = 6; }
-                            else if (reader.Name == "Part 2") { partid = 2; countAnwser = 3; anwser_in_question_num = 3; countQuestion = 25; question_in_group_num = 25; }
-                            else if (reader.Name == "Part 3") { partid = 3; count_audio = 1; countAnwser = 4; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
-                            else if (reader.Name == "Part 4") { partid = 4; count_audio = 1; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
-                            else if (reader.Name == "Part 5") { partid = 5; count_audio = 1; anwser_in_question_num = 4; countQuestion = 30; question_in_group_num = 30; }
-                            else if (reader.Name == "Part 6") { partid = 6; count_image = 1; anwser_in_question_num = 4; countQuestion = 4; question_in_group_num = 4; }
-                            else { partid = 7; count_image = 1; anwser_in_question_num = 4; countQuestion = 2; question_in_group_num = 2; count_group = 1; }
+                            if (reader.Name == "Part 1") {  count_image = 1; anwser_in_question_num = 4; countQuestion = 6; question_in_group_num = 6; }
+                            else if (reader.Name == "Part 2") { countAnwser = 3; anwser_in_question_num = 3; countQuestion = 25; question_in_group_num = 25; }
+                            else if (reader.Name == "Part 3") { count_audio = 1; countAnwser = 4; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
+                            else if (reader.Name == "Part 4") {  count_audio = 1; anwser_in_question_num = 4; countQuestion = 3; question_in_group_num = 3; }
+                            else if (reader.Name == "Part 5") { count_audio = 1; anwser_in_question_num = 4; countQuestion = 30; question_in_group_num = 30; }
+                            else if (reader.Name == "Part 6") {  count_image = 1; anwser_in_question_num = 4; countQuestion = 4; question_in_group_num = 4; }
+                            else {  count_image = 1; anwser_in_question_num = 4; countQuestion = 2; question_in_group_num = 2; count_group = 1; }
                             string base64ImageRepresentation_Question = null;
                             string base64ImageRepresentation_Group = null;
                             string base64FileAudio = null;
@@ -297,7 +297,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
                                         }
 
-                                        await this.createQuestion(reader.GetValue(1).ToString(), reader.Name, partid, base64ImageRepresentation_Question, GroupQuestionId, exam.Id);
+                                        await this.createQuestion(reader.GetValue(1).ToString(), reader.Name, base64ImageRepresentation_Question, GroupQuestionId, exam.Id);
                                         var question = await this._context.Questions.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                                         QuestionId = question.Id;
                                         countAnwser = 0;
@@ -315,6 +315,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                         else
                         {
                             var listQuestions = await this._context.Questions.Where(q => q.ExamId == exam.Id).Select(q => q.Id).ToArrayAsync();
+
+
+
                             int n=0;
                             while (reader.Read())
                             {
@@ -378,12 +381,11 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             await this._context.SaveChangesAsync();
             return 1;
         }
-        private async Task<int> createQuestion(string content, string partName, int partid, string image, int groupQuestionsId, int examId)
+        private async Task<int> createQuestion(string content, string partName, string image, int groupQuestionsId, int examId)
         {
             this._context.Questions.Add(new Question()
             {
                 Content = content,
-               // PartId = partid,
                 PartName= partName,
                 Image = image,
                 GroupQuestionId = groupQuestionsId,
@@ -403,23 +405,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             await this._context.SaveChangesAsync();
             return 1;
         }
-        //private async Task<string> SaveFile(IFormFile file)
-        //{
-        //    var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-        //    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-        //    await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-        //    return fileName;
-        //}
 
-        //private IActionResult Index(IFormFile file, [FromServices] IHostingEnvironment hostingEnvironment)
-        //{
-        //    string filePath = $"{hostingEnvironment.WebRootPath}\\File\\{file.FileName}";
-        //    using (FileStream fileStream = System.IO.File.Create(filePath))
-        //    {
-        //        file.CopyTo(fileStream);
-        //        fileStream.Flush();
-        //    }
-        //    return Ok();
-        //}
+       
+
+
+
     }
 }
