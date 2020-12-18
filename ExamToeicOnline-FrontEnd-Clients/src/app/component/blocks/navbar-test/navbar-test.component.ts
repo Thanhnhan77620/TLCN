@@ -1,7 +1,8 @@
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
 import { DethiService } from './../../../dethi/dethi.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
 
 @Component({
   selector: 'app-navbar-test',
@@ -12,36 +13,32 @@ export class NavbarTestComponent implements OnInit {
 
   partName: string = '';
   partIntro: number | null;
-  isTesting: boolean = false;
   deThiId: number;
   deThiCurrent: DeThi;
-
+  counter: number;
+  @ViewChild('countdown') countdown: CountdownComponent;
   constructor(private deThiService: DethiService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.deThiService.selectedPartChanged$.subscribe(
-      (part) => {
-        this.partIntro = part;
-        this.onPartName(this.partIntro);
+    this.deThiService.isDuration.subscribe(
+      () => {
+        this.counter = (+sessionStorage.getItem('duration') - Date.now()) / 1000;
+        console.log(this.counter)
       }
     )
-
-    this.deThiService.isTesting$.subscribe(
-      (value) => this.isTesting = value
-    )
-
-    this.deThiService.selectedDeThiChanged$.subscribe(
-      (deThiID) => {
-        this.deThiId = deThiID;
-        this.deThiService.getDeThi(+deThiID).subscribe(
+    this.route.queryParamMap.subscribe(
+      (params) => {
+        this.deThiId = +params.get('examId');
+        this.deThiService.getDeThi(this.deThiId).subscribe(
           (data) => {
             this.deThiCurrent = data;
           }
         )
+        this.partIntro = +params.get('part');
+        this.onPartName(this.partIntro);
       }
     )
-
   }
 
   onPartName(partNumber: number | null) {
@@ -71,5 +68,33 @@ export class NavbarTestComponent implements OnInit {
         this.partName = null;
         break;
     }
+  }
+
+  onFinished(event: CountdownEvent) {
+    if (event.action == 'done') {
+      alert('Time out - Stop it');
+      sessionStorage.removeItem('duration');
+    }
+    console.log(event)
+  }
+}
+
+@Pipe({
+  name: "formatTime"
+})
+export class FormatTimePipe implements PipeTransform {
+  transform(value: number): string {
+
+    value = value / 1000;
+    const hours: number = Math.floor(value / 3600);
+    const minutes: number = Math.floor((value % 3600) / 60);
+
+    return (
+      ("00" + hours).slice(-2) +
+      ":" +
+      ("00" + minutes).slice(-2) +
+      ":" +
+      ("00" + Math.floor(value - minutes * 60)).slice(-2)
+    );
   }
 }

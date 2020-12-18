@@ -29,6 +29,7 @@ import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail
     QuestionDetailComponent,
     NumberQuestionDetailComponent,
     IntroPartComponent,
+
   ],
   imports: [
     CommonModule,
@@ -50,7 +51,7 @@ import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail
                 runGuardsAndResolvers: 'paramsOrQueryParamsChange',
               },
               {
-                path: ':examId',
+                path: 'test',
                 component: ListQuestionComponent,
                 resolve: { resolvedListQuestionsData: QuestionResolver },
                 runGuardsAndResolvers: 'paramsOrQueryParamsChange'

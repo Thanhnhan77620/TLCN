@@ -21,4 +21,9 @@ export class QuestionDetailComponent implements OnInit {
 
   }
 
+  // onAnswerSelected(value: any, Question) {
+  //   this.question.answerSelected = value;
+  //   console.log("answer selected: " + this.question.answerSelected);
+  // }
+
 }

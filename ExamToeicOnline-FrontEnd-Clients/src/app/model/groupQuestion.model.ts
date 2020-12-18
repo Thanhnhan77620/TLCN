@@ -3,7 +3,7 @@ import { Question } from 'src/app/model/question.model';
 export interface GroupQuestion {
     id: number;
     questions: Question[],
-    fileAudio: [],
+    fileAudios: any[],
     paragraphs: Paragraph[],
     examId: number,
 }

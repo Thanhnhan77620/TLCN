@@ -1,10 +1,8 @@
-import { interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Instruction } from '../../../../../model/instruction.model';
 import { DethiService } from 'src/app/dethi/dethi.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: 'app-intro-part',
@@ -18,32 +16,15 @@ export class IntroPartComponent implements OnInit {
   correctAnswer: number;
   deThiId: number;
   numberQuestion: number | null;
-
-
-  listPart = [
-    { partName: 1, start: 1, end: 6 },
-    { partName: 2, start: 7, end: 25 },
-    { partName: 3, start: 32, end: 39 },
-    { partName: 4, start: 71, end: 30 },
-    { partName: 5, start: 101, end: 30 },
-    { partName: 6, start: 131, end: 11 },
-    { partName: 7, start: 141, end: 60 },
-  ]
-
-
   constructor(private route: ActivatedRoute,
     private deThiService: DethiService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.deThiService.selectedDeThiChanged$.subscribe(
-      (deThiID) => {
-        this.deThiId = deThiID;
-      }
-    )
     this.route.queryParamMap.subscribe(
       (params) => {
         this.introPart = +params.get('part');
+        this.deThiId = +params.get('examId');
         if (this.introPart) {
           this.deThiService.getInstructionOnPart(this.introPart).subscribe(
             (instruction) => {
@@ -126,8 +107,10 @@ export class IntroPartComponent implements OnInit {
 
   onStart() {
     this.onNumberQuestionStartPart(this.introPart);
-    this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.introPart, numberQuestion: this.numberQuestion } })
-    this.deThiService.changedpart(this.introPart);
+    // this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.introPart, numberQuestion: this.numberQuestion } })
+    this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.introPart, numberQuestion: this.numberQuestion } })
+
+    // this.deThiService.changedpart(this.introPart);
   }
 
 }

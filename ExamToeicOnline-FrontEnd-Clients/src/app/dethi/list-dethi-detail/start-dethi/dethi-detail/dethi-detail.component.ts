@@ -16,7 +16,7 @@ export class DethiDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const id = this.route.snapshot.paramMap.get('examId');
+    const id = this.route.snapshot.queryParamMap.get('examId');
     //console.log("dethi-detail: dethiid " + id)
     this.route.queryParamMap.subscribe(
       (params) => {
