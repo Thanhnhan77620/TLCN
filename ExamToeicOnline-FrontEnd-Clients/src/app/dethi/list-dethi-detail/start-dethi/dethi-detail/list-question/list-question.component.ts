@@ -21,6 +21,7 @@ export class ListQuestionComponent implements OnInit {
   deThiId: number;
   partNumber: number;
   partNumberChanged: number | null;
+  isSubmit: boolean = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +33,6 @@ export class ListQuestionComponent implements OnInit {
     this.route.data.subscribe(
       (data: any) => {
         this.resolvedData = data.resolvedListQuestionsData;
-        console.log(this.resolvedData)
       }
     )
     this.errorMessage = this.resolvedData.error;
@@ -42,12 +42,9 @@ export class ListQuestionComponent implements OnInit {
     )
     this.isImage_Scritp = !this.listQuestion[0].paragraphs.length;
     this.isFileAudio = !this.listQuestion[0].fileAudios.length;
-    console.log("isFileAudio: " + this.isFileAudio);
     this.partNumber = +this.route.snapshot.queryParamMap.get('part');
-    console.log("partNumber: " + this.partNumber)
-    this.deThiId = +this.route.snapshot.paramMap.get('examId');
-    console.log("dethi number: " + this.deThiId)
-
+    this.deThiId = +this.route.snapshot.queryParamMap.get('examId');
+    this.numberQuestion = +this.route.snapshot.queryParamMap.get('numberQuestion');
   }
 
   onNext() {
@@ -57,10 +54,8 @@ export class ListQuestionComponent implements OnInit {
     this.changedPart(this.numberQuestion);
     if (this.partNumber != this.partNumberChanged) {
       this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: this.partNumberChanged } })
-      this.deThiService.changedpart(this.partNumberChanged);
-      this.deThiService.changeTestingMode(true);
     } else {
-      this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.partNumberChanged, numberQuestion: this.numberQuestion } })
+      this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.partNumber, numberQuestion: this.numberQuestion } })
     }
   }
 

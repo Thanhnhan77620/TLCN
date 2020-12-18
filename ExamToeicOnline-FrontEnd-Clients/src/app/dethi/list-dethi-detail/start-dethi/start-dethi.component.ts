@@ -13,30 +13,33 @@ export class StartDethiComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private detThiService: DethiService
+    private deThiService: DethiService
   ) { }
   deThiCurrent: DeThi;
   errorMessage: string;
   listQuestion: Question[] = [];
   isStartDethi: boolean;
 
+
   ngOnInit(): void {
 
     const id = this.route.snapshot.paramMap.get("examId");
-    this.detThiService.changedDeThi(+id);
-
-    this.detThiService.getDeThi(+id).subscribe(
-      (data) => {
-        this.deThiCurrent = data;
-      },
-      (error) => (this.errorMessage = error)
-    );
+    if (!isNaN(+id)) {
+      this.deThiService.getDeThi(+id).subscribe(
+        (data) => {
+          this.deThiCurrent = data;
+        },
+        (error) => (this.errorMessage = error)
+      );
+    } else {
+      this.deThiCurrent = null;
+    }
   }
 
   onStart() {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiCurrent.id, part: 1 } })
-    this.detThiService.changedpart(1);
-    this.detThiService.changeTestingMode(true);
+    sessionStorage.setItem('duration', (Date.now() + this.deThiCurrent.duration * 60 * 1000).toString());
+    this.deThiService.durationStart(+sessionStorage.getItem('duration'));
   }
 
 

@@ -1,11 +1,11 @@
 import { GroupQuestion } from './../model/groupQuestion.model';
 import { Instruction } from '../model/instruction.model';
-import { tap, catchError } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { DeThi } from "./../model/dethi.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, throwError, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { Question } from "../model/question.model";
 
 @Injectable({
@@ -13,16 +13,10 @@ import { Question } from "../model/question.model";
 })
 export class DethiService {
 
-  private deThiSelected = new BehaviorSubject<number | null>(null);
-  selectedDeThiChanged$ = this.deThiSelected.asObservable();
-  private isTested = new BehaviorSubject<boolean | null>(null);
-  isTesting$ = this.isTested.asObservable();
-  private partSelected = new BehaviorSubject<number | null>(null);
-  selectedPartChanged$ = this.partSelected.asObservable();
-
-
   constructor(private http: HttpClient, private router: Router) { }
 
+  private _duration = new BehaviorSubject<number>(null);
+  isDuration = this._duration.asObservable();
 
   getAllDeThi() {
     return this.http
@@ -35,19 +29,6 @@ export class DethiService {
       .get<DeThi>("https://localhost:5001/api/exams?examId=" + deThiId)
       .pipe(catchError(this.handleError));
   }
-
-
-  private handleError(err: any): Observable<never> {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else {
-      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
-    }
-    console.error(err);
-    return throwError(errorMessage);
-  }
-
 
   getListQuestion(dethiId: number, partId: number): Observable<Question[]> {
     return this.http.get<Question[]>(`https://localhost:5001/api/questions/PartName?examId=${dethiId}&partName=Part ${partId}`).pipe(
@@ -67,16 +48,19 @@ export class DethiService {
     )
   }
 
-  changedDeThi(deThiId: number | null) {
-    this.deThiSelected.next(deThiId);
+  private handleError(err: any): Observable<never> {
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+    }
+    console.error(err);
+    return throwError(errorMessage);
   }
 
-  changeTestingMode(value: boolean | null) {
-    this.isTested.next(value);
-  }
-
-  changedpart(part: number | null) {
-    this.partSelected.next(part);
+  durationStart(value: number) {
+    this._duration.next(value);
   }
 
 }

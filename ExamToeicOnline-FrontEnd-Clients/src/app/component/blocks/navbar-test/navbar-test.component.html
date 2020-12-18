@@ -3,12 +3,19 @@
         <div class="row intro-page">
             <h4 class="sm white bold part-tile">
                 <a class="title-bar navbar-brand" routerLink="/">Toeic247</a>
-                <b *ngIf="!isTesting">{{partName}}</b>
+                <b *ngIf="partIntro">{{partName}}</b>
             </h4>
             <ul class="top-nav-list nav-item ml-auto">
-                <li class="timer"><a *ngIf="!isTesting"><b class="countdown">{{duration |date:'hh:mm:ss'}}</b></a>
+                <li class="timer">
+                    <a *ngIf="partIntro">
+                        <b class="countdown">
+                            <countdown *ngIf="counter >0" #countdown [config]="{leftTime: counter}"
+                                (event)="onFinished($event)">
+                            </countdown>
+                        </b>
+                    </a>
                 </li>
-                <li class="end-exam header-b" *ngIf="!isTesting"><a class="finish-all" href="#"><b>SUBMIT</b></a></li>
+                <li class="end-exam header-b" *ngIf="partIntro"><a class="finish-all" href="#"><b>SUBMIT</b></a></li>
                 <li class="backpage header-b exit">
                     <a class="exit-exam" href="#" style="background-color: red;">
                         <b>Cancel</b>

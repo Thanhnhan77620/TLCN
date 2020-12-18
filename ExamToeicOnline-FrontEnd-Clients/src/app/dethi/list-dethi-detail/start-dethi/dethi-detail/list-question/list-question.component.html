@@ -21,7 +21,12 @@
                 <app-question-detail [question]="question">
                 </app-question-detail>
             </div>
-            <button class="mc-btn btn-style-6" (click)="onNext()">Next</button>
+            <div *ngIf="numberQuestion === 196 || numberQuestion===200">
+                <button class="mc-btn btn-style-6 btn-danger" type="submit">Submit</button>
+            </div>
+            <div *ngIf="numberQuestion !== 196 && numberQuestion!==200">
+                <button class="mc-btn btn-style-6" (click)="onNext()">Next</button>
+            </div>
         </form>
     </div>
 </div>
