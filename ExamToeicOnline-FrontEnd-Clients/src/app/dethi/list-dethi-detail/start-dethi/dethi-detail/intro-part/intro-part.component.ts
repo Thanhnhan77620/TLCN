@@ -107,10 +107,7 @@ export class IntroPartComponent implements OnInit {
 
   onStart() {
     this.onNumberQuestionStartPart(this.introPart);
-    // this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.introPart, numberQuestion: this.numberQuestion } })
     this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.introPart, numberQuestion: this.numberQuestion } })
-
-    // this.deThiService.changedpart(this.introPart);
   }
 
 }
