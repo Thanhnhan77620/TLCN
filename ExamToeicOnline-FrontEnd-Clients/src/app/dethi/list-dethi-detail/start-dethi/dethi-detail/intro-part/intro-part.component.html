@@ -40,10 +40,11 @@
             <h4 class="sm">EXAMPLE: </h4>
             <p><b>{{instruction.question}}</b></p>
         </div>
-        <ul class="answer-list">
+        <ul class="answer-list" *ngIf="instruction.answers.length !== 0">
             <li *ngFor="let answer of instruction.answers; let i = index">
                 <div *ngIf="answer.trim()">
-                    <input type="radio" name="radio-1" id="radio-1" disabled="disabled" [checked]="correctAnswer===i">
+                    <input type="radio" name="radio-{{instruction.title}}" id="radio-1" disabled="disabled"
+                        [checked]="correctAnswer===i">
                     <label for="radio-1">
                         <i class="icon icon_radio"></i>
                         {{answer}}</label>

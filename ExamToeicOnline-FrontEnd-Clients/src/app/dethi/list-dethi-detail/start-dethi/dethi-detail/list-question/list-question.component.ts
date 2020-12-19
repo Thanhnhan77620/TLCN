@@ -24,8 +24,7 @@ export class ListQuestionComponent implements OnInit {
   isSubmit: boolean = false;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private deThiService: DethiService) {
+    private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -50,7 +49,6 @@ export class ListQuestionComponent implements OnInit {
   onNext() {
     const len = this.listQuestion[0].questions.length;
     this.numberQuestion = (this.listQuestion[0].questions[len - 1].id - ((this.deThiId - 1) * 100) + 1);
-    console.log('number_listquestion: ' + this.numberQuestion);
     this.changedPart(this.numberQuestion);
     if (this.partNumber != this.partNumberChanged) {
       this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: this.partNumberChanged } })
