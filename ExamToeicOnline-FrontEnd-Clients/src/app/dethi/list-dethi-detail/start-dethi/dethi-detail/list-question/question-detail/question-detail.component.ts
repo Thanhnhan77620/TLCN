@@ -12,13 +12,31 @@ export class QuestionDetailComponent implements OnInit {
   @Input() question: Question;
   instruction: Instruction = null;
 
-
+  aswerSelected = {
+    key: null,
+    value: null
+  }
+  listAswerSelected = [
+    this.aswerSelected
+  ]
+  deThiId: number | null;
+  numberQuestionId: number;
   introPart: number;
   errorMessage: any;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
+  }
+
+  changeSelected(event) {
+    // this.answerSelected[this.question.id - (this.question.examId - 1) * 200] = event.target.value;
+  }
+
+  onList(listAnswer: Map<number, number>) {
+    listAnswer.forEach(e => {
+      console.log(e['key'])
+    })
   }
 
 }

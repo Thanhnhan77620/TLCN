@@ -25,9 +25,10 @@ export class QuestionResolver implements Resolve<ListQuestionResolved>{
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ListQuestionResolved | Observable<ListQuestionResolved> | Promise<ListQuestionResolved> {
-        this.deThiId = +route.paramMap.get('examId');
+        // this.deThiId = +route.paramMap.get('examId');
+        this.deThiId = +route.queryParamMap.get('examId');
         this.numberQuestion = +route.queryParamMap.get('numberQuestion');
-        console.log('resolver numberQuestion:' + this.numberQuestion);
+        // console.log('resolver examId:' + this.deThiId);
         if (isNaN(+this.deThiId) || isNaN(+this.numberQuestion)) {
             const message = `DeThi was invalid`;
             console.error(message);

@@ -3,30 +3,12 @@
     <div *ngIf="question.image">
         <img src="{{question.image}}" alt="1. Select the answer" style="width: 100%">
     </div>
-    <ul class="answer-list">
-        <li *ngFor="let answer of question.anwsers">
-            <input type="radio" name="Answers[{{answer.id}}]" value="14276" id="answers-{{answer.id}}-14276"> <label
-                for="771">
+    <ul class="answer-list ">
+        <li *ngFor="let answer of question.anwsers; let i = index">
+            <input type="radio" name="Answers[{{question.id}}]" [value]="i" (change)="changeSelected($event)">
+            <label for="771">
                 <i class="icon icon_radio"></i>
                 {{answer.content}} </label>
         </li>
-        <!-- <li>
-            <input type="radio" name="Answers[{{question.id}}]" value="14277" id="answers-{{question.id}}-14277"> <label
-                for="771">
-                <i class="icon icon_radio"></i>
-                B </label>
-        </li>
-        <li>
-            <input type="radio" name="Answers[{{question.id}}]" value="14278" id="answers-{{question.id}}-14278"> <label
-                for="771">
-                <i class="icon icon_radio"></i>
-                C </label>
-        </li>
-        <li>
-            <input type="radio" name="Answers[{{question.id}}]" value="14279" id="answers-{{question.id}}-14279"> <label
-                for="771">
-                <i class="icon icon_radio"></i>
-                D </label>
-        </li> -->
     </ul>
 </div>

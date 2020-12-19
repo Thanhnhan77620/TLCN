@@ -7,20 +7,44 @@
             {{instruction.description}}
         </p>
 
-        <img *ngIf="introPart===1" src="../../../../../../assets/image/intro-part1.png" alt="1. Select the answer"
-            style="width: 100%">
-        <p><b>Audio: </b></p>
-        <audio controls style="width: 100%;">
-            <source type="audio/mp3" src="https://toeic24.vn/upload/audio/1579320667/1579321247.mp3" />
-        </audio>
-        <h4 class="sm">EXAMPLE: </h4>
-        <p *ngIf="instruction.introduce.trim()">{{instruction.introduce}}</p>
+        <div *ngIf="introPart===1">
+            <img src="../../../../../../assets/image/intro-part1.png" alt="1. Select the answer" style="width: 100%">
+            <p><b>Audio: </b></p>
+            <audio controls style="width: 100%;">
+                <source type="audio/mp3" src="https://toeic24.vn/upload/audio/1579320667/1579321247.mp3" />
+            </audio>
+        </div>
 
-        <p *ngIf="instruction.question.trim()"><b>{{instruction.question}}</b></p>
-        <ul class="answer-list">
+        <div *ngIf="introPart===2">
+            <p><b>Audio: </b></p>
+            <audio controls style="width: 100%;">
+                <source type="audio/mp3" src="https://toeic4u.com/vi/Toeictest/files/audios/q_20200604-0142402.mp3" />
+            </audio>
+        </div>
+        <div *ngIf="introPart===3">
+            <p><b>Audio: </b></p>
+            <audio controls style="width: 100%;">
+                <source type="audio/mp3" src="https://toeic4u.com/vi/Toeictest/files/audios/part_3_instruction.mp3" />
+            </audio>
+        </div>
+
+        <div *ngIf="introPart===4">
+            <p><b>Audio: </b></p>
+            <audio controls style="width: 100%;">
+                <source type="audio/mp3" src="https://toeic4u.com/vi/Toeictest/files/audios/part_4_instruction.mp3" />
+            </audio>
+        </div>
+
+        <p *ngIf="instruction.introduce.trim()">{{instruction.introduce}}</p>
+        <div *ngIf="instruction.question.trim()">
+            <h4 class="sm">EXAMPLE: </h4>
+            <p><b>{{instruction.question}}</b></p>
+        </div>
+        <ul class="answer-list" *ngIf="instruction.answers.length !== 0">
             <li *ngFor="let answer of instruction.answers; let i = index">
                 <div *ngIf="answer.trim()">
-                    <input type="radio" name="radio-1" id="radio-1" disabled="disabled" [checked]="correctAnswer===i">
+                    <input type="radio" name="radio-{{instruction.title}}" id="radio-1" disabled="disabled"
+                        [checked]="correctAnswer===i">
                     <label for="radio-1">
                         <i class="icon icon_radio"></i>
                         {{answer}}</label>

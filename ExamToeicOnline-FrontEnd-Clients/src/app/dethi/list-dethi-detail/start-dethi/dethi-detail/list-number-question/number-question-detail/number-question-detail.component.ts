@@ -20,13 +20,11 @@ export class NumberQuestionDetailComponent implements OnInit {
   deThiId: number;
 
   ngOnInit(): void {
-
-    this.deThiService.selectedDeThiChanged$.subscribe(
-      (deThiID) => {
-        this.deThiId = deThiID;
+    this.route.queryParamMap.subscribe(
+      (params) => {
+        this.deThiId = +params.get('examId');
       }
     )
-
   }
 
   arrayQuestion(end: number, start: number): number[] {
@@ -35,11 +33,12 @@ export class NumberQuestionDetailComponent implements OnInit {
 
   onInstruction(partName: number) {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: partName } })
-    this.deThiService.changedpart(partName);
   }
 
-  onClickQuestion(numberQuestion) {
-    this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.partName, numberQuestion: numberQuestion } })
-    this.deThiService.changedpart(this.partName);
+  onClickQuestion(numberQuestion: number) {
+
+    this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.partName, numberQuestion: numberQuestion } })
   }
+
+
 }
