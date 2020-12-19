@@ -24,7 +24,6 @@ export class NavbarTestComponent implements OnInit {
     this.deThiService.isDuration.subscribe(
       () => {
         this.counter = (+sessionStorage.getItem('duration') - Date.now()) / 1000;
-        console.log(this.counter)
       }
     )
     this.route.queryParamMap.subscribe(
@@ -75,7 +74,6 @@ export class NavbarTestComponent implements OnInit {
       alert('Time out - Stop it');
       sessionStorage.removeItem('duration');
     }
-    console.log(event)
   }
 }
 

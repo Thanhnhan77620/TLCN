@@ -25,7 +25,6 @@ export class NumberQuestionDetailComponent implements OnInit {
         this.deThiId = +params.get('examId');
       }
     )
-
   }
 
   arrayQuestion(end: number, start: number): number[] {
@@ -34,13 +33,12 @@ export class NumberQuestionDetailComponent implements OnInit {
 
   onInstruction(partName: number) {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: partName } })
-    // this.deThiService.changedpart(partName);
   }
 
   onClickQuestion(numberQuestion: number) {
-    // this.router.navigate([`exam/ToeicTest/${this.deThiId}`], { queryParams: { part: this.partName, numberQuestion: numberQuestion } })
 
     this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.partName, numberQuestion: numberQuestion } })
-    // this.deThiService.changedpart(this.partName);
   }
+
+
 }
