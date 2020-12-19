@@ -86,9 +86,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    dateStart = table.Column<DateTime>(nullable: false),
+                    StartedAt = table.Column<DateTime>(nullable: false),
+                    FinishedAt = table.Column<DateTime>(nullable: false),
                     Score = table.Column<int>(nullable: false),
-                    Effort = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
                     ExamId = table.Column<int>(nullable: false)
                 },
@@ -101,7 +101,12 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         principalTable: "Exams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    
+                    table.ForeignKey(
+                        name: "FK_DoExams_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,22 +202,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-                values: new object[] { new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"), new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
+                values: new object[] { new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"), new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-                values: new object[] { new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"), new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
+                values: new object[] { new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"), new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 1, new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929), "$2a$11$kS468wJogxZJp6LxscqaJu3Z2AloFWgi4OSDvsmkFoh5bMqNxa7Jy", new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"), "ngan", true, false });
+                values: new object[] { 1, new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659), "$2a$11$riekDL/SQ5MT.8jFbAr1GuJmaV4dEYwWNZo7eCmu1Yxp3GcyYu1m2", new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"), "ngan", true, false });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 2, new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929), "$2a$11$AK7Ywbv5IJSN0rMWT10QkuO9gUl0vz7J0au8pkuPJHCuh6dooF01e", new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"), "nhan", true, false });
+                values: new object[] { 2, new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659), "$2a$11$NHSpmo4XunWgvD9Emek3PuCnZiszGQlswa.66UdnGNlQwY1Vhb9rS", new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"), "nhan", true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

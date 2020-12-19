@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamToeicOnline_BackEnd_Clients.Migrations
 {
     [DbContext(typeof(ExamToeicOnlineDBContext))]
-    [Migration("20201216091251_init")]
+    [Migration("20201219023232_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,20 +51,20 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Effort")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("FinishedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("dateStart")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -216,9 +216,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929),
-                            Password = "$2a$11$kS468wJogxZJp6LxscqaJu3Z2AloFWgi4OSDvsmkFoh5bMqNxa7Jy",
-                            UserId = new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"),
+                            CreateAt = new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659),
+                            Password = "$2a$11$riekDL/SQ5MT.8jFbAr1GuJmaV4dEYwWNZo7eCmu1Yxp3GcyYu1m2",
+                            UserId = new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -226,9 +226,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 12, 16, 16, 12, 50, 521, DateTimeKind.Local).AddTicks(4929),
-                            Password = "$2a$11$AK7Ywbv5IJSN0rMWT10QkuO9gUl0vz7J0au8pkuPJHCuh6dooF01e",
-                            UserId = new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"),
+                            CreateAt = new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659),
+                            Password = "$2a$11$NHSpmo4XunWgvD9Emek3PuCnZiszGQlswa.66UdnGNlQwY1Vhb9rS",
+                            UserId = new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -263,7 +263,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0d84d843-6866-4e37-bedd-6a0a7788c82d"),
+                            Id = new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"),
                             Birthday = new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -271,7 +271,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c77ff04-3806-407f-8d8d-ba7a44de5491"),
+                            Id = new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"),
                             Birthday = new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
