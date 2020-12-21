@@ -27,30 +27,58 @@ export class ProfileComponent implements OnInit  {
         private router: Router,
         private toastService:ToastService
         ){ }
-         
-    //user=JSON.parse(localStorage.getItem("userData"));
+  
     userProfile:UserProfile;
+    key=1;
     ngOnInit(): void {
-        
+      
         this.userProfile = {
             id:localStorage.getItem('UserId'),
             email:localStorage.getItem('email'),
             fullName:localStorage.getItem('fullName'),
-            phone:!localStorage.getItem('phone')?localStorage.getItem('phone'):'',
+            phone:(localStorage.getItem('phone')!='null')?localStorage.getItem('phone'):"",
             image:localStorage.getItem('image'),
             birthDate:new Date(localStorage.getItem('birthday'))
+            
         }
         
     }
-    
+
+    oldPassWord:'';
+    newPassWord:'';
+    ConfirmNewPassWord:'';
+    options = { opacity: 1 };
+    onChangePassword(formProFile:NgForm){
+        this.userService.changePassword(localStorage.getItem('userName'),formProFile.value.oldPassWord,formProFile.value.newPassWord)
+        .subscribe(
+            result => this.showSuccess(),
+            error => {
+                this.toastService.error(error.message, 'Info message',this.options);
+            }
+            
+        );
+        this.oldPassWord='';
+        this.newPassWord='';
+        this.ConfirmNewPassWord='';
+
+    }
     showSuccess() {
-        const options = { opacity: 1 };
-        
-        this.toastService.success('Upload information success!', 'Info message',options);
+        this.toastService.success('Upload information success!', 'Info message',this.options);
+    }
+    showError() {
+        this.toastService.error('Old PassWord Incorrect!', 'Info message',this.options);
     }
     myImage:Observable<any>;
     userUpdate:UserUpdate
     file:File;
+    
+    routerChangePassword(){
+        this.key=2;
+
+    }
+    routerChangeProfile(){
+        this.key=1;
+    }
     onSave(formProFile: NgForm) {
         this.userUpdate = {
             id: localStorage.getItem('UserId'),
@@ -63,6 +91,7 @@ export class ProfileComponent implements OnInit  {
     
        this.userService.updateProfile(this.userUpdate);
        this.showSuccess();
+
     }
 
     onChange($event: Event) {

@@ -117,17 +117,24 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         
         //Change password
         [HttpPut("{username}")]
-        public async Task<IActionResult> ChangePassword([FromForm] AccountVM request)
+        public async Task<IActionResult> ChangePassword([FromForm] AccountVM accountVM)
         {
-            var account = await this._context.Accounts.Where(a => a.Username == request.Username).FirstOrDefaultAsync();
-            if (account == null)
+            var account = await this._context.Accounts.Where(a => a.Username == accountVM.Username).FirstOrDefaultAsync();
+            if (account==null)
             {
-                return NotFound("Can not found account with username= " + request.Username);
+                return NotFound("Can not find account "+ accountVM.Username);
             }
-            account.Password = BC.HashPassword(request.Password);
-            this._context.Accounts.Update(account);
-            await this._context.SaveChangesAsync();
-            return Ok("Change password successfully!");
+            else
+            {
+                if (BC.Verify(accountVM.Password, account.Password))
+                {
+                    account.Password = BC.HashPassword(accountVM.NewPassword);
+                    this._context.Accounts.Update(account);
+                    await this._context.SaveChangesAsync();
+                    return Ok();
+                }
+            }
+            return NotFound("Old Password Incorrect!");
         }
 
 

@@ -1,11 +1,11 @@
 
-<div class="container py-4">
+<div class="container py-5 my-2 " >
     <div class="row bg-info">
-        <div class="col-lg-3 col-sm-4 pb-4">
-            <mdb-card>
+        <div class="col-lg-3 col-sm-4 pb-4 ">
+            <mdb-card style="margin-top: 5rem;" >
                 <div class="py-4 m-4">
-                    <a routerLink="/user/profile">Profile</a><br><br>
-                    <a routerLink="/user/profile">Change Password</a>
+                    <a style="font-size: 20px; color: #145ce4;" (click)="routerChangeProfile();">Profile</a><br><br>
+                    <a style="font-size: 20px; color: #145ce4;" (click)="routerChangePassword();">Change Password</a>
                 </div>
             </mdb-card>
         </div>
@@ -16,72 +16,150 @@
                         <strong>Personal Information</strong>
                     </h5>
                 </mdb-card-header>
-                <mdb-card-body class="light-color px-lg-5 pt-0">
+                <mdb-card-body class="light-color px-lg-5 pt-0" *ngIf="key==1">
                     <div class="mt-3">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center ">
                             <form  (ngSubmit)="onSave(formProFile)" #formProFile="ngForm"  class="text-center" style="color: #030303;">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                         <div class="row">
-                                            <img [src]="myImage?(myImage|async):this.userProfile.image" style="width: 100px; height: 100px;" class="img-fluid rounded-circle hoverable" alt="image">
-                                        </div> 
-                                      <div class="row py-4">
-                                            <input type="file" ngModel name="image" (change)="onChange($event)" class="form-control"/>
-                                      </div> 
+                                    <div class="col-md-3 ">
+                                       
+                                            <div class="row ">
+                                                <div class="col-lg">
+                                                    <img [src]="myImage?(myImage|async):this.userProfile.image" style="width: 100px; height: 100px;" 
+                                                    class="img-fluid rounded-circle hoverable " alt="avatar">
+                                                </div>
+                                               
+                                            </div> 
+                                      
+                                       
+                                            <div class="row my-3 py-2" style=" position:relative;
+                                            display:inline-block;    
+                                            border-radius:8px;
+                                            border:#006ae2 solid 1px;
+                                            width:110px; 
+                                            padding: 4px;
+                                            font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+                                            color: #ffffff;
+                                            margin-top: 2px;
+                                            background:rgb(32, 91, 255)">
+                                              <span >Upload image</span>
+                                                <input style=" -webkit-appearance:none; 
+                                                position:absolute;
+                                                top:0; left:0;
+                                                opacity:0; "
+                                                type="file" ngModel name="image" (change)="onChange($event)" />   
+                                            </div> 
                                     </div>
-                                    <div class=" col-md-1 "></div>
-                                    <div class="col-md-9 col-xs-12 ">
+                                    <!-- <div class="col-md-1"></div> -->
+                                    <div class="col-md-9 col-xs-12">
                                         <div class="row text-left">
-                                            <div class="col-lg-3 col-sm-4 ">
+                                            <div class="col-lg-5 col-sm-4 ">
                                                 <div class="form-group">
                                                     <label>Full Name <span style="color:red">&#42;</span> </label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-9 col-sm-8 ">
+                                            <div class="col-lg-7 col-sm-8 ">
                                                 <div class="form-group">
-                                                    <input mdbInput type="text" [(ngModel)]="this.userProfile.fullName" name="fullName"  required placeholder="Enter fullName"
-                                                        class="form-control" />
+                                                    <input mdbInput type="text" [(ngModel)]="this.userProfile.fullName" 
+                                                    name="fullName"  required placeholder="Enter fullName"
+                                                        class="form-control" style="width:auto"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row text-left">
-                                            <div class=" col-lg-3 col-sm-4 col-xs-12">
+                                            <div class=" col-lg-5 col-sm-4 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Birth Date </label>
                                                 </div>
 
                                             </div>
-                                            <div class=" col-lg-9 col-sm-8 col-xs-12">
+                                            <div class=" col-lg-7 col-sm-8 col-xs-12">
                                                 <div class="form-group">
-                                                    <input mdbInput [ngModel]="this.userProfile.birthDate | date:'yyyy-MM-dd'" type="date" name="birthDate" class="form-control"/>
+                                                    <input mdbInput [ngModel]="this.userProfile.birthDate | date:'yyyy-MM-dd'"
+                                                     type="date" name="birthDate" class="form-control"style="width:auto"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row text-left">
-                                            <div class=" col-lg-3 col-sm-4 col-xs-12">
+                                            <div class=" col-lg-5 col-sm-4 col-xs-12 ">
                                                 <div class="form-group">
                                                     <label>Phone Number</label>
                                                 </div>
                                             </div>
-                                            <div class=" col-lg-9 col-sm-8 col-xs-12">
+                                            <div class=" col-lg-7 col-sm-8 col-xs-12">
                                                 <div class="form-group">
                                                     <input mdbInput type="text" [(ngModel)]="this.userProfile.phone" name="phoneNumber"  required
-                                                        placeholder="Enter phone number" class="form-control" />
+                                                        placeholder="Enter phone number" class="form-control" style="width:auto"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row text-left">
-                                            <div class="col-lg-3 col-sm-4 col-xs-12">
+                                            <div class="col-lg-5 col-sm-4 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Email <span style="color:red">&#42;</span> </label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-9 col-sm-8 col-xs-12">
+                                            <div class="col-lg-7 col-sm-8 col-xs-12">
                                                 <div class="form-group">
                                                     <input mdbInput type="email" [(ngModel)]="this.userProfile.email" name="email"  required
-                                                        placeholder="Enter email address" class="form-control" />
+                                                        placeholder="Enter email address" class="form-control"style="width:auto" />
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <button mdbBtn type="submit" color="success" mdbWavesEffect >
+                                        <mdb-icon fas icon="save" class="mr-1"></mdb-icon>Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </mdb-card-body>
+
+
+                <mdb-card-body class="light-color px-lg-5 pt-0" *ngIf="key==2">
+                    <div class="mt-3">
+                        <div class="row justify-content-center ">
+                            <form  (ngSubmit)="onChangePassword(formProFile)" #formProFile="ngForm"  class="text-center" style="color: #030303;">
+                                <div class="row text-left">
+                                    <div class="col-lg col-sm-4 pt-2">
+                                        <div class="form-group">
+                                            <label>Old Password<span style="color:red">&#42;</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg col-sm-8 ">
+                                        <div class="form-group">
+                                            <input mdbInput type="password" [(ngModel)]="oldPassWord" name="oldPassWord" required placeholder="Enter old password"
+                                                class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-left">
+                                    <div class="col-lg col-sm-4 pt-2">
+                                        <div class="form-group">
+                                            <label>New Password<span style="color:red">&#42;</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg col-sm-8 ">
+                                        <div class="form-group">
+                                            <input mdbInput type="password" [(ngModel)]="newPassWord" name="newPassWord" required placeholder="Enter new password"
+                                                class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row text-left">
+                                    <div class="col-lg col-sm-4 pt-2">
+                                        <div class="form-group">
+                                            <label>Confirm New Password<span style="color:red">&#42;</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg col-sm-8 ">
+                                        <div class="form-group">
+                                            <input mdbInput type="password" [(ngModel)]="ConfirmNewPassWord" name="ConfirmNewPassWord" required placeholder="Confirm password"
+                                                class="form-control" />
                                         </div>
                                     </div>
                                 </div>

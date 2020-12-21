@@ -109,6 +109,14 @@ export class UserService {
     })     
   }
 
+  changePassword(userName:string, oldPassWord:string,newPassWord:string){
+      var formData = new FormData();
+      formData.append("userName",userName);
+      formData.append("password",oldPassWord);
+      formData.append("NewPassword",newPassWord);
+      return this.http.put<any>(this.api+"accounts/"+userName,formData);
+  }
+   
   public handleError(errorRes: HttpErrorResponse) {
     let errorMessage = errorRes.error;
 

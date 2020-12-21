@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
   isAuthenticated = false;
   private userSub: Subscription;
   currentAccount: Account;
-  userName:string;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -24,13 +23,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
 
+  
   ngOnInit() {
     this.userSub = this.userService.account.subscribe((account) => {
       this.currentAccount = account;
       this.isAuthenticated = !!account;
     });
-   this.userName=localStorage.getItem('userName');
-
+    
   }
 
   onLogout() {
