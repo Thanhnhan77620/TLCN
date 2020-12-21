@@ -18,7 +18,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AngularFireModule } from '@angular/fire';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { TestLayoutComponent } from './test-layout/test-layout.component';
-import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.component';
+import { FormatTimePipe, NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.component';
+import { CountdownModule } from "ngx-countdown";
 
 
 
@@ -34,9 +35,11 @@ import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.
     PublicLayoutComponent,
     TestLayoutComponent,
     NavbarTestComponent,
+    FormatTimePipe,
   ],
   imports: [
     BrowserModule,
+    CountdownModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     ToastModule.forRoot(),
