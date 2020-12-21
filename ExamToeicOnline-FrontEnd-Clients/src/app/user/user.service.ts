@@ -102,11 +102,11 @@ export class UserService {
     formData.append("PhoneNumber", userUpdate.phone);
     formData.append("birthday", userUpdate.birthDate.toString());
     formData.append("Image", userUpdate.image);
-    return this.http.put<any>(this.api+"users/"+userUpdate.id,formData)
-    .subscribe(data=>{
-      this.setStorageCurrentUser(Guid.parse(userUpdate.id));
-      //this.router.navigate(["/auth/"+userUpdate.id+"/profile"]);
-    })     
+    return this.http.put<any>(this.api+"users/"+userUpdate.id,formData);
+    // .subscribe(data=>{
+    //   this.setStorageCurrentUser(Guid.parse(userUpdate.id));
+    //   //this.router.navigate(["/auth/"+userUpdate.id+"/profile"]);
+    // })     
   }
 
   changePassword(userName:string, oldPassWord:string,newPassWord:string){

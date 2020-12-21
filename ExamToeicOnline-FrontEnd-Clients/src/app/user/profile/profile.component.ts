@@ -87,10 +87,15 @@ export class ProfileComponent implements OnInit  {
             phone: formProFile.value.phoneNumber,
             email: formProFile.value.email,
             image: this.file
-        } 
-    
-       this.userService.updateProfile(this.userUpdate);
-       this.showSuccess();
+        }
+        this.userService.updateProfile(this.userUpdate)
+                        .subscribe(
+                            result => {
+                                this.userService.setStorageCurrentUser(Guid.parse(this.userUpdate.id));
+                                this.showSuccess()
+                            },
+                            error => {this.showError()}
+                        ); 
 
     }
 
