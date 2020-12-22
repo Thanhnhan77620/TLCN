@@ -38,7 +38,8 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
         public DbSet<DoExam> DoExams { get; set; }
         public DbSet<FileAudio> FileAudios { get; set; }
         public DbSet<Paragraph> Paragraphs { get; set; }
-      
+        public DbSet<Score> Scores { get; set; }
+
 
 
     }

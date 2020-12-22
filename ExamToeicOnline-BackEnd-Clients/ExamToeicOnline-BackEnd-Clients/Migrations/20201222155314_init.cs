@@ -22,6 +22,21 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    numberQuestion = table.Column<int>(nullable: false),
+                    ScoreLC = table.Column<int>(nullable: false),
+                    ScoreRC = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -53,7 +68,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,7 +103,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartedAt = table.Column<DateTime>(nullable: false),
                     FinishedAt = table.Column<DateTime>(nullable: false),
-                    Score = table.Column<int>(nullable: false),
+                    ScoreListening = table.Column<int>(nullable: false),
+                    ScoreReading = table.Column<int>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
                     ExamId = table.Column<int>(nullable: false)
                 },
@@ -175,7 +191,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         column: x => x.GroupQuestionId,
                         principalTable: "GroupQuestions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,22 +218,22 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-                values: new object[] { new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"), new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
+                values: new object[] { new Guid("08588718-a086-4523-a193-9621386a5ce8"), new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "nhan@gmail.com", "Nguyễn Thanh Nhân", null, "12345678" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Image", "PhoneNumber" },
-                values: new object[] { new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"), new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
+                values: new object[] { new Guid("6fea75c6-c322-4fbe-8331-5f230f2a0c3c"), new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "ngan@gmail.com", "Đỗ Thị Thanh Ngân", null, "98765432" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 1, new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659), "$2a$11$riekDL/SQ5MT.8jFbAr1GuJmaV4dEYwWNZo7eCmu1Yxp3GcyYu1m2", new Guid("c9108224-2ec7-4b24-986a-05454fcb0b9d"), "ngan", true, false });
+                values: new object[] { 1, new DateTime(2020, 12, 22, 22, 53, 13, 997, DateTimeKind.Local).AddTicks(2295), "$2a$11$yzEEpOmPW5plrRTx/lVdZuL0hV4yBt038wZkAS7IwrBhaZ5ZDeY8S", new Guid("08588718-a086-4523-a193-9621386a5ce8"), "ngan", true, false });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "CreateAt", "Password", "UserId", "Username", "isActive", "isAdmin" },
-                values: new object[] { 2, new DateTime(2020, 12, 19, 9, 32, 31, 240, DateTimeKind.Local).AddTicks(9659), "$2a$11$NHSpmo4XunWgvD9Emek3PuCnZiszGQlswa.66UdnGNlQwY1Vhb9rS", new Guid("6b2c5e8a-9335-493d-8606-c6e2cd42e5f3"), "nhan", true, false });
+                values: new object[] { 2, new DateTime(2020, 12, 22, 22, 53, 13, 997, DateTimeKind.Local).AddTicks(2295), "$2a$11$o8Bgv2AAeklxcB4XRoXCF.9lsJg7mjjvrNpLI3D3j9AdpYGTAMfmS", new Guid("6fea75c6-c322-4fbe-8331-5f230f2a0c3c"), "nhan", true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
@@ -281,6 +297,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
 
             migrationBuilder.DropTable(
                 name: "Paragraphs");
+
+            migrationBuilder.DropTable(
+                name: "Scores");
 
             migrationBuilder.DropTable(
                 name: "Questions");
