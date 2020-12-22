@@ -12,7 +12,12 @@ import { Question } from "../model/question.model";
   providedIn: "root",
 })
 export class DethiService {
-
+  private deThiSelected = new BehaviorSubject<number | null>(null);
+  selectedDeThiChanged$ = this.deThiSelected.asObservable();
+  private isTested = new BehaviorSubject<boolean | null>(null);
+  isTesting$ = this.isTested.asObservable();
+  private partSelected = new BehaviorSubject<number | null>(null);
+  selectedPartChanged$ = this.partSelected.asObservable();
   constructor(private http: HttpClient, private router: Router) { }
 
   private _duration = new BehaviorSubject<number>(null);

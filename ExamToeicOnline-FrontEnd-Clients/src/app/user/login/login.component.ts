@@ -3,6 +3,7 @@ import { AuthResponseData, UserService } from './../user.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import {ToastService} from 'ng-uikit-pro-standard'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   model: any = {
-    username: "nhan",
+    username: "ngan",
     password: "12345678"
   };
 
@@ -20,12 +21,22 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastService:ToastService
   ) { }
 
   ngOnInit(): void {
   }
-
+  showError() {
+    const options = { opacity: 1 };
+    
+    this.toastService.error('Login failed!', 'Info message',options);
+  } 
+  showSuccess() {
+    const options = { opacity: 1 };
+    
+    this.toastService.success('Login success!', 'Info message',options);
+  }
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
@@ -42,10 +53,11 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
+        this.showSuccess();
         this.router.navigate(['/home']);
       },
       error => {
-        alert(error);
+        this.showError();
       }
     );
 

@@ -23,12 +23,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
 
+  
   ngOnInit() {
     this.userSub = this.userService.account.subscribe((account) => {
       this.currentAccount = account;
       this.isAuthenticated = !!account;
     });
-
+    
   }
 
   onLogout() {

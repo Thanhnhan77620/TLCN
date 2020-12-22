@@ -57,11 +57,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
                 return NotFound("Can not found any Record!");
             }
-           
-            
-
         }
-
-
     }
 }

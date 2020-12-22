@@ -10,7 +10,6 @@ export class UserProfile {
         public phone: string,
         public email: string,
         public image: string
-        
     ){}
 
 }

@@ -10,11 +10,12 @@ using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
 using ExamToeicOnline_FrontEnd_Clients.Models;
 using ExamToeicOnline_BackEnd_Clients.Controllers;
 using ExamToeicOnline_BackEnd_Clients.Common;
-using System.Net.Http.Headers;
+using System.Net.Http.Headers;      
 using System.IO;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using BC = BCrypt.Net.BCrypt;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ExamToeicOnline_BackEnd_Clients.Controllers
 {
@@ -24,10 +25,12 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     {
         private readonly ExamToeicOnlineDBContext _context;
         private readonly IStorageService _storageService;
-        public UsersController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public UsersController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService, IWebHostEnvironment webHostEnvironment)
         {
             this._context = examToeicOnlineDBContext;
             this._storageService = storageService;
+            this._webHostEnvironment = webHostEnvironment;
 
         }
         // GET: get all user 
@@ -42,11 +45,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
             }
             return Ok(user);
-            
-
         }
         //GET: get one user
-       [HttpGet("{UserId}")]
+        [HttpGet("{UserId}")]
         public async Task<IActionResult> GetUserById(Guid UserId)
         {
             var user = await this._context.Users.Where(u => u.Id == UserId).FirstOrDefaultAsync();
@@ -57,8 +58,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             return Ok(user);
         }
-
-
 
         //  POST: register
         [HttpPost]
@@ -72,7 +71,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             else
             {
-
                 try
                 {
                     //create uer
@@ -102,91 +100,65 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
                     return BadRequest(err.Message);
                 }
-
             }
-
-         
             return Ok(user);
         }
+
+        [HttpPut("{UserId}")]
+        public async Task<IActionResult> Update([FromForm] UserVM request)
+        {
+            var users = await this._context.Users.Where(u => u.Id != request.Id).ToArrayAsync();
+            var userCurrent = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
+            if (userCurrent == null)
+            {
+                return NotFound("Can not foud the user with ID=" + request.Id);
+            }
+            else
+            {
+                userCurrent.Fullname = request.Fullname;
+                userCurrent.PhoneNumber = request.PhoneNumber;
+                //check email exists
+                foreach (var user in users)
+                {
+                    if (user.Email==request.Email)
+                    {
+                        return BadRequest("Email " + request.Email + " exist!");
+                    }
+                    else
+                    {
+                        userCurrent.Email = request.Email;
+                        break;
+                    }
+                }
+                userCurrent.Birthday = request.Birthday;
+
+                if (request.Image!=null)
+                {
+                    //host static image
+                    Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                    string nameImage = unixTimestamp.ToString() + "." + request.Image.FileName.Split('.')[1];
+                    string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\avatars\\";
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
+                    {
+                        await request.Image.CopyToAsync(fileStream);
+                        fileStream.Flush();
+                    }
+                    userCurrent.Image = "https://localhost:5001/wwwroot/uploads/avatars/" + nameImage;
+                }
+                    
+                
+                
+               
+                this._context.Users.Update(userCurrent);
+                await this._context.SaveChangesAsync();
+
+            }
+            return Ok(userCurrent);
+        }
        
-        //[HttpPut("{UserId}")]
-        //public async Task<IActionResult> Update([FromForm] UserVM request)
-        //{
-        //    var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
-        //    if (user == null)
-        //    {
-        //        return NotFound("Can not foud the user with ID=" + request.Id);
-        //    }
-        //    else
-        //    {
-        //        user.Fullname = request.Fullname;
-        //        user.PhoneNumber = request.PhoneNumber;
-        //        //check email exists
-        //        if(await checkEmailNotExit(request.Id, request.Email)==false)
-        //        {
-        //            return BadRequest("Email " + request.Email + " exist!");
-        //        }
-        //        else
-        //        {
-        //            user.Email = request.Email;
-        //        }
-        //        user.Birthday = request.Birthday;
-        //        user.Image = request.Image;
-        //        this._context.Users.Update(user);
-        //        await this._context.SaveChangesAsync();
-
-        //    }
-        //    return Ok("Update infomation successfully!");
-        //}
-
-        //[HttpGet("pp")]
-        //public async Task<IActionResult> checkEmailNotExit(Guid id ,string email)
-        //{
-        //    var user1 = from u in this._context.Users
-        //               where u.Id==id
-        //               select u;
-        //    var user = await this._context.Users.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
-        //    if (user == null)
-        //    {
-        //        return NotFound("Can not foud the user with ID=" + request.Id);
-        //    }
-        //    else
-        //    {
-        //        user.Fullname = request.Fullname;
-        //        user.PhoneNumber = request.PhoneNumber;
-        //        ////check email exists
-        //        //if(await this._context.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync()!=null)
-        //        //{
-        //        //    return BadRequest("Email " + request.Email + " exist!");
-        //        //}
-        //        //else
-        //        //{
-        //        //    user.Email = request.Email;
-        //        //}
-        //        user.Email = request.Email;
-        //        user.Birthday = request.Birthday;
-        //        user.Image = request.Image;
-        //        //Save image
-        //        //if (HttpContext.Request.Form.Files.Count > 0)
-        //        //{
-        //        //    var file = HttpContext.Request.Form.Files[0];
-
-        //        //    byte[] fileData = null;
-
-        //        //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-        //        //    {
-        //        //        fileData = binaryReader.ReadBytes((int)file.Length);
-        //        //    }
-
-
-        //    var user2 = from u in this._context.Users
-        //                where !(from m in this._context.Users select m.Id).Contains(id)
-        //                select u;
-
-        //    var user = await this._context.Users.Select(user => user.Id).Contains("d");
-
-        //    return Ok((from m in this._context.Users select m.Id).Contains(id));
-        //}
-        
     }
 }

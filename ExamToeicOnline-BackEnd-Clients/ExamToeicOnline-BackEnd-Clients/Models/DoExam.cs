@@ -9,10 +9,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Models
     public class DoExam
     {
         public int Id { get; set; }
-        public DateTime dateStart { get; set; }
+        public DateTime StartedAt { get; set; }
+        public DateTime FinishedAt { get; set; }
         public int Score { get; set; }
-        public DateTime Effort { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
         public int ExamId { get; set; }
         public Exam Exam { get; set; }

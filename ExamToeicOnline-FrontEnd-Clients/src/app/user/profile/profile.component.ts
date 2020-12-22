@@ -1,83 +1,127 @@
 import { observable, Observable, Subscriber} from 'rxjs';
-import { NgForm} from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from "@angular/router";
 import { Component, OnInit, Output,HostListener ,EventEmitter} from '@angular/core';
 import { ProfileService } from './profile.service'
 import { UserProfile } from "./../../model/userProfile.model";
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { UserService } from '../user.service';
+import { Account } from './../../model/account.model';
+import { Guid } from 'guid-typescript';
+import * as moment from 'moment';
+import { UserUpdate } from './../../model/userUpdate.model';
+import { ViewEncapsulation } from '@angular/core';
+import {ToastService} from 'ng-uikit-pro-standard'
+
 @Component({
     selector: 'app-profile',
-    templateUrl: './profile.component.html'
+    templateUrl: './profile.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 
 export class ProfileComponent implements OnInit  {
   
-
-    constructor(private profileService: ProfileService ){}
+    constructor(
+        private userService: UserService,
+        private router: Router,
+        private fb: FormBuilder,
+        private toastService:ToastService
+        ){ }
+    
+       
+    userProfile:UserProfile;
+    key=1;
     ngOnInit(): void {
-
+      
+        this.userProfile = {
+            id:localStorage.getItem('UserId'),
+            email:localStorage.getItem('email'),
+            fullName:localStorage.getItem('fullName'),
+            phone:(localStorage.getItem('phone')!='null')?localStorage.getItem('phone'):"",
+            image:localStorage.getItem('image'),
+            birthDate:new Date(localStorage.getItem('birthday'))
+        }
     }
 
-    userProfile:UserProfile   
+    oldPassWord:'';
+    newPassWord:'';
+    ConfirmNewPassWord:'';
+    options = { opacity: 1 };
+    
+
+    onChangePassword(formProFile:NgForm){
+        this.userService.changePassword(localStorage.getItem('userName'),formProFile.value.oldPassWord,formProFile.value.newPassWord)
+        .subscribe(
+            result => this.showSuccess(),
+            error => {
+                this.toastService.error(error.message, 'Info message',this.options);
+            }
+            
+        );
+        this.oldPassWord='';
+        this.newPassWord='';
+        this.ConfirmNewPassWord='';
+        
+    }
+  
+
+    showSuccess() {
+        this.toastService.success('Upload information success!', 'Info message',this.options);
+    }
+    showError() {
+        this.toastService.error('Old PassWord Incorrect!', 'Info message',this.options);
+    }
     myImage:Observable<any>;
+    userUpdate:UserUpdate
+    file:File;
+    
+    routerChangePassword(){
+        this.key=2;
 
-    file: string;
-
-    // id=Guid.parse("f255c9a7-7185-4a5d-b22d-3c3c9351e399");  
+    }
+    routerChangeProfile(){
+        this.key=1;
+    }
     onSave(formProFile: NgForm) {
-
-        // this.userProfile.id="f255c9a7-7185-4a5d-b22d-3c3c9351e399";
-        // this.userProfile.fullName=formProFile.value.fullName;
-        // this.userProfile.birthDate=formProFile.value.birthDate;
-        // this.userProfile.phone=formProFile.value.phoneNumber;
-        // this.userProfile.email=formProFile.value.email;
-        // this.userProfile.image=this.file;
-        this.userProfile = {
-            id: "B1B71AC8-AB3B-4897-A6AF-4A64B6F9A731",
+        this.userUpdate = {
+            id: localStorage.getItem('UserId'),
             fullName: formProFile.value.fullName,
             birthDate: formProFile.value.birthDate,
             phone: formProFile.value.phoneNumber,
             email: formProFile.value.email,
             image: this.file
-        } 
-       // console.log(this.userProfile)
-        // this.profileService.updateProfile(this.userProfile)
-        console.log(formProFile.value);
+        }
+      
+        this.userService.updateProfile(this.userUpdate)
+                        .subscribe(
+                            result => {
+                                this.userService.setStorageCurrentUser(Guid.parse(this.userUpdate.id));
+                                this.showSuccess()
+                            },
+                            error => {this.showError()}
+                        ); 
 
     }
 
     onChange($event: Event) {
-        const file = ($event.target as HTMLInputElement).files[0];
-        this.ConvertToBase64(file);
+        this.file = ($event.target as HTMLInputElement).files[0];
+        this.ConvertToBase64(this.file);
        
-
     }
     ConvertToBase64(file: File) {
-        this.myImage = new Observable((subscriber: Subscriber<any>) => {
-            this.readFile(file, subscriber);
-
-        });
-        this.myImage.subscribe((d) => {
-            // this.userProfile.image=d.toString();
-            // console.log(d.replace("data:image/jpeg;base64,",""))
-            this.file = d.replace("data:image/jpeg;base64,", "")
-            // console.log(this.file)
-
-            // })
-            // //console.log(this.myImage.subscribe())
-            // this.userProfile.image=this.myImage.toString();
-
-        })
+        if(file!=null){
+            this.myImage = new Observable((subscriber: Subscriber<any>) => {
+                this.readFile(file, subscriber);
+            });
+        }
     }
-
-
     readFile(file: File, subscriber: Subscriber<any>) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             subscriber.next(fileReader.result);
             subscriber.complete();
-
-
         };
         fileReader.onerror = (error) => {
             subscriber.error(error);

@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   error: string;
   authObs: Observable<User>;
   isRememberLogin: boolean = false;
-
+  
   private validationMessage = {
     required: 'Please enter your email address.',
     match: "Confirm Password don't match with Password",
@@ -84,7 +84,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         if (this.isRememberLogin) {
           this.userService.login(resData.accounts[0].username, password).subscribe(
             res => {
+              
               this.router.navigate(['/home']);
+              
             },
             errorMessage => {
               this.error = errorMessage;
