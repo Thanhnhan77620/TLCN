@@ -39,9 +39,7 @@ export class ProfileComponent implements OnInit  {
             phone:(localStorage.getItem('phone')!='null')?localStorage.getItem('phone'):"",
             image:localStorage.getItem('image'),
             birthDate:new Date(localStorage.getItem('birthday'))
-            
         }
-        
     }
 
     oldPassWord:'';
