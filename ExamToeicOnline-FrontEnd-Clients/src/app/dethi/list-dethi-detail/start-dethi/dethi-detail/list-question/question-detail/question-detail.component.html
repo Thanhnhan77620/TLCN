@@ -1,14 +1,16 @@
 <div class="answer" id="{{question.id}}">
     <p><b>{{question.content}}</b></p>
     <div *ngIf="question.image">
-        <img src="{{question.image}}" alt="1. Select the answer" style="width: 100%">
+        <img src="{{question.image}}" alt="{{question.content}}" style="width: 100%">
     </div>
-    <ul class="answer-list ">
-        <li *ngFor="let answer of question.anwsers; let i = index">
-            <input type="radio" name="Answers[{{question.id}}]" [value]="i" (change)="changeSelected($event)">
-            <label for="771">
-                <i class="icon icon_radio"></i>
-                {{answer.content}} </label>
-        </li>
-    </ul>
+    <div>
+        <ul class="answer-list">
+            <li *ngFor="let answer of question.anwsers; let i = index">
+                <input type="radio" value="i" (change)="changeSelected($event)">
+                <label for="771">
+                    <i class="icon icon_radio"></i>
+                    {{answer.content}} </label>
+            </li>
+        </ul>
+    </div>
 </div>
