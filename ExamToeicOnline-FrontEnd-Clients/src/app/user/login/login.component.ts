@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
   error: string = null;
+  returnUrl: string;
 
   constructor(
     private userService: UserService,
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.userService.redirectUrl;
   }
 
   onSubmit(form: NgForm) {
@@ -42,7 +44,11 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        this.router.navigate(['/home']);
+        if (this.returnUrl) {
+          this.router.navigateByUrl(this.returnUrl);
+        } else {
+          this.router.navigate(['/home']);
+        }
       },
       error => {
         alert(error);
