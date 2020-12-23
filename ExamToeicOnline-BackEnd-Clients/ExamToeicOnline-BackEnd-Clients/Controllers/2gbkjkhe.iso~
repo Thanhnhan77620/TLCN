@@ -59,7 +59,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(listExam);
         }
 
-        [HttpPost("{import}/{exam}")]
+        [HttpPost("{import}")]
         public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVM)
         {
             string nameFile = importExamVM.ExcelFile.FileName;
@@ -403,127 +403,35 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             await this._context.SaveChangesAsync();
             return 1;
         }
-        [HttpPost("{import}")]
-        public async Task<IActionResult> ImportAnswer([FromForm] ImportExamVM importExamVM)
-        {
-
-            string nameFile = importExamVM.ExcelFile.FileName;
-            string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\score\\";
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-            using (FileStream fileStream = System.IO.File.Create(filePath + nameFile))
-            {
-                await importExamVM.ExcelFile.CopyToAsync(fileStream);
-                fileStream.Flush();
-            }
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            var stream = System.IO.File.Open(filePath + nameFile, FileMode.Open, FileAccess.Read, FileShare.None);
-            var reader = ExcelReaderFactory.CreateReader(stream);
-            using (stream)
-            {
-                using (reader)
-                {
-                    while (reader.Read())
-                    {
-                        this._context.Scores.Add(new Score()
-                        {
-                            numberQuestion = Int32.Parse(reader.GetValue(0).ToString()),
-                            ScoreLC = Int32.Parse(reader.GetValue(1).ToString()),
-                            ScoreRC = Int32.Parse(reader.GetValue(2).ToString())
-                        });
-                        await this._context.SaveChangesAsync();
-                    }
-
-                }
-            }
-            return Ok("Import success!");
-        }
 
         [HttpPost("tomark")]
         public async Task<IActionResult> ToMark([FromBody] FeedbacAnswerVM feedbacAnswerVM)
         {
-            int countLC = 0;
-            int countRC = 0;
-            int i = 0;
-            var answerCorrects = from q in this._context.Questions
-                                join a in this._context.Anwsers on q.Id equals a.QuestionId
-                                where q.ExamId == feedbacAnswerVM.ExamId && a.Correct == true
-                                select new AnswerSelectVM()
-                                {
-                                    QuestionId = q.Id,
-                                    AnswerId = a.Id
-                                };
-            foreach (var answerCorrect in answerCorrects)
-            {
-                if (i<100)
-                {
-                    if (feedbacAnswerVM.answerSelectVMs[i].AnswerId == answerCorrect.AnswerId)
-                    {
-                        countLC++;
-                    }
-                }
-                else
-                {
-                    if (feedbacAnswerVM.answerSelectVMs[i].AnswerId == answerCorrect.AnswerId)
-                    {
-                        countRC++;
-                    }
-                }
-                
-                i++;
-            }
-            var scores = await this._context.Scores.Where(s => s.numberQuestion == countLC || s.numberQuestion == countRC).ToArrayAsync();
-            int Score = 0;
-            int ScoreListening = 0;
-            int ScoreReading = 0;
-            foreach (var item in scores)
-            {
-                if (countLC != countRC)
-                {
-                    if (item.numberQuestion == countLC)
-                    {
-                        ScoreListening = item.ScoreLC;
-                    }
-                    if (item.numberQuestion == countRC)
-                    {
-                        ScoreReading = item.ScoreRC;
-                    }
-                }
-                else
-                {
-                    ScoreListening = item.ScoreLC;
-                    ScoreReading=item.ScoreRC;
-                }
-            }
-            this._context.DoExams.Add(new DoExam()
-            {
-                StartedAt = UnixTimeStampToDateTime(feedbacAnswerVM.StartedAt),
-                FinishedAt = UnixTimeStampToDateTime(feedbacAnswerVM.FinishedAt),
-                ScoreListening = ScoreListening,
-                ScoreReading= ScoreReading,
-                UserId=feedbacAnswerVM.UserId,
-                ExamId=feedbacAnswerVM.ExamId
-            });
-            await this._context.SaveChangesAsync();
-            var doexam = await this._context.DoExams.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-            return Ok(doexam);
-        }
+            int count = 0;
+            // var questionInExam = await this._context.Questions.Where(q => q.ExamId == 2).Select(q=>q.Id).ToArrayAsync();
+            var questionInExam = from q in this._context.Questions
+                                 join a in this._context.Anwsers on q.Id equals a.QuestionId
+                                 where q.ExamId == feedbacAnswerVM.ExamId && a.Correct==true
+                                 select new AnswerSelectVM()
+                                 {
+                                     QuestionId = q.Id,
+                                     AnswerId = a.Id
+                                 };
+            // var answerCorrect= await this._context.Anwsers.Where(a=>a.)
 
-        public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
-        }
+            //foreach (var answerSelectVM in feedbacAnswerVM.answerSelectVMs)
+            //{
+            //    (answerSelectVM.)
+            //}
 
+
+            return Ok(questionInExam);
+
+
+        }
 
 
 
 
     }
-   
-
 }
