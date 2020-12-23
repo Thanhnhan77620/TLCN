@@ -1,8 +1,9 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Question } from './../../../../../model/question.model';
-import { DethiService } from 'src/app/dethi/dethi.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupQuestion, ListQuestionResolved } from 'src/app/model/groupQuestion.model';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-list-question',
@@ -23,8 +24,15 @@ export class ListQuestionComponent implements OnInit {
   partNumberChanged: number | null;
   isSubmit: boolean = false;
 
+  listAnswers = [];
+  answerSelected = {
+    question: '',
+    answerOption: ''
+  }
+
   constructor(private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private fb: FormBuilder) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -34,6 +42,7 @@ export class ListQuestionComponent implements OnInit {
         this.resolvedData = data.resolvedListQuestionsData;
       }
     )
+
     this.errorMessage = this.resolvedData.error;
     this.listQuestion = this.resolvedData.listQuestions;
     this.listQuestionSort = this.listQuestion[0].questions.sort(
@@ -44,11 +53,12 @@ export class ListQuestionComponent implements OnInit {
     this.partNumber = +this.route.snapshot.queryParamMap.get('part');
     this.deThiId = +this.route.snapshot.queryParamMap.get('examId');
     this.numberQuestion = +this.route.snapshot.queryParamMap.get('numberQuestion');
+
   }
 
   onNext() {
     const len = this.listQuestion[0].questions.length;
-    this.numberQuestion = (this.listQuestion[0].questions[len - 1].id - ((this.deThiId - 1) * 100) + 1);
+    this.numberQuestion = (this.listQuestion[0].questions[len - 1].id - ((this.deThiId - 1) * 200) + 1);
     this.changedPart(this.numberQuestion);
     if (this.partNumber != this.partNumberChanged) {
       this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiId, part: this.partNumberChanged } })
@@ -75,4 +85,24 @@ export class ListQuestionComponent implements OnInit {
       this.partNumberChanged = 7;
     }
   }
+
+
+  handleChanged(event) {
+    let answer = event.target.value;
+    let question = event.target.name;
+    if (sessionStorage.getItem('listAnswerSelected')) {
+      this.listAnswers = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
+      let index = this.listAnswers.findIndex((e) => e.question == question) + 1;
+      if (index) {
+        this.listAnswers[index - 1].answerOption = answer;
+      }
+      else {
+        this.listAnswers.push({ question: question, answerOption: answer });
+      }
+    } else {
+      this.listAnswers.push({ question: question, answerOption: answer });
+    }
+    sessionStorage.setItem("listAnswerSelected", JSON.stringify(this.listAnswers));
+  }
+
 }

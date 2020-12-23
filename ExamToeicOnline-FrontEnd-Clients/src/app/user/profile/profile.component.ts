@@ -1,6 +1,6 @@
 import { observable, Observable, Subscriber} from 'rxjs';
 import { DatePipe } from '@angular/common';
-import { NgForm} from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Component, OnInit, Output,HostListener ,EventEmitter} from '@angular/core';
 import { ProfileService } from './profile.service'
@@ -25,9 +25,11 @@ export class ProfileComponent implements OnInit  {
     constructor(
         private userService: UserService,
         private router: Router,
+        private fb: FormBuilder,
         private toastService:ToastService
         ){ }
-  
+    
+       
     userProfile:UserProfile;
     key=1;
     ngOnInit(): void {
@@ -46,6 +48,8 @@ export class ProfileComponent implements OnInit  {
     newPassWord:'';
     ConfirmNewPassWord:'';
     options = { opacity: 1 };
+    
+
     onChangePassword(formProFile:NgForm){
         this.userService.changePassword(localStorage.getItem('userName'),formProFile.value.oldPassWord,formProFile.value.newPassWord)
         .subscribe(
@@ -58,8 +62,10 @@ export class ProfileComponent implements OnInit  {
         this.oldPassWord='';
         this.newPassWord='';
         this.ConfirmNewPassWord='';
-
+        
     }
+  
+
     showSuccess() {
         this.toastService.success('Upload information success!', 'Info message',this.options);
     }
@@ -86,6 +92,7 @@ export class ProfileComponent implements OnInit  {
             email: formProFile.value.email,
             image: this.file
         }
+      
         this.userService.updateProfile(this.userUpdate)
                         .subscribe(
                             result => {

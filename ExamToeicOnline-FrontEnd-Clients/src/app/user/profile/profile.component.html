@@ -122,7 +122,7 @@
                 <mdb-card-body class="light-color px-lg-5 pt-0" *ngIf="key==2">
                     <div class="mt-3">
                         <div class="row justify-content-center ">
-                            <form  (ngSubmit)="onChangePassword(formProFile)" #formProFile="ngForm"  class="text-center" style="color: #030303;">
+                            <form  (ngSubmit)="onChangePassword(formProFile)" #formProFile="ngForm" class="text-center" style="color: #030303;">
                                 <div class="row text-left">
                                     <div class="col-lg col-sm-4 pt-2">
                                         <div class="form-group">
@@ -159,8 +159,10 @@
                                     <div class="col-lg col-sm-8 ">
                                         <div class="form-group">
                                             <input mdbInput type="password" [(ngModel)]="ConfirmNewPassWord" name="ConfirmNewPassWord" required placeholder="Confirm password"
-                                                class="form-control" />
+                                                class="form-control"  />
                                         </div>
+                                       
+                                     <p *ngIf="formProFile.controls.ConfirmNewPassWord.touched && (formProFile.control.value.ConfirmNewPassWord!=formProFile.control.value.newPassWord)" style="color: red;">Comfirm not matching!</p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">

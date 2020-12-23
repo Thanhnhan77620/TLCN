@@ -3,7 +3,7 @@ import { AuthResponseData, UserService } from './../user.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import {ToastService} from 'ng-uikit-pro-standard'
+import { ToastService } from 'ng-uikit-pro-standard'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,24 +18,22 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
   error: string = null;
-
+  returnUrl: string;
+  options = { opacity: 1 };
   constructor(
     private userService: UserService,
     private router: Router,
-    private toastService:ToastService
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.userService.redirectUrl;
   }
   showError() {
-    const options = { opacity: 1 };
-    
-    this.toastService.error('Login failed!', 'Info message',options);
-  } 
+    this.toastService.error('Login failed!', 'Info message', this.options);
+  }
   showSuccess() {
-    const options = { opacity: 1 };
-    
-    this.toastService.success('Login success!', 'Info message',options);
+    this.toastService.success('Login success!', 'Info message', this.options);
   }
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -53,8 +51,12 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       resData => {
-        this.showSuccess();
-        this.router.navigate(['/home']);
+        if (this.returnUrl) {
+          this.router.navigateByUrl(this.returnUrl);
+        } else {
+          this.showSuccess();
+          this.router.navigate(['/home']);
+        }
       },
       error => {
         this.showError();
