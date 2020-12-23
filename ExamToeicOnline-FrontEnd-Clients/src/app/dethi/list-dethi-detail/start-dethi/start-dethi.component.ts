@@ -38,6 +38,7 @@ export class StartDethiComponent implements OnInit {
 
   onStart() {
     this.router.navigate([`exam/ToeicTest/intro`], { queryParams: { examId: this.deThiCurrent.id, part: 1 } })
+    sessionStorage.setItem('start', Date.now().toString())
     sessionStorage.setItem('duration', (Date.now() + this.deThiCurrent.duration * 60 * 1000).toString());
     this.deThiService.durationStart(+sessionStorage.getItem('duration'));
   }

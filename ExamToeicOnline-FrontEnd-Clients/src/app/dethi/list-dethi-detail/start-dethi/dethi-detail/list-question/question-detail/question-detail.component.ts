@@ -1,3 +1,4 @@
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Instruction } from '../../../../../../model/instruction.model';
 import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/model/question.model';
@@ -11,26 +12,28 @@ import { Component, Input, OnInit } from '@angular/core';
 export class QuestionDetailComponent implements OnInit {
   @Input() question: Question;
   instruction: Instruction = null;
-
-  aswerSelected = {
-    key: null,
-    value: null
-  }
-  listAswerSelected = [
-    this.aswerSelected
-  ]
+  formAnswer: FormGroup;
   deThiId: number | null;
   numberQuestionId: number;
   introPart: number;
   errorMessage: any;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
+    this.formAnswer = this.fb.group({
+      questionId: '',
+      listAnswers: this.fb.array([
+        this.fb.group({
+          option: ''
+        })
+      ])
+    })
   }
 
   changeSelected(event) {
-    // this.answerSelected[this.question.id - (this.question.examId - 1) * 200] = event.target.value;
+    // this.listAnswers.push({ a })
+
   }
 
   onList(listAnswer: Map<number, number>) {

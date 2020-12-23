@@ -1,3 +1,4 @@
+import { AuthGuard } from './../user/auth.guard';
 import { QuestionResolver } from './dethi-resolver.service';
 import { StartDethiComponent } from "./list-dethi-detail/start-dethi/start-dethi.component";
 import { SharedModule } from "./../shared/shared.module";
@@ -56,9 +57,11 @@ import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail
                 resolve: { resolvedListQuestionsData: QuestionResolver },
                 runGuardsAndResolvers: 'paramsOrQueryParamsChange'
               }
-            ]
+            ],
+            canActivate: [AuthGuard]
           },
-        ]
+        ],
+
       }
     ]),
     SharedModule,

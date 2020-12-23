@@ -14,12 +14,26 @@
                 </audio>
             </div>
             <div *ngIf="!isImage_Scritp">
-                <img src="{{listQuestion[0].paragraphs[0].image_Script }}" alt="1. Select the answer"
-                    style="width: 100%">
+                <img src="{{listQuestion[0].paragraphs[0].image_Script }}" style="width: 100%">
             </div>
-            <div *ngFor="let question of listQuestionSort">
-                <app-question-detail [question]="question">
-                </app-question-detail>
+            <div>
+                <div *ngFor="let question of listQuestionSort; let questionIndex = index">
+                    <div class="answer" id="{{question.id}}">
+                        <p><b>{{question.content}}</b></p>
+                        <div *ngIf="question.image">
+                            <img src="{{question.image}}" alt="{{question.content}}" style="width: 100%">
+                        </div>
+                        <div class="answer-list form-group">
+                            <div *ngFor="let answer of question.anwsers; let i = index">
+                                <input type="radio" value="{{answer.id}}" id="{{answer.id}}"
+                                    name="{{answer.questionId}}" (change)="handleChanged($event)">
+                                <label for="{{answer.id}}">
+                                    <i class=" icon icon_radio"></i>
+                                    {{answer.content}} </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div *ngIf="numberQuestion === 196 || numberQuestion===200">
                 <button class="mc-btn btn-style-6 " type="submit">Submit</button>
@@ -28,5 +42,6 @@
                 <button class="mc-btn btn-style-6" (click)="onNext()">Next</button>
             </div>
         </form>
+
     </div>
 </div>

@@ -36,6 +36,9 @@ export class UserService {
   jwtHelper = new JwtHelperService();
   private _isLoginMode: boolean = false;
 
+  public redirectUrl: string;
+
+
   get isLoginMode(): boolean {
     return this._isLoginMode;
   }
