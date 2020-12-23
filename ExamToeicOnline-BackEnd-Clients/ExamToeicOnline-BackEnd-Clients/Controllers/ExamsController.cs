@@ -440,6 +440,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             return Ok("Import success!");
         }
+
         [HttpPost("tomark")]
         public async Task<IActionResult> ToMark([FromBody] FeedbacAnswerVM feedbacAnswerVM)
         {
@@ -498,9 +499,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             this._context.DoExams.Add(new DoExam()
             {
-                StartedAt = DateTime.Now,
-                FinishedAt = DateTime.Now,
-                ScoreListening= ScoreListening,
+                StartedAt = UnixTimeStampToDateTime(feedbacAnswerVM.StartedAt),
+                FinishedAt = UnixTimeStampToDateTime(feedbacAnswerVM.FinishedAt),
+                ScoreListening = ScoreListening,
                 ScoreReading= ScoreReading,
                 UserId=feedbacAnswerVM.UserId,
                 ExamId=feedbacAnswerVM.ExamId
@@ -509,5 +510,20 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var doexam = await this._context.DoExams.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
             return Ok(doexam);
         }
+
+        public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
+
+
+
+
     }
+   
+
 }
