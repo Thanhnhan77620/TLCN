@@ -61,13 +61,14 @@ export class DethiService {
     const body = {
       userid: user.userId,
       examid: +sessionStorage.getItem("examId"),
-      startedat: +sessionStorage.getItem('start'),
-      finishedat: +(Date.now() * 1000),
+      startedat: +sessionStorage.getItem('start')/1000,
+      finishedat: +(Date.now() / 1000),
       answerSelectVMs: JSON.parse(sessionStorage.getItem("listAnswerSelected")),
     }
     console.log(body);
     return this.http.post(`https://localhost:5001/api/exams/tomark`, body)
       .pipe(catchError(this.handleError))
+      
   }
 
   private handleError(err: any): Observable<never> {

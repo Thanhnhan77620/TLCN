@@ -446,34 +446,44 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             int countLC = 0;
             int countRC = 0;
-            int i = 0;
+        
             var answerCorrects = from q in this._context.Questions
-                                join a in this._context.Anwsers on q.Id equals a.QuestionId
-                                where q.ExamId == feedbacAnswerVM.ExamId && a.Correct == true
-                                select new AnswerSelectVM()
-                                {
-                                    QuestionId = q.Id,
-                                    AnswerId = a.Id
-                                };
-            foreach (var answerCorrect in answerCorrects)
+                                 join a in this._context.Anwsers on q.Id equals a.QuestionId
+                                 where q.ExamId == feedbacAnswerVM.ExamId && a.Correct == true
+                                 select new AnswerSelectVM()
+                                 {
+                                     QuestionId = q.Id,
+                                     AnswerId = a.Id
+                                 };
+            List<AnswerSelectVM> answerSelected = new List<AnswerSelectVM>();
+            foreach (var item in answerCorrects)
             {
-                if (i<100)
-                {
-                    if (feedbacAnswerVM.answerSelectVMs[i].AnswerId == answerCorrect.AnswerId)
-                    {
-                        countLC++;
-                    }
-                }
-                else
-                {
-                    if (feedbacAnswerVM.answerSelectVMs[i].AnswerId == answerCorrect.AnswerId)
-                    {
-                        countRC++;
-                    }
-                }
-                
-                i++;
+                answerSelected.Add(item);
             }
+            foreach (var item in feedbacAnswerVM.answerSelectVMs)
+            {
+                for (int idx = 0; idx < answerSelected.Count; idx++)
+                {
+                    if (item.QuestionId == answerSelected[idx].QuestionId && item.AnswerId == answerSelected[idx].AnswerId)
+                    {
+                        if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) >= 0)
+                        {
+                            if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) <= 99)
+                            {
+                                countLC++;
+                            }
+                            else
+                            {
+                                countRC++;
+                            }
+
+                        }
+                        idx = answerSelected.Count;
+                    }
+                }
+             
+            }
+
             var scores = await this._context.Scores.Where(s => s.numberQuestion == countLC || s.numberQuestion == countRC).ToArrayAsync();
             int Score = 0;
             int ScoreListening = 0;
@@ -494,7 +504,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 else
                 {
                     ScoreListening = item.ScoreLC;
-                    ScoreReading=item.ScoreRC;
+                    ScoreReading = item.ScoreRC;
                 }
             }
             this._context.DoExams.Add(new DoExam()
@@ -502,13 +512,20 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 StartedAt = UnixTimeStampToDateTime(feedbacAnswerVM.StartedAt),
                 FinishedAt = UnixTimeStampToDateTime(feedbacAnswerVM.FinishedAt),
                 ScoreListening = ScoreListening,
-                ScoreReading= ScoreReading,
-                UserId=feedbacAnswerVM.UserId,
-                ExamId=feedbacAnswerVM.ExamId
+                ScoreReading = ScoreReading,
+                UserId = feedbacAnswerVM.UserId,
+                ExamId = feedbacAnswerVM.ExamId
             });
             await this._context.SaveChangesAsync();
             var doexam = await this._context.DoExams.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-            return Ok(doexam);
+            DoExamVM doExamVM = new DoExamVM();
+            doExamVM.UserId = doexam.UserId;
+            doExamVM.ExamId = doexam.ExamId;
+            doExamVM.StartedAt = doexam.StartedAt;
+            doExamVM.FinishedAt = doexam.FinishedAt;
+            doExamVM.ScoreListening = doexam.ScoreListening;
+            doExamVM.ScoreReading = doexam.ScoreReading;
+            return Ok(doExamVM);
         }
 
         public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
@@ -518,10 +535,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
-
-
-
-
 
     }
    
