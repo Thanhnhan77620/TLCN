@@ -472,29 +472,33 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             {
                 answerSelected.Add(item);
             }
-            foreach (var item in feedbacAnswerVM.answerSelectVMs)
+            if (feedbacAnswerVM.answerSelectVMs!=null)
             {
-                for (int idx = 0; idx < answerSelected.Count; idx++)
+                foreach (var item in feedbacAnswerVM.answerSelectVMs)
                 {
-                    if (item.QuestionId == answerSelected[idx].QuestionId && item.AnswerId == answerSelected[idx].AnswerId)
+                    for (int idx = 0; idx < answerSelected.Count; idx++)
                     {
-                        if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) >= 0)
+                        if (item.QuestionId == answerSelected[idx].QuestionId && item.AnswerId == answerSelected[idx].AnswerId)
                         {
-                            if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) <= 99)
+                            if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) >= 0)
                             {
-                                countLC++;
-                            }
-                            else
-                            {
-                                countRC++;
-                            }
+                                if (answerSelected.FindIndex(a => a.QuestionId == answerSelected[idx].QuestionId) <= 99)
+                                {
+                                    countLC++;
+                                }
+                                else
+                                {
+                                    countRC++;
+                                }
 
+                            }
+                            idx = answerSelected.Count;
                         }
-                        idx = answerSelected.Count;
                     }
+
                 }
-             
             }
+            
 
             var scores = await this._context.Scores.Where(s => s.numberQuestion == countLC || s.numberQuestion == countRC).ToArrayAsync();
             int Score = 0;

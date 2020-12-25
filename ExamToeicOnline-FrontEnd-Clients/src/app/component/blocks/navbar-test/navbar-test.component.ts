@@ -99,16 +99,14 @@ export class NavbarTestComponent implements OnInit {
   onFinished(event: CountdownEvent) {
     if (event.action == 'done') {
       alert('Time out - Stop it');
-      sessionStorage.removeItem('duration');
+      this.onSubmit();
     }
-  }
-
-  onStop(event: CountdownEvent) {
-
   }
 
 
   onSubmit() {
+    this.countdown.stop();
+    this.countdown.restart();
     this.deThiService.submit().subscribe(
       (data: any) => {
         console.log(data)
