@@ -5,9 +5,8 @@ import { DethiModule } from "./dethi/dethi.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MDBBootstrapModule } from "angular-bootstrap-md";
 import { HttpClientModule } from "@angular/common/http";
-import { ToastModule } from 'ng-uikit-pro-standard';
+import { MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
 
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./component/blocks/navbar/navbar.component";
@@ -42,7 +41,7 @@ import { CountdownModule } from "ngx-countdown";
     BrowserModule,
     CountdownModule,
     BrowserAnimationsModule,
-    MDBBootstrapModule.forRoot(),
+    MDBBootstrapModulesPro.forRoot(),
     ToastModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,

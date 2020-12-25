@@ -1,12 +1,12 @@
 import { SubmitComponent } from './../../../dethi/list-dethi-detail/start-dethi/dethi-detail/list-question/submit/submit.component';
-import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
 import { DethiService } from './../../../dethi/dethi.service';
-import { Component, OnInit, Pipe, PipeTransform, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
+import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-navbar-test',
@@ -21,9 +21,26 @@ export class NavbarTestComponent implements OnInit {
   deThiCurrent: DeThi;
   counter: number;
   message: string;
-  validatingForm: FormGroup;
   isSubmit: boolean = false;
   modalRef: MDBModalRef;
+  modalOptions = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: false,
+    ignoreBackdropClick: false,
+    class: '',
+    containerClass: '',
+    animated: true,
+    data: {
+      content: {
+        scoreListening: '',
+        scoreReading: '',
+        score: ''
+      }
+    }
+  }
+
   @ViewChild('countdown') countdown: CountdownComponent;
   constructor(private deThiService: DethiService,
     private route: ActivatedRoute,
@@ -48,16 +65,6 @@ export class NavbarTestComponent implements OnInit {
         this.onPartName(this.partIntro);
       }
     )
-    this.onModalService();
-  }
-
-  onInitFormSubmit() {
-    this.validatingForm = new FormGroup({
-      contactFormModalName: new FormControl('', Validators.required),
-      contactFormModalEmail: new FormControl('', Validators.email),
-      contactFormModalSubject: new FormControl('', Validators.required),
-      contactFormModalMessage: new FormControl('', Validators.required)
-    });
   }
 
   onPartName(partNumber: number | null) {
@@ -96,38 +103,32 @@ export class NavbarTestComponent implements OnInit {
     }
   }
 
-  openModel() {
-    this.modalRef = this.modalService.show(SubmitComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: '',
-      containerClass: '',
-      animated: true
-    });
+  onStop(event: CountdownEvent) {
 
   }
-  onModalService() {
-    this.modalService.open.subscribe(() => console.log('open'));
-    this.modalService.opened.subscribe(() => console.log('opened'));
-    this.modalService.close.subscribe(() => console.log('close'));
-    this.modalService.closed.subscribe(() => console.log('closed'));
-  }
+
 
   onSubmit() {
-    // this.deThiService.submit().subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   },
-    //   errorMessage => {
-    //     this.message = errorMessage;
-    //     console.log(this.message)
-    //   }
-    // )
-    this.openModel();
+    this.deThiService.submit().subscribe(
+      (data: any) => {
+        console.log(data)
+        this.modalOptions.data.content.scoreListening = data.scoreListening
+        this.modalOptions.data.content.scoreReading = data.scoreReading
+        this.modalOptions.data.content.score = data.scoreListening + data.scoreReading
+
+      },
+      errorMessage => {
+        this.message = errorMessage;
+        console.log(this.message)
+      }
+    )
+
+    this.modalRef = this.modalService.show(SubmitComponent, this.modalOptions)
     this.isSubmit = true;
+    sessionStorage.removeItem("listAnswerSelected");
+    sessionStorage.removeItem("start");
+    sessionStorage.removeItem("duration");
+    sessionStorage.removeItem("examId");
   }
 
   onCancel() {

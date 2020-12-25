@@ -530,10 +530,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
 
         public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
+            TimeSpan time = TimeSpan.FromMilliseconds(unixTimeStamp);
+            DateTime startdate = new DateTime(1970, 1, 1) + time;
+            DateTime dateInLocalTimeFormat = startdate.ToLocalTime();
+            return dateInLocalTimeFormat;
         }
 
     }

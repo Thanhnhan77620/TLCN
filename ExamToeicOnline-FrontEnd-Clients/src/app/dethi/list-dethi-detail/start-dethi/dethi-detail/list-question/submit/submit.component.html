@@ -8,16 +8,16 @@
     <div class="modal-body">
         <div id="fulltest_result">
             <div class="result_detail"> <label>Listening</label>
-                <div class="result_score result_score_list">15</div>
+                <div class="result_score result_score_list">{{content.scoreListening}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="result_detail"> <label>Reading</label>
-                <div class="result_score result_score_read">0</div>
+                <div class="result_score result_score_read">{{content.scoreReading}}</div>
                 <div class="clearfix"></div>
             </div>
 
             <div class="result_detail "> <label>Tổng điểm</label>
-                <div class="result_score result_score_total result_highlight">15</div>
+                <div class="result_score result_score_total result_highlight">{{content.score}}</div>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -26,7 +26,8 @@
         <button mdbBtn class="waves-ligh" mdbWavesEffect><b>Hiện đán án</b>
             <mdb-icon fas icon="angle-double-right" class="ml-1"></mdb-icon>
         </button>
-        <button mdbBtn class="waves-ligh" style="background-color:#d0d6e2; color: #bf360c;" mdbWavesEffect><b>Close</b>
+        <button mdbBtn class="waves-ligh" style="background-color:#d0d6e2; color: #bf360c;" mdbWavesEffect
+            (click)="modalRef.hide()"><b>Close</b>
             <mdb-icon fas icon="times-circle" class="ml-1"></mdb-icon>
         </button>
     </div>

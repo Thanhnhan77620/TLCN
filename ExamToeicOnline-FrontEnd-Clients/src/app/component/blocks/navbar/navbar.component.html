@@ -1,7 +1,8 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #00717b;" [containerInside]="true">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #00717b;"
+  [containerInside]="true">
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" routerLink="/home" >TOEIC247.vn</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/home">TOEIC247.vn</a></mdb-navbar-brand>
   <!-- Collapsible content -->
   <links>
     <!-- Links -->
@@ -38,32 +39,33 @@
     </form>
     <!--/ Search form -->
     <!-- User -->
-  
-      <ul class="navbar-nav ml-auto">
-        <!-- Dropdown -->
-        <!-- LoggedIn -->
-        <li class="nav-item dropdown" dropdown>
-  
-  
-          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            <mdb-icon fas icon="user"></mdb-icon>
-            <span> {{ isAuthenticated ? currentAccount.username : 'UserName'}}</span>
-           
-          </a>
-         
-          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isAuthenticated" (click)="onLogin()">Login</a>
-            <a [routerLink]="['/auth', currentAccount.userId,'profile']" routerLinkActive="router-link-active"
-              class="dropdown-item waves-light" mdbWavesEffect *ngIf="isAuthenticated" (click)="onShowProfile()">Profile</a>
-            <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()" *ngIf="isAuthenticated">Log Out</a>
-            <a routerLink="/auth/register" class="dropdown-item waves-light" mdbWavesEffect
-              *ngIf="!isAuthenticated">Register</a>
-          </div>
-          
-        </li>
-      </ul>
-    
-    
+
+    <ul class="navbar-nav ml-auto">
+      <!-- Dropdown -->
+      <!-- LoggedIn -->
+      <li class="nav-item dropdown" dropdown>
+
+
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon>
+          <span> {{ isAuthenticated ? currentAccount.username : 'UserName'}}</span>
+
+        </a>
+
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isAuthenticated" (click)="onLogin()">Login</a>
+          <a [routerLink]="['/auth', currentAccount.userId,'profile']" routerLinkActive="router-link-active"
+            class="dropdown-item waves-light" mdbWavesEffect *ngIf="isAuthenticated"
+            (click)="onShowProfile()">Profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()" *ngIf="isAuthenticated">Log Out</a>
+          <a routerLink="/auth/register" class="dropdown-item waves-light" mdbWavesEffect
+            *ngIf="!isAuthenticated">Register</a>
+        </div>
+
+      </li>
+    </ul>
+
+
     <!-- /User -->
   </links>
 </mdb-navbar>

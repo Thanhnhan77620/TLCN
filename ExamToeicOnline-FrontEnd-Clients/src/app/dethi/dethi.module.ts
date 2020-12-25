@@ -45,10 +45,6 @@ import { SubmitComponent } from './list-dethi-detail/start-dethi/dethi-detail/li
             path: "ToeicTest",
             component: DethiDetailComponent,
             children: [
-              // {
-              //   path: 'submit',
-              //   component: SubmitComponent
-              // },
               {
                 path: 'intro',
                 component: IntroPartComponent,
