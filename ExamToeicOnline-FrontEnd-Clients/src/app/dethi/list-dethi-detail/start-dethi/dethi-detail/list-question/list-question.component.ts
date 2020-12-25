@@ -1,9 +1,12 @@
+import { DethiService } from 'src/app/dethi/dethi.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Question } from './../../../../../model/question.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupQuestion, ListQuestionResolved } from 'src/app/model/groupQuestion.model';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
+import { SubmitComponent } from './submit/submit.component';
 
 @Component({
   selector: 'app-list-question',
@@ -24,6 +27,25 @@ export class ListQuestionComponent implements OnInit {
   partNumberChanged: number | null;
   isSubmit: boolean = false;
   isCheck: boolean = false;
+  message: string;
+  modalRef: MDBModalRef;
+  modalOptions = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: false,
+    ignoreBackdropClick: false,
+    class: '',
+    containerClass: '',
+    animated: true,
+    data: {
+      content: {
+        scoreListening: '',
+        scoreReading: '',
+        score: ''
+      }
+    }
+  }
 
   listAnswers = [];
   answerSelected = {
@@ -33,7 +55,8 @@ export class ListQuestionComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private modalService: MDBModalService,
+    private deThiService: DethiService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -92,7 +115,6 @@ export class ListQuestionComponent implements OnInit {
     let answer = +event.target.value;
     let question = +event.target.name;
     this.isCheck = event.target.checked;
-    console.log(this.isCheck);
     if (sessionStorage.getItem('listAnswerSelected')) {
       this.listAnswers = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
       let index = this.listAnswers.findIndex((e) => e.questionId == question) + 1;
@@ -110,5 +132,27 @@ export class ListQuestionComponent implements OnInit {
 
   onCheck() {
 
+  }
+  onSubmit() {
+    this.deThiService.submit().subscribe(
+      (data: any) => {
+        console.log(data)
+        this.modalOptions.data.content.scoreListening = data.scoreListening
+        this.modalOptions.data.content.scoreReading = data.scoreReading
+        this.modalOptions.data.content.score = data.scoreListening + data.scoreReading
+
+      },
+      errorMessage => {
+        this.message = errorMessage;
+        console.log(this.message)
+      }
+    )
+
+    this.modalRef = this.modalService.show(SubmitComponent, this.modalOptions)
+    this.isSubmit = true;
+    sessionStorage.removeItem("listAnswerSelected");
+    sessionStorage.removeItem("start");
+    sessionStorage.removeItem("duration");
+    sessionStorage.removeItem("examId");
   }
 }

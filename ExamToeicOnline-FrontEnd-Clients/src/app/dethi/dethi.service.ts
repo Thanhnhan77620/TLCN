@@ -1,4 +1,3 @@
-import { Account } from './../model/account.model';
 import { GroupQuestion } from './../model/groupQuestion.model';
 import { Instruction } from '../model/instruction.model';
 import { catchError } from "rxjs/operators";
@@ -13,12 +12,9 @@ import { Question } from "../model/question.model";
   providedIn: "root",
 })
 export class DethiService {
-  private deThiSelected = new BehaviorSubject<number | null>(null);
-  selectedDeThiChanged$ = this.deThiSelected.asObservable();
-  private isTested = new BehaviorSubject<boolean | null>(null);
-  isTesting$ = this.isTested.asObservable();
-  private partSelected = new BehaviorSubject<number | null>(null);
-  selectedPartChanged$ = this.partSelected.asObservable();
+  private submitResult = new BehaviorSubject<any | null>(null);
+  resultSubmit$ = this.submitResult.asObservable();
+
   constructor(private http: HttpClient, private router: Router) { }
 
   private _duration = new BehaviorSubject<number>(null);
@@ -56,7 +52,6 @@ export class DethiService {
 
   submit() {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-
     const user: any = JSON.parse(localStorage.getItem('userData'));
     const body = {
       userid: user.userId,
@@ -68,7 +63,7 @@ export class DethiService {
     console.log(body);
     return this.http.post(`https://localhost:5001/api/exams/tomark`, body)
       .pipe(catchError(this.handleError))
-      
+
   }
 
   private handleError(err: any): Observable<never> {

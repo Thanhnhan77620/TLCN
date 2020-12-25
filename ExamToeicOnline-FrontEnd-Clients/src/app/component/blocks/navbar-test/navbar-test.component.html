@@ -15,13 +15,14 @@
                         </b>
                     </a>
                 </li>
-                <li class="end-exam header-b" *ngIf="partIntro" data-toggle="modal" id="#myModal" (click)="onSubmit()">
-                    <a class="finish-all">
-                        <b>SUBMIT</b>
+                <li class="end-exam header-b">
+                    <a class="finish-all" mdbBtn mdbWavesEffect>
+                        <b (click)="onSubmit()">Submit</b>
                     </a>
                 </li>
+
                 <li class="backpage header-b exit">
-                    <a class="exit-exam" href="#" style="background-color: red;">
+                    <a class="exit-exam" (click)="onCancel()" style="background-color: red;">
                         <b>Cancel</b>
                     </a>
                 </li>

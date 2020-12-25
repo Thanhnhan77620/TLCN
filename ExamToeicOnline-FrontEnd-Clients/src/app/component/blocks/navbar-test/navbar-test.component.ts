@@ -1,9 +1,12 @@
+import { SubmitComponent } from './../../../dethi/list-dethi-detail/start-dethi/dethi-detail/list-question/submit/submit.component';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
 import { DethiService } from './../../../dethi/dethi.service';
-import { Component, OnInit, Pipe, PipeTransform, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
+import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-navbar-test',
@@ -18,10 +21,31 @@ export class NavbarTestComponent implements OnInit {
   deThiCurrent: DeThi;
   counter: number;
   message: string;
+  isSubmit: boolean = false;
+  modalRef: MDBModalRef;
+  modalOptions = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: false,
+    ignoreBackdropClick: false,
+    class: '',
+    containerClass: '',
+    animated: true,
+    data: {
+      content: {
+        scoreListening: '',
+        scoreReading: '',
+        score: ''
+      }
+    }
+  }
+
   @ViewChild('countdown') countdown: CountdownComponent;
   constructor(private deThiService: DethiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.deThiService.isDuration.subscribe(
@@ -79,17 +103,37 @@ export class NavbarTestComponent implements OnInit {
     }
   }
 
+  onStop(event: CountdownEvent) {
+
+  }
+
+
   onSubmit() {
-    // this.router.navigate(['/exam/ToeicTest/submit']);
     this.deThiService.submit().subscribe(
-      (data) => {
-        console.log(data);
+      (data: any) => {
+        console.log(data)
+        this.modalOptions.data.content.scoreListening = data.scoreListening
+        this.modalOptions.data.content.scoreReading = data.scoreReading
+        this.modalOptions.data.content.score = data.scoreListening + data.scoreReading
+
       },
       errorMessage => {
         this.message = errorMessage;
         console.log(this.message)
       }
     )
+
+    this.modalRef = this.modalService.show(SubmitComponent, this.modalOptions)
+    this.isSubmit = true;
+    sessionStorage.removeItem("listAnswerSelected");
+    sessionStorage.removeItem("start");
+    sessionStorage.removeItem("duration");
+    sessionStorage.removeItem("examId");
+  }
+
+  onCancel() {
+    this.isSubmit = false;
+    this.router.navigate(['/home']);
   }
 }
 
