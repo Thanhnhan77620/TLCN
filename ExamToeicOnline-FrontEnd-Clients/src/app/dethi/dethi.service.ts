@@ -1,8 +1,9 @@
+import { Account } from './../model/account.model';
 import { GroupQuestion } from './../model/groupQuestion.model';
 import { Instruction } from '../model/instruction.model';
 import { catchError } from "rxjs/operators";
 import { DeThi } from "./../model/dethi.model";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
@@ -51,6 +52,22 @@ export class DethiService {
     return this.http.get<Instruction>(`https://localhost:5001/api/Intros/?partName=Part ${partName}`).pipe(
       catchError(this.handleError)
     )
+  }
+
+  submit() {
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+
+    const user: any = JSON.parse(localStorage.getItem('userData'));
+    const body = {
+      userid: user.userId,
+      examid: +sessionStorage.getItem("examId"),
+      startedat: +sessionStorage.getItem('start'),
+      finishedat: +(Date.now() * 1000),
+      answerSelectVMs: JSON.parse(sessionStorage.getItem("listAnswerSelected")),
+    }
+    console.log(body);
+    return this.http.post(`https://localhost:5001/api/exams/tomark`, body)
+      .pipe(catchError(this.handleError))
   }
 
   private handleError(err: any): Observable<never> {
