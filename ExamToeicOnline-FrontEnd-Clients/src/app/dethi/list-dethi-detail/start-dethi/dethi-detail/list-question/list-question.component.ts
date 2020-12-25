@@ -1,10 +1,8 @@
 import { DethiService } from 'src/app/dethi/dethi.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Question } from './../../../../../model/question.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupQuestion, ListQuestionResolved } from 'src/app/model/groupQuestion.model';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { MDBModalRef, MDBModalService } from 'ng-uikit-pro-standard';
 import { SubmitComponent } from './submit/submit.component';
 

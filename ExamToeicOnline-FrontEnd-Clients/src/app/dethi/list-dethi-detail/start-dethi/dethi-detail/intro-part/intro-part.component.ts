@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intro-part.component.scss']
 })
 export class IntroPartComponent implements OnInit {
-  introPart: number;
+  introPart: number | null;
   instruction: Instruction;
   errorMessage: string;
   correctAnswer: number;
