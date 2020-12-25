@@ -519,10 +519,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return dtDateTime;
         }
 
-
-
-
-
     }
    
 
