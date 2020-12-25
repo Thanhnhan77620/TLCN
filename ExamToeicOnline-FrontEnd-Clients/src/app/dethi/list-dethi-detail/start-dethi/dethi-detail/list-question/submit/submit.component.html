@@ -1,20 +1,33 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="modal-content">
+    <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold text-danger">KẾT QUẢ THI</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div id="fulltest_result">
+            <div class="result_detail"> <label>Listening</label>
+                <div class="result_score result_score_list">15</div>
+                <div class="clearfix"></div>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="result_detail"> <label>Reading</label>
+                <div class="result_score result_score_read">0</div>
+                <div class="clearfix"></div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+
+            <div class="result_detail "> <label>Tổng điểm</label>
+                <div class="result_score result_score_total result_highlight">15</div>
+                <div class="clearfix"></div>
             </div>
         </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn class="waves-ligh" mdbWavesEffect><b>Hiện đán án</b>
+            <mdb-icon fas icon="angle-double-right" class="ml-1"></mdb-icon>
+        </button>
+        <button mdbBtn class="waves-ligh" style="background-color:#d0d6e2; color: #bf360c;" mdbWavesEffect><b>Close</b>
+            <mdb-icon fas icon="times-circle" class="ml-1"></mdb-icon>
+        </button>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MDBModalRef } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-submit',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmitComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modalRef: MDBModalRef) { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,3 +1,6 @@
+import { SubmitComponent } from './../../../dethi/list-dethi-detail/start-dethi/dethi-detail/list-question/submit/submit.component';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
@@ -18,10 +21,14 @@ export class NavbarTestComponent implements OnInit {
   deThiCurrent: DeThi;
   counter: number;
   message: string;
+  validatingForm: FormGroup;
+  isSubmit: boolean = false;
+  modalRef: MDBModalRef;
   @ViewChild('countdown') countdown: CountdownComponent;
   constructor(private deThiService: DethiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.deThiService.isDuration.subscribe(
@@ -41,6 +48,16 @@ export class NavbarTestComponent implements OnInit {
         this.onPartName(this.partIntro);
       }
     )
+    this.onModalService();
+  }
+
+  onInitFormSubmit() {
+    this.validatingForm = new FormGroup({
+      contactFormModalName: new FormControl('', Validators.required),
+      contactFormModalEmail: new FormControl('', Validators.email),
+      contactFormModalSubject: new FormControl('', Validators.required),
+      contactFormModalMessage: new FormControl('', Validators.required)
+    });
   }
 
   onPartName(partNumber: number | null) {
@@ -79,17 +96,43 @@ export class NavbarTestComponent implements OnInit {
     }
   }
 
+  openModel() {
+    this.modalRef = this.modalService.show(SubmitComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: '',
+      containerClass: '',
+      animated: true
+    });
+
+  }
+  onModalService() {
+    this.modalService.open.subscribe(() => console.log('open'));
+    this.modalService.opened.subscribe(() => console.log('opened'));
+    this.modalService.close.subscribe(() => console.log('close'));
+    this.modalService.closed.subscribe(() => console.log('closed'));
+  }
+
   onSubmit() {
-    // this.router.navigate(['/exam/ToeicTest/submit']);
-    this.deThiService.submit().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      errorMessage => {
-        this.message = errorMessage;
-        console.log(this.message)
-      }
-    )
+    // this.deThiService.submit().subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //   },
+    //   errorMessage => {
+    //     this.message = errorMessage;
+    //     console.log(this.message)
+    //   }
+    // )
+    this.openModel();
+    this.isSubmit = true;
+  }
+
+  onCancel() {
+    this.isSubmit = false;
+    this.router.navigate(['/home']);
   }
 }
 

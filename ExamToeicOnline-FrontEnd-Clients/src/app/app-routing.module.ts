@@ -1,4 +1,4 @@
-import { AuthGuard } from './user/auth.guard';
+
 import { TestLayoutComponent } from './test-layout/test-layout.component';
 import { IntroduceDethiComponent } from './dethi/introduce-dethi/introduce-dethi.component';
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
@@ -34,6 +34,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./user/user.module').then(m => m.UserModule)
       },
+
     ]
   },
 

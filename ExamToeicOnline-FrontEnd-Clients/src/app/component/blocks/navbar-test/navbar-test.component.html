@@ -15,11 +15,52 @@
                         </b>
                     </a>
                 </li>
-                <li class="end-exam header-b" *ngIf="partIntro" data-toggle="modal" id="#myModal" (click)="onSubmit()">
-                    <a class="finish-all">
-                        <b>SUBMIT</b>
+                <li class="end-exam header-b">
+                    <a class="finish-all" mdbBtn mdbWavesEffect>
+                        <b (click)="onSubmit()">SUBMIT</b>
                     </a>
+                    <!-- <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1"
+                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold text-danger">KẾT QUẢ THI</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                        (click)="frame.hide()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="fulltest_result">
+                                        <div class="result_detail"> <label>Listening</label>
+                                            <div class="result_score result_score_list">15</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="result_detail"> <label>Reading</label>
+                                            <div class="result_score result_score_read">0</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="result_detail "> <label>Tổng điểm</label>
+                                            <div class="result_score result_score_total result_highlight">15</div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button mdbBtn class="waves-ligh" mdbWavesEffect><b>Hiện đán án</b>
+                                        <mdb-icon fas icon="angle-double-right" class="ml-1"></mdb-icon>
+                                    </button>
+                                    <button mdbBtn class="waves-ligh" style="background-color:#d0d6e2; color: #bf360c;"
+                                        mdbWavesEffect><b>Close</b>
+                                        <mdb-icon fas icon="times-circle" class="ml-1"></mdb-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                 </li>
+
                 <li class="backpage header-b exit">
                     <a class="exit-exam" href="#" style="background-color: red;">
                         <b>Cancel</b>
