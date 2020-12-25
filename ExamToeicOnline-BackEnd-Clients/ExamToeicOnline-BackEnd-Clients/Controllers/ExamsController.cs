@@ -59,7 +59,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(listExam);
         }
 
-        [HttpPost("{import}/{exam}")]
+        [HttpPost("{import}")]
         public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVM)
         {
             string nameFile = importExamVM.ExcelFile.FileName;
@@ -403,7 +403,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             await this._context.SaveChangesAsync();
             return 1;
         }
-        [HttpPost("{import}")]
+        [HttpPost("{import}/{score}")]
         public async Task<IActionResult> ImportAnswer([FromForm] ImportExamVM importExamVM)
         {
 

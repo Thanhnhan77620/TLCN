@@ -11,7 +11,6 @@ import {
 import { catchError, map, tap } from "rxjs/operators";
 import { throwError, of, Subject } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { UserProfile } from "../model/userProfile.model";
 import { Guid } from 'guid-typescript';
 import { UserUpdate } from './../model/userUpdate.model';
 export interface AuthResponseData {
@@ -24,12 +23,12 @@ export interface AuthResponseData {
 @Injectable({ providedIn: "root" })
 export class UserService {
 
-  api:string="";
+  api: string = "";
 
 
   constructor(private http: HttpClient, private router: Router) {
-    this.api ="https://localhost:5001/api/";
-   }
+    this.api = "https://localhost:5001/api/";
+  }
 
   account = new BehaviorSubject<Account>(null);
   private tokenExpirationTimer: any;
@@ -52,14 +51,14 @@ export class UserService {
     body.append("email", email);
     body.append("password", password);
     return this.http
-      .post<User>(this.api+"users", body)
+      .post<User>(this.api + "users", body)
       .pipe(catchError(this.handleError));
   }
 
   login(username: string, password: string) {
     return this.http
       .get<AuthResponseData>(
-        this.api+"accounts/login?username=" +
+        this.api + "accounts/login?username=" +
         username +
         "&password=" +
         password
@@ -71,7 +70,7 @@ export class UserService {
           const tokenExpiration = this.jwtHelper.getTokenExpirationDate(
             resData.value.token
           );
-         
+
           this.handleAuthentication(
             account.sub[0],
             account.sub[1],
@@ -81,45 +80,45 @@ export class UserService {
         })
       );
   }
-  setStorageCurrentUser(userId:Guid){
-    return this.http.get<any>(this.api+"users/"+userId).subscribe(data => {
-        localStorage.setItem('UserId',data.id);
-        localStorage.setItem('email',data.email);
-        localStorage.setItem('fullName',data.fullname);
-        localStorage.setItem('phone',data.phoneNumber);
-        localStorage.setItem('image',data.image);
-        localStorage.setItem('birthday',data.birthday);
+  setStorageCurrentUser(userId: Guid) {
+    return this.http.get<any>(this.api + "users/" + userId).subscribe(data => {
+      localStorage.setItem('UserId', data.id);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('fullName', data.fullname);
+      localStorage.setItem('phone', data.phoneNumber);
+      localStorage.setItem('image', data.image);
+      localStorage.setItem('birthday', data.birthday);
     })
   }
-  setStorageCurrentAccount(userName:string){
-    return this.http.get<any>(this.api+"accounts/"+userName).subscribe(data =>{
-      localStorage.setItem('userName',data.username);
+  setStorageCurrentAccount(userName: string) {
+    return this.http.get<any>(this.api + "accounts/" + userName).subscribe(data => {
+      localStorage.setItem('userName', data.username);
     })
   }
- 
-  updateProfile(userUpdate:UserUpdate) {  
+
+  updateProfile(userUpdate: UserUpdate) {
     var formData = new FormData();
     formData.append("id", userUpdate.id);
-    formData.append("fullName",userUpdate.fullName);
-    formData.append("email",userUpdate.email);
+    formData.append("fullName", userUpdate.fullName);
+    formData.append("email", userUpdate.email);
     formData.append("PhoneNumber", userUpdate.phone);
     formData.append("birthday", userUpdate.birthDate.toString());
     formData.append("Image", userUpdate.image);
-    return this.http.put<any>(this.api+"users/"+userUpdate.id,formData);
+    return this.http.put<any>(this.api + "users/" + userUpdate.id, formData);
     // .subscribe(data=>{
     //   this.setStorageCurrentUser(Guid.parse(userUpdate.id));
     //   //this.router.navigate(["/auth/"+userUpdate.id+"/profile"]);
     // })     
   }
 
-  changePassword(userName:string, oldPassWord:string,newPassWord:string){
-      var formData = new FormData();
-      formData.append("userName",userName);
-      formData.append("password",oldPassWord);
-      formData.append("NewPassword",newPassWord);
-      return this.http.put<any>(this.api+"accounts/"+userName,formData);
+  changePassword(userName: string, oldPassWord: string, newPassWord: string) {
+    var formData = new FormData();
+    formData.append("userName", userName);
+    formData.append("password", oldPassWord);
+    formData.append("NewPassword", newPassWord);
+    return this.http.put<any>(this.api + "accounts/" + userName, formData);
   }
-   
+
   public handleError(errorRes: HttpErrorResponse) {
     let errorMessage = errorRes.error;
 
@@ -161,7 +160,7 @@ export class UserService {
     this.setStorageCurrentUser(Guid.parse(userId));
     this.setStorageCurrentAccount(username);
     //localStorage.setItem("userName", username);
-    
+
   }
 
   autoLogin() {

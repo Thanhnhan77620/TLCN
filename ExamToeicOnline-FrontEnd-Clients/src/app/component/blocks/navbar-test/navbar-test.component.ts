@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
 import { DethiService } from './../../../dethi/dethi.service';
@@ -16,9 +17,11 @@ export class NavbarTestComponent implements OnInit {
   deThiId: number;
   deThiCurrent: DeThi;
   counter: number;
+  message: string;
   @ViewChild('countdown') countdown: CountdownComponent;
   constructor(private deThiService: DethiService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.deThiService.isDuration.subscribe(
@@ -74,6 +77,19 @@ export class NavbarTestComponent implements OnInit {
       alert('Time out - Stop it');
       sessionStorage.removeItem('duration');
     }
+  }
+
+  onSubmit() {
+    // this.router.navigate(['/exam/ToeicTest/submit']);
+    this.deThiService.submit().subscribe(
+      (data) => {
+        console.log(data);
+      },
+      errorMessage => {
+        this.message = errorMessage;
+        console.log(this.message)
+      }
+    )
   }
 }
 
