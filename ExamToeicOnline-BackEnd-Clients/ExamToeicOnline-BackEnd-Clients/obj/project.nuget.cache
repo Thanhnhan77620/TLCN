@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i9JBFPUdXCfltSmxdm4f0U2ArgARdqo3rCcEz9VZVYQPi5gBv5x2ArXEVXa8fYZhBYkxw/5Gyax+X3fSealqew==",
+  "dgSpecHash": "8odaVE6vL5QbAcAMgTvRkrzB8d38GhOaM7AFSR4CCwT5Jscx5xVohnRl+MTlzai5E99xzBj0Dvy4PxJoUnU+YA==",
   "success": true,
-  "projectFilePath": "D:\\Nam 4\\HK I\\TLCN\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+  "projectFilePath": "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\bcrypt.net-next\\4.0.0\\bcrypt.net-next.4.0.0.nupkg.sha512",
     "C:\\Users\\ThanhNhan\\.nuget\\packages\\bouncycastle\\1.8.6.1\\bouncycastle.1.8.6.1.nupkg.sha512",
