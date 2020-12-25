@@ -21,7 +21,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
             this._context = examToeicOnlineDBContext;
 
-
         }
         [HttpGet]
         public async Task<IActionResult> Get()

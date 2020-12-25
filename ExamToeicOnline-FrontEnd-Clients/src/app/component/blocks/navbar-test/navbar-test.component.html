@@ -15,7 +15,11 @@
                         </b>
                     </a>
                 </li>
-                <li class="end-exam header-b" *ngIf="partIntro"><a class="finish-all" href="#"><b>SUBMIT</b></a></li>
+                <li class="end-exam header-b" *ngIf="partIntro" data-toggle="modal" id="#myModal" (click)="onSubmit()">
+                    <a class="finish-all">
+                        <b>SUBMIT</b>
+                    </a>
+                </li>
                 <li class="backpage header-b exit">
                     <a class="exit-exam" href="#" style="background-color: red;">
                         <b>Cancel</b>
