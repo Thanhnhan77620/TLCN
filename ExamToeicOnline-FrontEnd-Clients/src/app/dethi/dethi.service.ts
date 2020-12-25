@@ -61,8 +61,8 @@ export class DethiService {
     const body = {
       userid: user.userId,
       examid: +sessionStorage.getItem("examId"),
-      startedat: +sessionStorage.getItem('start')/1000,
-      finishedat: +(Date.now() / 1000),
+      startedat: +sessionStorage.getItem('start'),
+      finishedat: +(Date.now()),
       answerSelectVMs: JSON.parse(sessionStorage.getItem("listAnswerSelected")),
     }
     console.log(body);
