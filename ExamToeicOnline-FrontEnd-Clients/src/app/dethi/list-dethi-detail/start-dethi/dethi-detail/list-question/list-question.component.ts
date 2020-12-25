@@ -23,6 +23,7 @@ export class ListQuestionComponent implements OnInit {
   partNumber: number;
   partNumberChanged: number | null;
   isSubmit: boolean = false;
+  isCheck: boolean = false;
 
   listAnswers = [];
   answerSelected = {
@@ -88,21 +89,26 @@ export class ListQuestionComponent implements OnInit {
 
 
   handleChanged(event) {
-    let answer = event.target.value;
-    let question = event.target.name;
+    let answer = +event.target.value;
+    let question = +event.target.name;
+    this.isCheck = event.target.checked;
+    console.log(this.isCheck);
     if (sessionStorage.getItem('listAnswerSelected')) {
       this.listAnswers = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
-      let index = this.listAnswers.findIndex((e) => e.question == question) + 1;
+      let index = this.listAnswers.findIndex((e) => e.questionId == question) + 1;
       if (index) {
-        this.listAnswers[index - 1].answerOption = answer;
+        this.listAnswers[index - 1].answerId = answer;
       }
       else {
-        this.listAnswers.push({ question: question, answerOption: answer });
+        this.listAnswers.push({ questionId: question, answerId: answer });
       }
     } else {
-      this.listAnswers.push({ question: question, answerOption: answer });
+      this.listAnswers.push({ questionId: question, answerId: answer });
     }
     sessionStorage.setItem("listAnswerSelected", JSON.stringify(this.listAnswers));
   }
 
+  onCheck() {
+
+  }
 }
