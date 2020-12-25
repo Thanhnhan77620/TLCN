@@ -47,6 +47,18 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             }
             return Ok(exam);
         }
+        //GET: get exam
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> getHistoryExam(Guid userId)
+        {
+            var examHistory = await this._context.DoExams.Where(d => d.UserId == userId).ToArrayAsync();
+            if (examHistory == null)
+            {
+                return NotFound("Can not found any Record!");
+            }
+            return Ok(examHistory);
+        }
+
         //GET: get list exams
         [HttpGet("list")]
         public async Task<IActionResult> getListExam()
@@ -535,6 +547,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             DateTime dateInLocalTimeFormat = startdate.ToLocalTime();
             return dateInLocalTimeFormat;
         }
+
+
 
     }
    
