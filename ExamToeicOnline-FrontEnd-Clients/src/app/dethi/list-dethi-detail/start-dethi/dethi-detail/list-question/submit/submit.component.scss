@@ -1,6 +1,32 @@
-.modal-content {
-  width: inherit;
-  height: inherit;
-  margin: 0 auto;
-  max-height: 100%;
+#fulltest_result {
+  margin: 0;
+  padding: 0;
+}
+
+#fulltest_result .result_detail {
+  margin-bottom: 15px;
+}
+
+#fulltest_result .result_detail label {
+  font-size: 18px;
+  float: left;
+  width: 150px;
+  padding-top: 15px;
+  font-weight: normal;
+}
+
+#fulltest_result .result_detail .result_score {
+  background: #eeeeee;
+  float: left;
+  padding: 15px 0px;
+  font-weight: bold;
+  font-size: 18px;
+  width: 150px;
+  text-align: center;
+}
+
+.waves-ligh {
+  background-color: #311b92;
+  color: #eeeeee;
+  border-radius: 8px;
 }
