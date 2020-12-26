@@ -1,7 +1,7 @@
 <div class="modal-content">
     <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold text-danger">KẾT QUẢ THI</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()" (click)="onCancel()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -27,7 +27,7 @@
             <mdb-icon fas icon="angle-double-right" class="ml-1"></mdb-icon>
         </button>
         <button mdbBtn class="waves-ligh" style="background-color:#d0d6e2; color: #bf360c;" mdbWavesEffect
-            (click)="modalRef.hide()"><b>Close</b>
+            (click)="modalRef.hide()" (click)="onCancel()"><b>Close</b>
             <mdb-icon fas icon="times-circle" class="ml-1"></mdb-icon>
         </button>
     </div>

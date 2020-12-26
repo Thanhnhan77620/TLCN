@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'ng-uikit-pro-standard';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,10 +15,13 @@ export class SubmitComponent implements OnInit {
   score: string;
   content: any
 
-  constructor(public modalRef: MDBModalRef) { }
+  constructor(public modalRef: MDBModalRef, private router: Router) { }
 
   ngOnInit(): void {
 
   }
-
+  
+  onCancel(){
+    this.router.navigate(['/home']);
+  }
 }
