@@ -238,9 +238,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2020, 12, 25, 21, 46, 58, 560, DateTimeKind.Local).AddTicks(5002),
-                            Password = "$2a$11$u9/5DJNT2qi7qXPq69.vaOcxnSYcQ7z6HwbNCI0YYSsmYo5haM0qW",
-                            UserId = new Guid("9f5a75fe-df09-4ae8-b27f-fea8dcb86443"),
+                            CreateAt = new DateTime(2020, 12, 27, 19, 58, 26, 851, DateTimeKind.Local).AddTicks(4907),
+                            Password = "$2a$11$UDXCKUOZcMFV0rvYitDeUOaUQwIv0bXXuocO2sWsGsjHXPJORkGNi",
+                            UserId = new Guid("38573b8d-bc34-420b-afcc-a436a496d482"),
                             Username = "ngan",
                             isActive = true,
                             isAdmin = false
@@ -248,9 +248,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2020, 12, 25, 21, 46, 58, 560, DateTimeKind.Local).AddTicks(5002),
-                            Password = "$2a$11$Ft4ajRfKHD6INZgo22VtS.tndSfT7EK/KK8gwnF6Lqr/bKYk2GrSm",
-                            UserId = new Guid("34231b01-d98f-4539-85e9-165d349bd587"),
+                            CreateAt = new DateTime(2020, 12, 27, 19, 58, 26, 851, DateTimeKind.Local).AddTicks(4907),
+                            Password = "$2a$11$bma17yvGMddyU/SG0MEsR.Md0yFsxAeggkIkxr6Bi0.tEIyL7DB7S",
+                            UserId = new Guid("16c0afee-f96d-4ae1-9b18-3a9397854831"),
                             Username = "nhan",
                             isActive = true,
                             isAdmin = false
@@ -285,7 +285,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9f5a75fe-df09-4ae8-b27f-fea8dcb86443"),
+                            Id = new Guid("38573b8d-bc34-420b-afcc-a436a496d482"),
                             Birthday = new DateTime(1999, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nhan@gmail.com",
                             Fullname = "Nguyễn Thanh Nhân",
@@ -293,7 +293,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Migrations
                         },
                         new
                         {
-                            Id = new Guid("34231b01-d98f-4539-85e9-165d349bd587"),
+                            Id = new Guid("16c0afee-f96d-4ae1-9b18-3a9397854831"),
                             Birthday = new DateTime(1999, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ngan@gmail.com",
                             Fullname = "Đỗ Thị Thanh Ngân",
