@@ -40,7 +40,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
         public DbSet<Paragraph> Paragraphs { get; set; }
         public DbSet<Score> Scores { get; set; }
 
-
+      
 
     }
 }

@@ -18,5 +18,6 @@ namespace ExamToeicOnline_FrontEnd_Clients.Models
         public string Image { get; set; }
         public ICollection<Account> Accounts { get; set; }
         public ICollection<DoExam> DoExams { get; set; }
+
     }
 }
