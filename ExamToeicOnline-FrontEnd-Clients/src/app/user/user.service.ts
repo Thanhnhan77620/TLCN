@@ -200,6 +200,11 @@ export class UserService {
     }
   }
 
+
+  viewHistoryExam(userId: string) {
+    return this.http.get(this.api + userId).pipe(catchError(this.handleError));
+  }
+
   // getUser(userId: string): Observable<User> {
   //   return this.http
   //     .get<User>(this.api+"users" + userId)
