@@ -18,7 +18,7 @@ import { BodyComponent } from "./component/blocks/body/body.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { PublicLayoutComponent } from './public-layout/public-layout.component';
 import { TestLayoutComponent } from './test-layout/test-layout.component';
-import { FormatTimePipe, NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.component';
+import { NavbarTestComponent } from './component/blocks/navbar-test/navbar-test.component';
 import { CountdownModule } from "ngx-countdown";
 
 
@@ -35,7 +35,6 @@ import { CountdownModule } from "ngx-countdown";
     PublicLayoutComponent,
     TestLayoutComponent,
     NavbarTestComponent,
-    FormatTimePipe,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +49,6 @@ import { CountdownModule } from "ngx-countdown";
     SharedModule
   ],
   entryComponents: [SubmitComponent],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
