@@ -1,5 +1,4 @@
 import { SubmitComponent } from './../../../dethi/list-dethi-detail/start-dethi/dethi-detail/list-question/submit/submit.component';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeThi } from './../../../model/dethi.model';
 import { ActivatedRoute } from '@angular/router';
@@ -132,25 +131,5 @@ export class NavbarTestComponent implements OnInit {
   onCancel() {
     this.isSubmit = false;
     this.router.navigate(['/home']);
-  }
-}
-
-@Pipe({
-  name: "formatTime"
-})
-export class FormatTimePipe implements PipeTransform {
-  transform(value: number): string {
-
-    value = value / 1000;
-    const hours: number = Math.floor(value / 3600);
-    const minutes: number = Math.floor((value % 3600) / 60);
-
-    return (
-      ("00" + hours).slice(-2) +
-      ":" +
-      ("00" + minutes).slice(-2) +
-      ":" +
-      ("00" + Math.floor(value - minutes * 60)).slice(-2)
-    );
   }
 }

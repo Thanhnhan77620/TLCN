@@ -48,7 +48,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             return Ok(exam);
         }
         //GET: get exam
-        [HttpGet("{userId}")]
+        [HttpGet("{history}/{userId}")]
         public async Task<IActionResult> getHistoryExam(Guid userId)
         {
             var examHistory = await this._context.DoExams.Where(d => d.UserId == userId).ToArrayAsync();

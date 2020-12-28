@@ -1,3 +1,4 @@
+import { HistoryExam } from './../model/historyExam';
 import { Account } from "./../model/account.model";
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from "./../model/user.model";
@@ -8,7 +9,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, map, take, tap } from "rxjs/operators";
 import { throwError, of, Subject } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Guid } from 'guid-typescript';
@@ -24,7 +25,6 @@ export interface AuthResponseData {
 export class UserService {
 
   api: string = "";
-
 
   constructor(private http: HttpClient, private router: Router) {
     this.api = "https://localhost:5001/api/";
@@ -198,6 +198,15 @@ export class UserService {
         );
       }
     }
+  }
+
+
+  viewHistoryExam() {
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    const user: any = JSON.parse(localStorage.getItem('userData'));
+    return this.http.get<HistoryExam[]>(this.api + "exams/history/" + user.userId, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // getUser(userId: string): Observable<User> {

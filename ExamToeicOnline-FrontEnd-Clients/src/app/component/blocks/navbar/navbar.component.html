@@ -57,6 +57,9 @@
           <a [routerLink]="['/auth', currentAccount.userId,'profile']" routerLinkActive="router-link-active"
             class="dropdown-item waves-light" mdbWavesEffect *ngIf="isAuthenticated"
             (click)="onShowProfile()">Profile</a>
+          <a routerLinkActive="router-link-active" class="dropdown-item waves-light" mdbWavesEffect
+            *ngIf="isAuthenticated" (click)="onShowHistoryExam()">History
+            Exam</a>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()" *ngIf="isAuthenticated">Log Out</a>
           <a routerLink="/auth/register" class="dropdown-item waves-light" mdbWavesEffect
             *ngIf="!isAuthenticated">Register</a>
