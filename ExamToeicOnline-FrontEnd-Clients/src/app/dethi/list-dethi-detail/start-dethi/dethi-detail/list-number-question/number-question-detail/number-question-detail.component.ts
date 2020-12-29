@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DethiService } from 'src/app/dethi/dethi.service';
-import { Component, Input, OnInit, enableProdMode } from '@angular/core';
+import { Component, Input, OnInit, enableProdMode, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-number-question-detail',
@@ -18,11 +19,17 @@ export class NumberQuestionDetailComponent implements OnInit {
   @Input() start: number;
   @Input() end: number;
   deThiId: number;
+  numberQuestionSubscription: any;
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(
       (params) => {
         this.deThiId = +params.get('examId');
+      }
+    )
+    this.deThiService.isCheckedAnswer.subscribe(
+      (data) => {
+        this.numberQuestionSubscription = data;
       }
     )
   }
@@ -38,6 +45,15 @@ export class NumberQuestionDetailComponent implements OnInit {
   onClickQuestion(numberQuestion: number) {
 
     this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.partName, numberQuestion: numberQuestion } })
+  }
+
+  onChanged() {
+    this.deThiService.isCheckedAnswer.subscribe(
+      (data) => {
+        this.numberQuestionSubscription = data;
+      }
+    )
+
   }
 
 

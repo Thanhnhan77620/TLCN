@@ -1,9 +1,10 @@
+import { Router } from '@angular/router';
 import { DethiService } from './../../dethi/dethi.service';
 import { HistoryExam } from './../../model/historyExam';
 import { UserService } from './../user.service';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective } from 'ng-uikit-pro-standard';
-import * as moment from 'moment';
+
 
 
 @Component({
@@ -25,7 +26,8 @@ export class HistoryExamComponent implements OnInit, AfterViewInit {
 
   constructor(private cdRef: ChangeDetectorRef,
     private userService: UserService,
-    private deThiService: DethiService) { }
+    private deThiService: DethiService,
+    private router: Router) { }
 
   ngOnInit() {
     this.userService.viewHistoryExam().subscribe(
@@ -58,5 +60,8 @@ export class HistoryExamComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
+  // onTestAgain() {
+  //   this.router.navigate(["exam", ]);
+  // }
 }
 

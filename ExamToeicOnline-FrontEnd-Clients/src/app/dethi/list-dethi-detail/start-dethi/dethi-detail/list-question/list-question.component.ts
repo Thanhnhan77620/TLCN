@@ -126,6 +126,8 @@ export class ListQuestionComponent implements OnInit {
       this.listAnswers.push({ questionId: question, answerId: answer });
     }
     sessionStorage.setItem("listAnswerSelected", JSON.stringify(this.listAnswers));
+    this.deThiService.ChangedAnswerSelected(question - ((this.deThiId - 1) * 200))
+    console.log(question - ((this.deThiId - 1) * 200));
   }
 
   onCheck() {

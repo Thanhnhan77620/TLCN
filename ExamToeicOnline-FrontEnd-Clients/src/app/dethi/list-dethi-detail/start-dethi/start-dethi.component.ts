@@ -15,14 +15,13 @@ export class StartDethiComponent implements OnInit {
     private route: ActivatedRoute,
     private deThiService: DethiService
   ) { }
-  deThiCurrent: DeThi;
+  deThiCurrent: DeThi | null;
   errorMessage: string;
   listQuestion: Question[] = [];
   isStartDethi: boolean;
 
 
   ngOnInit(): void {
-
     const id = this.route.snapshot.paramMap.get("examId");
     if (!isNaN(+id)) {
       this.deThiService.getDeThi(+id).subscribe(

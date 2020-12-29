@@ -1,4 +1,4 @@
-<section id="quizz-intro-section" class="quizz-intro-section learn-section" style="min-height: 753px;">
+<section id="quizz-intro-section" class="quizz-intro-section learn-section">
     <div class="container">
         <div class="question-content-wrap">
             <div class="row">
@@ -7,7 +7,7 @@
                         style="height: auto !important; min-height: 0px !important;">
                         <div class="exam-info" style="height: auto !important;">
                             <h4 class="sm">
-                                <b>
+                                <b *ngIf="deThiCurrent">
                                     {{deThiCurrent.title}}</b>
                             </h4>
                             <br>

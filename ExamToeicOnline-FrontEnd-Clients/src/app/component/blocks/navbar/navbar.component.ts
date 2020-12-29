@@ -1,5 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
-import { DethiService } from 'src/app/dethi/dethi.service';
 import { Router } from '@angular/router';
 import { Account } from "./../../../model/account.model";
 import { UserService } from "./../../../user/user.service";
@@ -33,6 +31,7 @@ export class NavbarComponent implements OnInit {
   }
   onLogout() {
     this.userService.logout();
+    this.isAuthenticated = false;
   }
 
   onShowProfile() { }

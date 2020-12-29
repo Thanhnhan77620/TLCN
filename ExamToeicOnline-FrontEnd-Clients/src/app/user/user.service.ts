@@ -136,6 +136,7 @@ export class UserService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+    localStorage.removeItem('userData')
     this.isLoginMode = false;
   }
 
@@ -156,6 +157,7 @@ export class UserService {
     const user = new Account(username, userId, token, expirationDate);
     this.account.next(user);
     this.autoLogout(expiresIn / 1000);
+    console.log((expiresIn / 1000));
     localStorage.setItem("userData", JSON.stringify(user));
     this.setStorageCurrentUser(Guid.parse(userId));
     this.setStorageCurrentAccount(username);
@@ -170,9 +172,6 @@ export class UserService {
       _token: string;
       _tokenExpirationDate: string;
     } = JSON.parse(localStorage.getItem("userData"));
-    // this.getCurrentUser(Guid.parse(userData.userId));
-    // localStorage.setItem("userName", userData.username);
-    // console.log(userData);
     if (!userData) {
       return;
     }
@@ -185,6 +184,8 @@ export class UserService {
     );
 
     if (loadedUser.token) {
+      console.log("loaded " + new Date(loadedUser._tokenExpirationDate).getTime());
+      console.log("loaded exp " + (new Date(loadedUser._tokenExpirationDate).getTime() - new Date().getTime()));
       this.account.next(loadedUser);
       if (
         this.jwtHelper.isTokenExpired(
@@ -193,8 +194,7 @@ export class UserService {
         )
       ) {
         this.autoLogout(
-          new Date(loadedUser._tokenExpirationDate).getTime() -
-          new Date().getTime()
+          new Date(loadedUser._tokenExpirationDate).getTime() - new Date().getTime()
         );
       }
     }
