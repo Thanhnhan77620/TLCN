@@ -142,7 +142,6 @@ export class UserService {
   autoLogout(expirationDuration: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
-      localStorage.clear();
     }, expirationDuration);
   }
 
@@ -196,6 +195,9 @@ export class UserService {
           new Date(loadedUser._tokenExpirationDate).getTime() -
           new Date().getTime()
         );
+
+        console.log(new Date(loadedUser._tokenExpirationDate).getTime() -
+          new Date().getTime())
       }
     }
   }
