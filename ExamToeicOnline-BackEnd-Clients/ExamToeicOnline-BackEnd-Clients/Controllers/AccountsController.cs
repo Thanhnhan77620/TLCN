@@ -105,11 +105,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 issuer: _config["Jwt:Key"],
                 audience: _config["Jwt:Issuer"],
                 claim,
-<<<<<<< HEAD
                 expires: DateTime.Now.AddMinutes(2),
-=======
-                expires: DateTime.Now.AddMinutes(180),
->>>>>>> master
                 signingCredentials: credentials
             );
 

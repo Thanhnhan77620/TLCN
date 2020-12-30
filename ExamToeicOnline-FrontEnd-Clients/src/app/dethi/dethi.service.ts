@@ -20,8 +20,12 @@ export class DethiService {
   private _duration = new BehaviorSubject<number>(null);
   isDuration = this._duration.asObservable();
 
-  private _checkedAnswer = new BehaviorSubject<number>(null);
+  private _checkedAnswer = new BehaviorSubject<any>(null);
   isCheckedAnswer = this._checkedAnswer.asObservable();
+
+  public numberQuestionChecked: number;
+
+
 
   getAllDeThi() {
     return this.http
@@ -85,7 +89,7 @@ export class DethiService {
   }
 
 
-  ChangedAnswerSelected(value: number) {
+  ChangedAnswerSelected(value: any) {
     this._checkedAnswer.next(value);
   }
 

@@ -43,6 +43,4 @@ export class StartDethiComponent implements OnInit {
     this.deThiService.durationStart(+sessionStorage.getItem('duration'));
   }
 
-
-
 }

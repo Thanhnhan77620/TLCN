@@ -1,8 +1,7 @@
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DethiService } from 'src/app/dethi/dethi.service';
-import { Component, Input, OnInit, enableProdMode, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-number-question-detail',
@@ -15,21 +14,20 @@ export class NumberQuestionDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { }
 
+
   @Input() partName: number;
   @Input() start: number;
   @Input() end: number;
   deThiId: number;
   numberQuestionSubscription: any;
+  question = [];
+  isChecked: boolean = false;
+
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(
       (params) => {
         this.deThiId = +params.get('examId');
-      }
-    )
-    this.deThiService.isCheckedAnswer.subscribe(
-      (data) => {
-        this.numberQuestionSubscription = data;
       }
     )
   }
@@ -47,14 +45,15 @@ export class NumberQuestionDetailComponent implements OnInit {
     this.router.navigate([`exam/ToeicTest/test`], { queryParams: { examId: this.deThiId, part: this.partName, numberQuestion: numberQuestion } })
   }
 
-  onChanged() {
-    this.deThiService.isCheckedAnswer.subscribe(
-      (data) => {
-        this.numberQuestionSubscription = data;
+
+  onChanged(value: number): boolean {
+    if (sessionStorage.getItem('listAnswerSelected')) {
+      let listQuestionChecked: any[] = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
+      if (listQuestionChecked.findIndex(p => p.questionId - ((this.deThiId - 1) * 200) === value) !== -1) {
+        console.log(true)
+        return true;
       }
-    )
-
+    }
+    return false;
   }
-
-
 }

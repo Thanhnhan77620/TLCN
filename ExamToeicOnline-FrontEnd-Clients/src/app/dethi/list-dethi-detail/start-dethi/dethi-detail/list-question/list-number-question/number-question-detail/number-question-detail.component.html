@@ -11,8 +11,9 @@
         <a (click)="onInstruction(partName)" class="text-primary"> Instruction</a>
     </h5>
     <div class="list-q-n" *ngFor="let number of arrayQuestion(end, start)">
-        <a (click)="onClickQuestion(number)" class="btn btn-default question-n" (change)="onChanged()">
-            {{ number }}
-        </a>
+        <button (click)="onClickQuestion(number)" class="btn btn-question question-n" style="color: #2d3837;"
+            [ngClass]="onChanged(number) ? 'btn-checked' : 'btn-question'">
+            {{number}}
+        </button>
     </div>
 </div>

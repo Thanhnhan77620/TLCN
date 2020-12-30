@@ -21,9 +21,13 @@
   height: 40px;
   border-radius: 0;
 }
-.btn-default {
-  color: #333 !important;
-  background-color: #cccccc !important;
+.btn-question {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.btn-checked {
+  background-color: #b087b8;
   border-color: #ccc;
 }
 

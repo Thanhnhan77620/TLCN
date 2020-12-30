@@ -18,6 +18,7 @@ export class ListQuestionComponent implements OnInit {
   listQuestionSort: Question[];
   errorMessage: string;
   isImage_Scritp: boolean = false;
+  listAnswers = [];
   isFileAudio: boolean = false;
   numberQuestion: number | null;
   deThiId: number;
@@ -45,11 +46,7 @@ export class ListQuestionComponent implements OnInit {
     }
   }
 
-  listAnswers = [];
-  answerSelected = {
-    question: '',
-    answerOption: ''
-  }
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -126,12 +123,7 @@ export class ListQuestionComponent implements OnInit {
       this.listAnswers.push({ questionId: question, answerId: answer });
     }
     sessionStorage.setItem("listAnswerSelected", JSON.stringify(this.listAnswers));
-    this.deThiService.ChangedAnswerSelected(question - ((this.deThiId - 1) * 200))
-    console.log(question - ((this.deThiId - 1) * 200));
-  }
-
-  onCheck() {
-
+    // this.deThiService.ChangedAnswerSelected(question - ((this.deThiId - 1) * 200))
   }
   onSubmit() {
     this.deThiService.submit().subscribe(
@@ -154,5 +146,17 @@ export class ListQuestionComponent implements OnInit {
     sessionStorage.removeItem("start");
     sessionStorage.removeItem("duration");
     sessionStorage.removeItem("examId");
+  }
+
+
+  onChecked(question: number, answerSelected: number): boolean {
+    if (sessionStorage.getItem('listAnswerSelected')) {
+      let listQuestionChecked: any[] = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
+      if (listQuestionChecked.findIndex(p => p.questionId === question && p.answerId === answerSelected) !== -1) {
+        console.log(true)
+        return true;
+      }
+    }
+    return false;
   }
 }
