@@ -20,15 +20,22 @@ export class DethiService {
   private _duration = new BehaviorSubject<number>(null);
   isDuration = this._duration.asObservable();
 
+  private _checkedAnswer = new BehaviorSubject<any>(null);
+  isCheckedAnswer = this._checkedAnswer.asObservable();
+
+  public numberQuestionChecked: number;
+
+
+
   getAllDeThi() {
     return this.http
-      .get<DeThi[]>("https://localhost:5001/api/exams/list")
+      .get<DeThi[]>("https://localhost:5001/api/exams/")
       .pipe(catchError(this.handleError));
   }
 
   getDeThi(deThiId: number) {
     return this.http
-      .get<DeThi>("https://localhost:5001/api/exams?examId=" + deThiId)
+      .get<DeThi>("https://localhost:5001/api/exams/" + deThiId)
       .pipe(catchError(this.handleError));
   }
 
@@ -80,5 +87,11 @@ export class DethiService {
   durationStart(value: number) {
     this._duration.next(value);
   }
+
+
+  ChangedAnswerSelected(value: any) {
+    this._checkedAnswer.next(value);
+  }
+
 
 }

@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { DethiService } from 'src/app/dethi/dethi.service';
-import { Component, Input, OnInit, enableProdMode } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-number-question-detail',
@@ -14,10 +14,15 @@ export class NumberQuestionDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { }
 
+
   @Input() partName: number;
   @Input() start: number;
   @Input() end: number;
   deThiId: number;
+  numberQuestionSubscription: any;
+  question = [];
+  isChecked: boolean = false;
+
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(
@@ -41,4 +46,14 @@ export class NumberQuestionDetailComponent implements OnInit {
   }
 
 
+  onChanged(value: number): boolean {
+    if (sessionStorage.getItem('listAnswerSelected')) {
+      let listQuestionChecked: any[] = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
+      if (listQuestionChecked.findIndex(p => p.questionId - ((this.deThiId - 1) * 200) === value) !== -1) {
+        console.log(true)
+        return true;
+      }
+    }
+    return false;
+  }
 }

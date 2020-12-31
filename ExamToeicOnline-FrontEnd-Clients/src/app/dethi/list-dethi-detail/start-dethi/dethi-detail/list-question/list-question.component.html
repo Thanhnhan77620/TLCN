@@ -26,7 +26,8 @@
                         <div class="answer-list form-group">
                             <div *ngFor="let answer of question.anwsers; let i = index">
                                 <input type="radio" value="{{answer.id}}" id="{{answer.id}}"
-                                    name="{{answer.questionId}}" (change)="handleChanged($event)">
+                                    name="{{answer.questionId}}" (change)="handleChanged($event)"
+                                    [checked]="onChecked(question.id, answer.id)">
                                 <label for="{{answer.id}}">
                                     <i class=" icon icon_radio"></i>
                                     {{answer.content}} </label>

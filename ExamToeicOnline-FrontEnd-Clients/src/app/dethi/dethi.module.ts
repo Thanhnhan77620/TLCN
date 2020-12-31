@@ -1,3 +1,4 @@
+import { ListNumberQuestionComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/list-number-question/list-number-question.component';
 import { AuthGuard } from './../user/auth.guard';
 import { QuestionResolver } from './dethi-resolver.service';
 import { StartDethiComponent } from "./list-dethi-detail/start-dethi/start-dethi.component";
@@ -11,11 +12,10 @@ import { CommonModule } from "@angular/common";
 import { ListDethiDetailComponent } from "./list-dethi-detail/list-dethi-detail.component";
 import { DethiDetailComponent } from "./list-dethi-detail/start-dethi/dethi-detail/dethi-detail.component";
 import { ListDethiComponent } from "./introduce-dethi/list-dethi/list-dethi.component";
-import { ListNumberQuestionComponent } from "./list-dethi-detail/start-dethi/dethi-detail/list-number-question/list-number-question.component";
 import { ListQuestionComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/list-question.component';
-import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-number-question/number-question-detail/number-question-detail.component';
 import { IntroPartComponent } from './list-dethi-detail/start-dethi/dethi-detail/intro-part/intro-part.component';
 import { SubmitComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/submit/submit.component';
+import { NumberQuestionDetailComponent } from './list-dethi-detail/start-dethi/dethi-detail/list-question/list-number-question/number-question-detail/number-question-detail.component';
 
 @NgModule({
   declarations: [

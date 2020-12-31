@@ -15,14 +15,13 @@ export class StartDethiComponent implements OnInit {
     private route: ActivatedRoute,
     private deThiService: DethiService
   ) { }
-  deThiCurrent: DeThi;
+  deThiCurrent: DeThi | null;
   errorMessage: string;
   listQuestion: Question[] = [];
   isStartDethi: boolean;
 
 
   ngOnInit(): void {
-
     const id = this.route.snapshot.paramMap.get("examId");
     if (!isNaN(+id)) {
       this.deThiService.getDeThi(+id).subscribe(
@@ -43,7 +42,5 @@ export class StartDethiComponent implements OnInit {
     sessionStorage.setItem('duration', (Date.now() + this.deThiCurrent.duration * 60 * 1000).toString());
     this.deThiService.durationStart(+sessionStorage.getItem('duration'));
   }
-
-
 
 }

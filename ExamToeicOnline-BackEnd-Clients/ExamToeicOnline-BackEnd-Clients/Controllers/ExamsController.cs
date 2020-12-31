@@ -37,10 +37,11 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             this._webHostEnvironment = webHostEnvironment;
         }
         //GET: get exam
-        [HttpGet]
+        [HttpGet("{examId}")]
         public async Task<IActionResult> getExamById(int examId)
         {
             var exam = await this._context.Exams.Where(x => x.Id == examId).FirstOrDefaultAsync();
+
             if (exam == null)
             {
                 return NotFound("Can not found any Record!");
@@ -60,10 +61,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         }
 
         //GET: get list exams
-        [HttpGet("list")]
+        [HttpGet]
         public async Task<IActionResult> getListExam()
         {
-            var listExam = await this._context.Exams.ToArrayAsync();
+            //var listExam = await this._context.Exams.ToArrayAsync();
+            var listExam = (from e in this._context.Exams
+                            select new ExamVM() {
+                                Id=e.Id,
+                                Title=e.Title,
+                                Duration=e.Duration
+                            });
             if (listExam == null)
             {
                 return NotFound("Can not found any Record!");

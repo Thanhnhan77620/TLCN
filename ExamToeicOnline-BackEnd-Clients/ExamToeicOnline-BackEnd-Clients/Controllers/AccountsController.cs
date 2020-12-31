@@ -34,7 +34,15 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var accounts = await this._context.Accounts.ToArrayAsync();
+            //var accounts = await this._context.Accounts.ToArrayAsync();
+            var accounts = (from a in this._context.Accounts
+                            select new AccountDTO() {
+                                Id=a.Id,
+                                Username=a.Username,
+                                Password=a.Password,
+                                isActive=a.isActive,
+                                CreateAt=a.CreateAt
+                            });
             if (accounts == null)
             {
                 return NotFound("Can not found any record!");
@@ -105,7 +113,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 issuer: _config["Jwt:Key"],
                 audience: _config["Jwt:Issuer"],
                 claim,
-                expires: DateTime.Now.AddMinutes(120),
+                expires: DateTime.Now.AddMinutes(2),
                 signingCredentials: credentials
             );
 
