@@ -37,8 +37,16 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            IActionResult res;
-            var user = await this._context.Users.Include(x => x.Accounts).ToArrayAsync();
+
+            //var user = await this._context.Users.ToArrayAsync();
+            var user = (from u in this._context.Users
+                        select new UserDTO() { 
+                            Id=u.Id,
+                            Fullname=u.Fullname,
+                            PhoneNumber=u.PhoneNumber,
+                            Birthday=u.Birthday,
+                            Image=u.Image
+                        });
             if (user == null)
             {
                 return NotFound("Can not found an record!");
