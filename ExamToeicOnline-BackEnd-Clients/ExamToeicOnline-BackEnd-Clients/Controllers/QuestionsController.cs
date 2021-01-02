@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
@@ -17,11 +16,9 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class QuestionsController : ControllerBase
     {
         private readonly ExamToeicOnlineDBContext _context;
-        private readonly IStorageService _storageService;
-        public QuestionsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService)
+        public QuestionsController(ExamToeicOnlineDBContext examToeicOnlineDBContext )
         {
             this._context = examToeicOnlineDBContext;
-            this._storageService = storageService;
 
         }
 

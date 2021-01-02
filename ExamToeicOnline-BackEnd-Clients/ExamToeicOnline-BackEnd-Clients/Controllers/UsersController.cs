@@ -9,7 +9,6 @@ using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
 using ExamToeicOnline_FrontEnd_Clients.Models;
 using ExamToeicOnline_BackEnd_Clients.Controllers;
-using ExamToeicOnline_BackEnd_Clients.Common;
 using System.Net.Http.Headers;      
 using System.IO;
 using System.Security.Cryptography;
@@ -24,12 +23,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ExamToeicOnlineDBContext _context;
-        private readonly IStorageService _storageService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public UsersController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService, IWebHostEnvironment webHostEnvironment)
+        public UsersController(ExamToeicOnlineDBContext examToeicOnlineDBContext,  IWebHostEnvironment webHostEnvironment)
         {
             this._context = examToeicOnlineDBContext;
-            this._storageService = storageService;
             this._webHostEnvironment = webHostEnvironment;
 
         }
@@ -38,7 +35,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            //var user = await this._context.Users.ToArrayAsync();
             var user = (from u in this._context.Users
                         select new UserDTO() { 
                             Id=u.Id,

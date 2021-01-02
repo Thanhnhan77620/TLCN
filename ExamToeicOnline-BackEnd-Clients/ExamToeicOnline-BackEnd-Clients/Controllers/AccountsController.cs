@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +20,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ExamToeicOnlineDBContext _context;
-        private readonly IStorageService _storageService;
         private IConfiguration _config;
-        public AccountsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService, IConfiguration configuration)
+        public AccountsController(ExamToeicOnlineDBContext examToeicOnlineDBContext,  IConfiguration configuration)
         {
             this._context = examToeicOnlineDBContext;
-            this._storageService = storageService;
             this._config = configuration;
 
         }
