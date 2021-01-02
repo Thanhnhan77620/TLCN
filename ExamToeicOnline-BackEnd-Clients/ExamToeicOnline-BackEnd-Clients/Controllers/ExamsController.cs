@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Models;
 using ExamToeicOnline_BackEnd_Clients.Models.ViewModels;
@@ -28,12 +27,10 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class ExamsController : ControllerBase
     {
         private readonly ExamToeicOnlineDBContext _context;
-        private readonly IStorageService _storageService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ExamsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IStorageService storageService, IWebHostEnvironment webHostEnvironment)
+        public ExamsController(ExamToeicOnlineDBContext examToeicOnlineDBContext, IWebHostEnvironment webHostEnvironment)
         {
             this._context = examToeicOnlineDBContext;
-            this._storageService = storageService;
             this._webHostEnvironment = webHostEnvironment;
         }
         //GET: get exam

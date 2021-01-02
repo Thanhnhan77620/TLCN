@@ -16,7 +16,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
     public class IntrosController : ControllerBase
     {
         [HttpGet]
-
         public async Task<IActionResult> GetIntro(string partName)
         {
             string filePath = "./File/Intro/Intro.xlsx";

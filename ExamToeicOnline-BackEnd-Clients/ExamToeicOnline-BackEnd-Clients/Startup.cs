@@ -1,4 +1,3 @@
-using ExamToeicOnline_BackEnd_Clients.Common;
 using ExamToeicOnline_BackEnd_Clients.EF;
 using ExamToeicOnline_BackEnd_Clients.Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,7 +43,6 @@ namespace ExamToeicOnline_BackEnd_Clients
                     options.UseSqlServer(Configuration.GetConnectionString("ExamToeicOnlineConnection")));
            
             //Declare DI
-            services.AddTransient<IStorageService, FileStorageService>();
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -66,40 +64,7 @@ namespace ExamToeicOnline_BackEnd_Clients
                         };
                     });
 
-            //services.AddAuthentication(options=> {
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     })
-            //    .AddJwtBearer(JwtBearerOptions =>
-            //    {
-            //        JwtBearerOptions.Events = new JwtBearerEvents()
-            //        {
-            //            OnTokenValidated = context =>
-            //            {
-            //                List<Claim> claims = new List<Claim>(((ClaimsIdentity)context.Principal.Identity));
-            //                string strUsuario=claims.Where(c=>c.Type==JWT_CLAIM_USUARIO)
-            //            }
-            //        };
-
-
-
-            //        //cfg.RequireHttpsMetadata = false;
-            //        //cfg.SaveToken = true;
-
-            //        //cfg.TokenValidationParameters = new TokenValidationParameters()
-            //        //{
-            //        //    ValidIssuer = Configuration["Tokens:Issuer"],
-            //        //    ValidAudience = Configuration["Tokens:Issuer"],
-            //        //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
-            //        //};
-
-            //    });
-
-
-
-
-
+         
 
         }
 

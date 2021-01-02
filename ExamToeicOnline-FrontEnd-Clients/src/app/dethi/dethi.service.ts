@@ -29,7 +29,7 @@ export class DethiService {
 
   getAllDeThi() {
     return this.http
-      // .get<DeThi[]>("https://localhost:5001/api/exams/list")
+      //.get<DeThi[]>("https://localhost:5001/api/exams/list")
       .get<DeThi[]>("https://localhost:5001/api/exams/")
       .pipe(catchError(this.handleError));
   }
