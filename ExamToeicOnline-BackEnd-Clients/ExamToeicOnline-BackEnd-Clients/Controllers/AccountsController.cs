@@ -110,7 +110,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                 issuer: _config["Jwt:Key"],
                 audience: _config["Jwt:Issuer"],
                 claim,
-                expires: DateTime.Now.AddMinutes(2),
+                expires: DateTime.Now.AddMinutes(240),
                 signingCredentials: credentials
             );
 
@@ -118,8 +118,6 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
             var encodetoken = new JwtSecurityTokenHandler().WriteToken(tokent);
             return encodetoken;
         }
-
-        
         //Change password
         [HttpPut("{username}")]
         public async Task<IActionResult> ChangePassword([FromForm] AccountVM accountVM)
