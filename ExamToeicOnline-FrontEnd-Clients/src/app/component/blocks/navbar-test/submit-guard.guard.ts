@@ -13,7 +13,7 @@ export class SubmitGuardGuard implements CanDeactivate<NavbarTestComponent> {
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (sessionStorage.getItem('listAnswerSelected') && !component.isSubmit) {
-      return confirm(`Navigate away and lose all changes?`);
+      return confirm(`Bạn có chắc thoát khỏi bài thì không? Kết quả bài thi sẽ không được lưu lại.`);
     }
 
     return true;
