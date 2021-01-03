@@ -153,7 +153,6 @@ export class ListQuestionComponent implements OnInit {
     if (sessionStorage.getItem('listAnswerSelected')) {
       let listQuestionChecked: any[] = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
       if (listQuestionChecked.findIndex(p => p.questionId === question && p.answerId === answerSelected) !== -1) {
-        console.log(true)
         return true;
       }
     }
