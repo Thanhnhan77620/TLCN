@@ -50,7 +50,6 @@ export class NumberQuestionDetailComponent implements OnInit {
     if (sessionStorage.getItem('listAnswerSelected')) {
       let listQuestionChecked: any[] = JSON.parse(sessionStorage.getItem('listAnswerSelected'));
       if (listQuestionChecked.findIndex(p => p.questionId - ((this.deThiId - 1) * 200) === value) !== -1) {
-        console.log(true)
         return true;
       }
     }
