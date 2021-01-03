@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj": {}
+    "D:\\Nam 4\\HK I\\CNPMM\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj": {}
   },
   "projects": {
-    "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj": {
+    "D:\\Nam 4\\HK I\\CNPMM\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+        "projectUniqueName": "D:\\Nam 4\\HK I\\CNPMM\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
         "projectName": "ExamToeicOnline-BackEnd-Clients",
-        "projectPath": "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
+        "projectPath": "D:\\Nam 4\\HK I\\CNPMM\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients.csproj",
         "packagesPath": "C:\\Users\\ThanhNhan\\.nuget\\packages\\",
-        "outputPath": "D:\\Nam 4\\HK I\\TLCN\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\obj\\",
+        "outputPath": "D:\\Nam 4\\HK I\\CNPMM\\Project\\TLCN\\ExamToeicOnline-BackEnd-Clients\\ExamToeicOnline-BackEnd-Clients\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ThanhNhan\\AppData\\Roaming\\NuGet\\NuGet.Config",
