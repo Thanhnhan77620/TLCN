@@ -79,8 +79,8 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         public async Task<IActionResult> Import([FromForm] ImportExamVM importExamVM)
         {
             string nameFile = importExamVM.ExcelFile.FileName;
-            //string nameFileSolution = importExamVM.ExcelSulotion.FileName;
-            string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\exams\\";
+          
+            string filePath = $"{this._webHostEnvironment.WebRootPath}\\uploads\\exams\\";
             if (!Directory.Exists(filePath))
             {
                 Directory.CreateDirectory(filePath);
@@ -424,7 +424,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
         {
 
             string nameFile = importExamVM.ExcelFile.FileName;
-            string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\score\\";
+            string filePath = $"{this._webHostEnvironment.WebRootPath}\\uploads\\score\\";
             if (!Directory.Exists(filePath))
             {
                 Directory.CreateDirectory(filePath);

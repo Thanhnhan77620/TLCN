@@ -105,6 +105,10 @@ export class UserService {
     formData.append("birthday", userUpdate.birthDate.toString());
     formData.append("Image", userUpdate.image);
     return this.http.put<any>(this.api + "users/" + userUpdate.id, formData);
+    // .subscribe(data=>{
+    //   this.setStorageCurrentUser(Guid.parse(userUpdate.id));
+    //   //this.router.navigate(["/auth/"+userUpdate.id+"/profile"]);
+    // })     
   }
 
   changePassword(userName: string, oldPassWord: string, newPassWord: string) {
@@ -128,11 +132,11 @@ export class UserService {
     this.account.next(null);
     this.router.navigate(["/home"]);
     localStorage.clear();
-    console.log('clear done');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+    localStorage.removeItem('userData')
     this.isLoginMode = false;
   }
 
@@ -179,16 +183,18 @@ export class UserService {
     );
 
     if (loadedUser.token) {
+      console.log("loaded " + new Date(loadedUser._tokenExpirationDate).getTime());
+      console.log("loaded exp " + (new Date(loadedUser._tokenExpirationDate).getTime() - new Date().getTime()));
       this.account.next(loadedUser);
-      if (this.jwtHelper.isTokenExpired(
-        "",
-        +loadedUser._tokenExpirationDate.getTime())
+      if (
+        this.jwtHelper.isTokenExpired(
+          "",
+          +loadedUser._tokenExpirationDate.getTime()
+        )
       ) {
         this.autoLogout(
-
           new Date(loadedUser._tokenExpirationDate).getTime() - new Date().getTime()
         );
-
 
         console.log(new Date(loadedUser._tokenExpirationDate).getTime() -
           new Date().getTime())

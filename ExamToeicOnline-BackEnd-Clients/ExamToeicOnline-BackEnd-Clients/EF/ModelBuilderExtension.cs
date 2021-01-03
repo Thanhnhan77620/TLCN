@@ -45,7 +45,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                   isActive = true,
                   isAdmin = false,
                   CreateAt = dateTime,
-                  UserId = id1
+                  UserId = id2
               },
               new Account()
               {
@@ -55,7 +55,7 @@ namespace ExamToeicOnline_BackEnd_Clients.EF
                   isActive = true,
                   isAdmin = false,
                   CreateAt = dateTime,
-                  UserId = id2
+                  UserId = id1
               }
           );
            
