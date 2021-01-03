@@ -141,7 +141,7 @@ namespace ExamToeicOnline_BackEnd_Clients.Controllers
                     //host static image
                     Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     string nameImage = unixTimestamp.ToString() + "." + request.Image.FileName.Split('.')[1];
-                    string filePath = $"{this._webHostEnvironment.WebRootPath}\\wwwroot\\uploads\\avatars\\";
+                    string filePath = $"{this._webHostEnvironment.WebRootPath}\\uploads\\avatars\\";
                     if (!Directory.Exists(filePath))
                     {
                         Directory.CreateDirectory(filePath);
