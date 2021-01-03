@@ -15,7 +15,7 @@
                         </b>
                     </a>
                 </li>
-                <li class="end-exam header-b">
+                <li class="end-exam header-b" *ngIf="partIntro">
                     <a class="finish-all" mdbBtn mdbWavesEffect>
                         <b (click)="onSubmit()">Submit</b>
                     </a>
