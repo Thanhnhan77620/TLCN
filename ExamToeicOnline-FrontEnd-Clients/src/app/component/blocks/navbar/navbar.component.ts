@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Account } from "./../../../model/account.model";
 import { UserService } from "./../../../user/user.service";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.userSub = this.userService.account.subscribe((account) => {
       this.currentAccount = account;
-      this.isAuthenticated = this.userService.isLoginMode;
+      this.isAuthenticated = !!account;
       if (!this.isAuthenticated) {
         localStorage.clear()
       }
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
   }
   onLogout() {
     this.userService.logout();
-    this.isAuthenticated = this.userService.isLoginMode;
+    this.isAuthenticated = false;
   }
 
   onShowProfile() { }
